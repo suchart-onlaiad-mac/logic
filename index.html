@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตรรกะง่ายนิดเดียว</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff6ec7; --purple:#a06bff; --blue:#4ea8ff; --cyan:#37e0d8;
+    --green:#5bd75b; --yellow:#ffd34e; --orange:#ff9d42; --red:#ff6b6b;
+    --ink:#34306b; --soft:#fff;
+    --shadow:0 10px 30px rgba(80,60,160,.18);
+    --shadow-sm:0 4px 14px rgba(80,60,160,.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Kanit','Sarabun',sans-serif;
+    color:var(--ink);
+    background:linear-gradient(135deg,#ffe1f4 0%,#e3ecff 45%,#dffaf6 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* floating bubbles bg */
+  .bubbles{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none}
+  .bubbles span{position:absolute; bottom:-80px; border-radius:50%; opacity:.35;
+    animation:rise linear infinite}
+  @keyframes rise{to{transform:translateY(-115vh) rotate(360deg)}}
+  .wrap{position:relative; z-index:1; max-width:920px; margin:0 auto; padding:18px 16px 60px}
+
+  /* ---- Header ---- */
+  header{text-align:center; padding:14px 0 6px}
+  .title{
+    font-weight:800; font-size:clamp(26px,6vw,46px); line-height:1.05;
+    background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue),var(--cyan));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 3px 0 rgba(255,255,255,.6));
+  }
+  .subtitle{font-size:15px; color:#6a64a6; margin-top:4px; font-weight:500}
+  .mascot{font-size:clamp(48px,11vw,74px); display:inline-block; animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+
+  /* ---- Star bar ---- */
+  .starbar{display:flex; align-items:center; justify-content:center; gap:8px; margin:10px auto 0;
+    background:#fff; border-radius:50px; padding:8px 18px; box-shadow:var(--shadow-sm); width:max-content; font-weight:600}
+  .starbar b{color:var(--orange); font-size:20px}
+
+  /* ---- Home menu cards ---- */
+  .menu{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:16px; margin-top:22px}
+  .card{
+    border:none; cursor:pointer; border-radius:24px; padding:22px 16px; text-align:center;
+    color:#fff; font-family:inherit; font-weight:700; font-size:17px; position:relative;
+    box-shadow:var(--shadow); transition:transform .15s, box-shadow .15s; overflow:hidden;
+  }
+  .card:hover{transform:translateY(-6px) scale(1.02); box-shadow:0 16px 36px rgba(80,60,160,.28)}
+  .card:active{transform:scale(.97)}
+  .card .ico{font-size:42px; display:block; margin-bottom:8px; filter:drop-shadow(0 3px 4px rgba(0,0,0,.15))}
+  .card small{display:block; font-weight:500; font-size:12.5px; opacity:.92; margin-top:4px}
+  .c1{background:linear-gradient(140deg,#ff8fd4,#ff5fb0)}
+  .c2{background:linear-gradient(140deg,#9b8bff,#7a5cff)}
+  .c3{background:linear-gradient(140deg,#5fb8ff,#3d86ff)}
+  .c4{background:linear-gradient(140deg,#42e0c8,#1bc2b0)}
+  .c5{background:linear-gradient(140deg,#ffc04e,#ff9326)}
+  .c6{background:linear-gradient(140deg,#76dd6e,#39c14a)}
+
+  /* ---- Screens ---- */
+  .screen{display:none; animation:pop .35s ease}
+  .screen.active{display:block}
+  @keyframes pop{from{opacity:0; transform:translateY(18px) scale(.98)}to{opacity:1; transform:none}}
+  .panel{background:#fff; border-radius:26px; padding:24px 22px; box-shadow:var(--shadow); margin-top:18px}
+  .panel h2{font-size:clamp(20px,4.5vw,28px); display:flex; align-items:center; gap:10px; margin-bottom:6px}
+  .panel .lead{color:#6a64a6; font-size:15px; line-height:1.6; margin-bottom:16px}
+
+  .backbtn{border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:15px;
+    background:#fff; color:var(--purple); border-radius:50px; padding:10px 20px; box-shadow:var(--shadow-sm);
+    display:inline-flex; align-items:center; gap:7px; transition:transform .12s}
+  .backbtn:hover{transform:translateX(-4px)}
+
+  /* ---- 100 grid ---- */
+  .grid100{display:grid; grid-template-columns:repeat(10,1fr); gap:4px; max-width:340px; margin:14px auto;
+    background:#f0eefc; padding:10px; border-radius:18px}
+  .cell{aspect-ratio:1; background:#fff; border-radius:6px; cursor:pointer; transition:.12s; box-shadow:inset 0 0 0 1px #e6e2fb}
+  .cell.on{background:linear-gradient(140deg,var(--pink),var(--purple)); box-shadow:none; transform:scale(1.04)}
+  .bigpct{text-align:center; font-size:clamp(38px,9vw,64px); font-weight:800;
+    background:linear-gradient(90deg,var(--pink),var(--purple)); -webkit-background-clip:text; background-clip:text; color:transparent; margin:6px 0}
+  .hint{text-align:center; color:#6a64a6; font-size:14px; margin-top:6px}
+
+  /* ---- Sliders & inputs ---- */
+  .row{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; margin:14px 0}
+  input[type=range]{-webkit-appearance:none; appearance:none; width:min(320px,80%); height:14px; border-radius:50px;
+    background:linear-gradient(90deg,var(--cyan),var(--purple)); outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:30px; height:30px; border-radius:50%;
+    background:#fff; border:4px solid var(--purple); cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,.2)}
+  input[type=range]::-moz-range-thumb{width:30px; height:30px; border-radius:50%; background:#fff; border:4px solid var(--purple); cursor:pointer}
+  .field{display:flex; flex-direction:column; gap:4px; align-items:center}
+  .field label{font-weight:600; font-size:14px; color:#6a64a6}
+  .num{width:130px; font-family:inherit; font-weight:700; font-size:22px; text-align:center; color:var(--ink);
+    border:3px solid #e6e2fb; border-radius:16px; padding:10px; outline:none; transition:.15s; background:#faf9ff}
+  .num:focus{border-color:var(--purple); background:#fff}
+
+  /* ---- Convert visual ---- */
+  .conv{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; text-align:center; margin-top:8px}
+  .conv .box{background:#faf9ff; border-radius:18px; padding:16px 10px; border:3px solid #eee9fc}
+  .conv .box .t{font-size:12px; color:#9a93c9; font-weight:600}
+  .conv .box .v{font-size:clamp(20px,5vw,30px); font-weight:800; margin-top:4px}
+  .conv .b1 .v{color:var(--pink)} .conv .b2 .v{color:var(--purple)} .conv .b3 .v{color:var(--blue)}
+  svg.pie{display:block; margin:8px auto; filter:drop-shadow(0 6px 10px rgba(120,90,200,.25))}
+
+  /* ---- Steps box ---- */
+  .steps{background:linear-gradient(135deg,#fff7fc,#f2f6ff); border-radius:18px; padding:16px 18px; margin-top:14px;
+    border:2px dashed #d9cffb}
+  .steps .st{display:flex; gap:10px; align-items:flex-start; padding:7px 0; font-size:15px; line-height:1.5}
+  .steps .st b{min-width:26px; height:26px; border-radius:50%; background:var(--purple); color:#fff;
+    display:inline-grid; place-items:center; font-size:13px; flex:none}
+  .answer{text-align:center; font-size:clamp(26px,7vw,40px); font-weight:800; margin-top:10px;
+    background:linear-gradient(90deg,var(--green),var(--cyan)); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+  /* ---- progress bar (for X% of N) ---- */
+  .bar{height:42px; background:#f0eefc; border-radius:50px; overflow:hidden; margin:14px 0; position:relative}
+  .bar .fill{height:100%; width:0; border-radius:50px; background:linear-gradient(90deg,var(--orange),var(--pink));
+    transition:width .6s cubic-bezier(.3,1.3,.5,1); display:flex; align-items:center; justify-content:flex-end;
+    padding-right:14px; color:#fff; font-weight:700}
+
+  /* ---- buttons ---- */
+  .btn{border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:16px; color:#fff;
+    border-radius:50px; padding:12px 26px; box-shadow:var(--shadow-sm); transition:transform .12s, filter .12s}
+  .btn:hover{transform:translateY(-2px); filter:brightness(1.05)} .btn:active{transform:scale(.96)}
+  .btn.go{background:linear-gradient(135deg,var(--purple),var(--blue))}
+  .btn.alt{background:linear-gradient(135deg,var(--orange),var(--pink))}
+  .center{text-align:center}
+
+  /* ---- real world tabs ---- */
+  .tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:10px}
+  .tab{border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:14px; color:var(--purple);
+    background:#f0eefc; border-radius:50px; padding:9px 18px; transition:.15s}
+  .tab.on{background:linear-gradient(135deg,var(--purple),var(--blue)); color:#fff; box-shadow:var(--shadow-sm)}
+  .tool{display:none} .tool.on{display:block; animation:pop .3s ease}
+  .result-card{background:linear-gradient(135deg,#eafff3,#e7f6ff); border-radius:18px; padding:16px; margin-top:12px; text-align:center}
+  .result-card .big{font-size:clamp(24px,6vw,38px); font-weight:800; color:var(--green)}
+  .result-card .small{font-size:14px; color:#6a8; font-weight:600}
+  .priceline{font-size:15px; color:#6a64a6; margin-top:4px}
+  .priceline del{color:#c0b8e0}
+
+  /* ---- Quiz ---- */
+  .levelpick{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:16px 0}
+  .lvl{border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:16px; color:#fff;
+    border-radius:20px; padding:18px 22px; box-shadow:var(--shadow-sm); transition:transform .14s; flex:1; min-width:120px; max-width:200px}
+  .lvl:hover{transform:translateY(-4px)} .lvl small{display:block; font-weight:500; font-size:12px; opacity:.92; margin-top:4px}
+  .lvl.e{background:linear-gradient(140deg,#76dd6e,#39c14a)}
+  .lvl.m{background:linear-gradient(140deg,#ffc04e,#ff9326)}
+  .lvl.h{background:linear-gradient(140deg,#ff8f8f,#ff5f5f)}
+
+  .qhead{display:flex; justify-content:space-between; align-items:center; font-weight:700; color:#6a64a6; margin-bottom:6px; font-size:14px}
+  .qprog{height:10px; background:#f0eefc; border-radius:50px; overflow:hidden; margin-bottom:14px}
+  .qprog i{display:block; height:100%; background:linear-gradient(90deg,var(--cyan),var(--purple)); transition:width .3s}
+  .question{font-size:clamp(20px,5vw,28px); font-weight:700; text-align:center; margin:10px 0 18px; line-height:1.4}
+  .choices{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .choice{border:3px solid #e6e2fb; background:#faf9ff; cursor:pointer; font-family:inherit; font-weight:700;
+    font-size:22px; color:var(--ink); border-radius:18px; padding:18px; transition:.12s}
+  .choice:hover{border-color:var(--purple); transform:translateY(-2px)}
+  .choice.correct{background:linear-gradient(135deg,#5bd75b,#37e0d8); color:#fff; border-color:transparent; animation:pulse .4s}
+  .choice.wrong{background:linear-gradient(135deg,#ff8f8f,#ff5f5f); color:#fff; border-color:transparent; animation:shake .4s}
+  .choice:disabled{cursor:default}
+  @keyframes pulse{50%{transform:scale(1.08)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  .feedback{text-align:center; font-size:20px; font-weight:700; margin-top:16px; min-height:30px}
+  .scorebig{text-align:center; padding:10px}
+  .scorebig .stars{font-size:54px; letter-spacing:6px}
+  .scorebig .msg{font-size:clamp(22px,5vw,30px); font-weight:800; margin:10px 0;
+    background:linear-gradient(90deg,var(--pink),var(--purple)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .scorebig .detail{color:#6a64a6; font-size:16px}
+
+  /* confetti */
+  .confetti{position:fixed; top:-10px; width:10px; height:16px; z-index:99; pointer-events:none; border-radius:2px}
+  @keyframes fall{to{transform:translateY(105vh) rotate(720deg); opacity:0}}
+
+  footer{text-align:center; color:#9a93c9; font-size:12.5px; margin-top:30px; line-height:1.7}
+
+  /* ---- (IT) locked cards ---- */
+  .card.locked{filter:grayscale(.75) brightness(1.05); opacity:.6; cursor:not-allowed}
+  .card.locked:hover{transform:none; box-shadow:var(--shadow)}
+  @media (max-width:600px){
+    .menu{grid-template-columns:1fr 1fr; gap:12px}
+    .card{padding:16px 10px; font-size:15px}
+    .card .ico{font-size:34px}
+    .panel{padding:18px 12px}
+    .layer{padding:14px 12px}
+    table.t{font-size:13px}
+    table.t th,table.t td{padding:7px 5px}
+  }
+  .card .tag{position:absolute; top:10px; right:12px; font-size:11px; background:rgba(255,255,255,.3); border-radius:50px; padding:2px 9px}
+  .c7{background:linear-gradient(140deg,#ff8f8f,#ff5f5f)}
+  .c8{background:linear-gradient(140deg,#7fd3ff,#4f8dff)}
+  /* ---- (IT) ด่านพิเศษ Office ---- */
+  .cgold{background:linear-gradient(140deg,#ffa62b,#e86a00)}
+  .special{margin-top:26px; border-radius:24px; padding:16px 14px 18px; background:linear-gradient(140deg,#fff8e0,#ffeab8); border:3px dashed #ffb400; text-align:center}
+  .special .sp-h{font-family:'Pridi',serif; font-size:21px; font-weight:700; color:#b86e00}
+  .special .sp-tag{display:inline-block; font-size:12px; font-weight:600; background:#ff5f5f; color:#fff; border-radius:50px; padding:2px 10px; margin-left:6px; vertical-align:middle}
+  .special .tip{margin:6px 0 12px}
+  .special .card{width:100%; max-width:360px; margin:0 auto}
+  .path{display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin:6px 0 4px}
+  .path span{background:#fff; border-radius:50px; padding:3px 11px; font-size:13px; font-weight:600; color:#6a64a6}
+
+  /* ---- (IT) 3 layers ---- */
+  .layer{border-radius:22px; padding:18px 18px; margin-top:16px; animation:pop .35s ease}
+  .layer h3{font-size:clamp(18px,4vw,23px); display:flex; align-items:center; gap:8px; margin-bottom:8px}
+  .layer p{font-size:16px; line-height:1.7}
+  .L1{background:linear-gradient(135deg,#eafff0,#e6fbff); border:3px solid #bdf0cc}
+  .L2{background:linear-gradient(135deg,#fffbe6,#fff0e0); border:3px solid #ffe2a8}
+  .L3{background:linear-gradient(135deg,#f3edff,#ffeaf6); border:3px solid #dccfff}
+  .more{display:block; width:100%; margin-top:14px; border:3px dashed #c9bdf5; background:#fff; cursor:pointer;
+    font-family:inherit; font-weight:700; font-size:16px; color:var(--purple); border-radius:18px; padding:14px; transition:.15s}
+  .more:hover{background:#faf7ff; transform:translateY(-2px)}
+  .hide{display:none}
+
+  /* phone ↔ computer compare cards */
+  .cmp{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-top:10px}
+  .cmp .it{background:#fff; border-radius:18px; padding:14px; box-shadow:var(--shadow-sm); text-align:center}
+  .cmp .it .e{font-size:40px}
+  .cmp .it b{display:block; font-size:17px; margin-top:4px}
+  .cmp .it span{display:block; font-size:14px; color:#6a64a6; margin-top:4px; line-height:1.5}
+  .cmp .it span b{display:inline; font-size:inherit; margin:0; color:var(--ink)}
+  .cmp .it span .kw{display:inline; font-size:inherit; margin:0; color:#6b3fd6; line-height:inherit}
+  .cmp .it .pill{display:inline-block; margin-top:8px; font-size:12.5px; font-weight:600; color:#fff; border-radius:50px; padding:3px 12px}
+  .p-in{background:var(--blue)} .p-pr{background:var(--pink)} .p-st{background:var(--orange)} .p-out{background:var(--green)}
+
+  /* flow IPO */
+  .flow{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin:12px 0}
+  .flow .f{border-radius:16px; padding:10px 14px; color:#fff; font-weight:700; text-align:center; min-width:96px}
+  .flow .f small{display:block; font-weight:500; font-size:12px}
+  .flow .ar{font-size:22px; color:#a99fe0}
+
+  /* memo / exam tip */
+  .memo{background:#fff; border-left:6px solid var(--orange); border-radius:14px; padding:12px 14px; margin-top:12px; font-size:15px; line-height:1.6}
+  .memo.ex{border-left-color:var(--red)}
+  .tw{overflow-x:auto; margin-top:10px; border-radius:14px}
+  .tw table.t{margin-top:0}
+  table.t{width:100%; border-collapse:separate; border-spacing:0; margin-top:10px; font-size:14.5px; background:#fff; border-radius:14px; overflow:hidden}
+  table.t th{background:#efe9ff; color:#5a4bb0; padding:9px 8px; text-align:left}
+  table.t td{padding:9px 8px; border-top:1px solid #f1eefc; vertical-align:top; line-height:1.5}
+
+  /* ---- (IT) level map ---- */
+  .levels{display:grid; gap:12px; margin-top:12px}
+  .lv{display:flex; align-items:center; gap:14px; border:none; cursor:pointer; font-family:inherit; text-align:left;
+    border-radius:20px; padding:14px 16px; color:#fff; box-shadow:var(--shadow-sm); transition:transform .14s}
+  .lv:hover{transform:translateY(-3px)}
+  .lv .n{font-size:38px}
+  .lv b{font-size:17px; display:block} .lv small{font-size:13px; opacity:.95}
+  .lv .st{margin-left:auto; font-size:20px; letter-spacing:2px; white-space:nowrap}
+  .lv.locked{background:#cfcbe6 !important; cursor:not-allowed} .lv.locked:hover{transform:none}
+  .hearts{font-size:18px; letter-spacing:2px}
+  .btn.fire{background:linear-gradient(135deg,#ff5f3c,#ffb020)}
+  #ch-retry{position:fixed; left:50%; bottom:16px; transform:translateX(-50%); z-index:50; display:none;
+    box-shadow:0 6px 18px rgba(0,0,0,.25); max-width:calc(100vw - 32px)}
+  .lv .bd{font-size:15px; margin-left:4px}
+  .choices.txt{grid-template-columns:1fr}
+  .choices.txt .choice{font-size:17px; text-align:left; padding:14px 16px; line-height:1.45}
+  .why{background:#f7f5ff; border-radius:14px; padding:12px 14px; margin-top:12px; font-size:15px; line-height:1.6; display:none}
+  .nextbtn{margin-top:12px; display:none}
+
+  /* ---- (IT) hardware tour ---- */
+  .step-h{display:flex; align-items:center; gap:8px; font-size:clamp(17px,4vw,21px); font-weight:700; margin:22px 0 4px}
+  .step-h .sn{width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--purple)); color:#fff;
+    display:inline-grid; place-items:center; font-size:15px; flex:none}
+  .tip{font-size:14.5px; color:#6a64a6; line-height:1.6; margin-bottom:8px}
+  .fig{background:#fff; border-radius:20px; padding:8px; box-shadow:var(--shadow-sm); margin-top:8px}
+  .hsvg{display:block; width:100%; max-width:440px; margin:0 auto; height:auto}
+  .hsvg .bd{cursor:pointer}
+  .hsvg .bd circle{fill:#ff6ec7; stroke:#fff; stroke-width:2.5; transition:.15s}
+  .hsvg .bd text{fill:#fff; font-size:12px; font-weight:800; text-anchor:middle; font-family:'Kanit',sans-serif; pointer-events:none}
+  .hsvg .bd:hover circle{fill:#a06bff}
+  .hsvg .bd.sel circle{fill:#ffd34e; stroke:#ff6ec7; r:12}
+  .hsvg .bd.sel text{fill:var(--ink)}
+  .hsvg .pt{cursor:pointer; transition:.15s}
+  .hsvg .pppush{animation:ppPush .7s ease-out}
+  .hsvg .ppfly{animation:ppFly .6s ease-out}
+  @keyframes ppPush{from{transform:translateX(240px)}to{transform:none}}
+  @keyframes ppFly{from{transform:translateY(26px);opacity:0}to{transform:none;opacity:1}}
+  .hsvg .pt.sel{filter:drop-shadow(0 0 4px #ffd34e) drop-shadow(0 0 7px #ff6ec7)}
+  .hsvg .bd circle{animation:beat 2.2s ease-in-out infinite}
+  @keyframes beat{50%{stroke-width:5}}
+  .chips{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:10px}
+  .chip{border:2px solid #e6e2fb; background:#fff; cursor:pointer; font-family:inherit; font-size:13.5px; font-weight:600;
+    color:var(--ink); border-radius:50px; padding:5px 12px; transition:.12s}
+  .chip.sel{background:linear-gradient(135deg,var(--yellow),var(--orange)); border-color:transparent}
+  .info{background:#fff; border-radius:16px; padding:12px 14px; margin-top:10px; font-size:15.5px; line-height:1.6; min-height:52px;
+    border:3px solid #ffe2a8; text-align:center}
+  .info .deep{text-align:left; margin-top:8px; border-top:1.5px dashed #d9d2f2; padding-top:8px}
+  .info .dbtn{border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:14.5px; color:#6b3fd6;
+    background:#efe8ff; border-radius:50px; padding:6px 14px; margin-top:6px}
+  .info .d2{background:#f7f3ff; border-radius:12px; padding:8px 10px}
+  .info .d3{margin:8px 0 4px 18px; padding:0} .info .d3 li{margin:3px 0}
+  .info .dlink{display:inline-block; margin-top:4px; font-size:14px; color:#2a6fd6; word-break:break-word}
+  .kw{color:#6b3fd6; border-bottom:2px dotted #a98bf0; cursor:pointer; font-weight:700}
+  .info .gp{font-style:normal; color:#fff; font-size:12.5px; font-weight:600; border-radius:50px; padding:2px 10px; margin-left:4px; white-space:nowrap}
+  .map{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:8px}
+  .grp{border-radius:18px; padding:12px; color:#fff}
+  .grp h4{font-size:16px} .grp h4 small{font-weight:500; font-size:11.5px; opacity:.9}
+  .grp p{font-size:12.5px; opacity:.95; margin:2px 0 8px}
+  .grp .ch{display:inline-block; background:rgba(255,255,255,.92); color:var(--ink); border-radius:50px; padding:3px 10px; margin:0 4px 5px 0; font-size:13px; font-weight:600}
+  .grp .ch small{font-weight:500; color:#6a64a6}
+  .g-in{background:linear-gradient(140deg,#5fb8ff,#3d86ff)} .g-pr{background:linear-gradient(140deg,#ff8fd4,#ff5fb0)}
+  .g-st{background:linear-gradient(140deg,#ffc04e,#ff9326)} .g-out{background:linear-gradient(140deg,#76dd6e,#39c14a)}
+  .g-ax{background:linear-gradient(140deg,#9b8bff,#7a5cff); grid-column:1/-1}
+  .hsvg .offtag{display:none}
+  .hsvg.off .offtag{display:inline; animation:pop .35s ease}
+  .hsvg.off [data-k=ram] rect{fill:#d6d3e6 !important}
+  .hsvg.off [data-k=cpu]{opacity:.55}
+  .xinfo{text-align:left; margin-top:8px}
+  .cmp1{display:flex; gap:10px; align-items:flex-start; background:#faf8ff; border-radius:12px; padding:8px 10px; margin-top:6px; font-size:14.5px; line-height:1.55}
+  .cmp1 .e{font-size:24px; flex:none}
+  .qpic{text-align:center; font-size:64px; line-height:1; margin-top:6px}
+  .hsvg .hit{fill:transparent; cursor:pointer; transition:.15s}
+  .hsvg .hit:hover{fill:#ffd34e22}
+  .hsvg .hit.sel{fill:#ffd34e40; stroke:#ff6ec7; stroke-width:2}
+  .hsvg .hit.ok{fill:#39c14a40; stroke:#39c14a; stroke-width:2.5}
+  .hsvg .hit.bad{fill:#ff5f5f40; stroke:#ff5f5f; stroke-width:2.5}
+  .qpic .hsvg{max-width:440px; margin-top:6px}
+  .hsvg.kbd{max-width:600px}
+  .kbdw{overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .kbdw .hsvg.kbd{min-width:520px}
+  .kbdw-hint{display:none; text-align:center; font-size:12.5px; color:#8a84a8; margin-top:2px}
+  @media (max-width:600px){ .kbdw-hint{display:block} }
+  .hsvg.kbd .hit.sel{fill:#ffb13bb0; stroke:#ff6ec7; stroke-width:1.5}
+  .hsvg.kbd .hit.ok{fill:#39c14a90} .hsvg.kbd .hit.bad{fill:#ff5f5f90}
+
+  /* ---- (IT) data units ---- */
+  .bulbs{display:grid; grid-template-columns:repeat(8,1fr); gap:6px; max-width:440px; margin:6px auto 0}
+  .bulb{border:none; cursor:pointer; font-family:inherit; border-radius:14px; padding:6px 0; background:#eceaf6; color:#9a93c9;
+    font-weight:800; font-size:18px; transition:.15s}
+  .bulb .e{display:block; font-size:24px; filter:grayscale(1); opacity:.45}
+  .bulb.on{background:linear-gradient(140deg,#fff3b0,#ffd34e); color:var(--ink); box-shadow:0 0 14px rgba(255,211,78,.85)}
+  .bulb.on .e{filter:none; opacity:1}
+  .bulb small{display:block; font-size:11px; font-weight:600}
+  .pv .bulb{cursor:default}
+  .byteout{display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:8px; margin-top:10px; text-align:center}
+  .byteout div{background:#faf9ff; border-radius:14px; padding:8px 4px; box-shadow:inset 0 0 0 2px #eee9fc}
+  .byteout small{display:block; font-size:12px; color:#9a93c9; font-weight:600}
+  .byteout b{font-size:clamp(18px,5vw,26px); letter-spacing:1px}
+  .ladder{max-width:520px; margin:8px auto 0}
+  .rung{display:flex; align-items:center; gap:10px; border-radius:16px; padding:9px 12px; color:#fff}
+  .rung .u{font-weight:800; font-size:18px; min-width:64px; line-height:1.15}
+  .rung .u small{display:block; font-size:11.5px; font-weight:500; opacity:.92}
+  .rung .ex{font-size:14px; line-height:1.45; flex:1; min-width:0}
+  .rung .e{font-size:24px; flex:none}
+  .ladder .step{text-align:center; font-weight:800; color:var(--purple); font-size:14px; padding:2px 0}
+
+  /* ---- (IT) software ---- */
+  .stack{display:grid; gap:6px; max-width:460px; margin:8px auto 0}
+  .lay{display:flex; align-items:center; gap:12px; border-radius:16px; padding:10px 14px; background:#f0eefc; font-weight:700;
+    font-size:15.5px; line-height:1.35; border:3px solid transparent; border-left:8px solid var(--lc,#c9c3e8); transition:.2s}
+  .lay .e{font-size:28px; flex:none}
+  .lay small{display:block; font-weight:500; font-size:12.5px; color:#6a64a6}
+  .lay.lost{opacity:.6}
+  .lay.on{background:linear-gradient(135deg,#fff3b0,#ffd34e); border-color:#ff9d42; transform:scale(1.03); box-shadow:var(--shadow-sm)}
+  @media (max-width:420px){
+    .bulbs{grid-template-columns:repeat(4,1fr)}
+    .rung{flex-wrap:wrap; row-gap:2px}
+    .rung .e{order:-1}
+    .rung .u{display:flex; align-items:baseline; gap:6px}
+    .rung .ex{flex-basis:100%}
+  }
+
+  /* ---- (EQ) บรรทัดคณิต + เหตุผล · ตาชั่ง ---- */
+  .story{background:#fff8e8; border-radius:18px; padding:14px; text-align:center; font-size:16.5px; line-height:1.7; margin-top:8px}
+  .story .pic{font-size:40px; letter-spacing:4px}
+  .story .ask{font-weight:800; font-size:19px; color:var(--purple)}
+  .lines{display:grid; gap:6px; margin-top:8px}
+  .ln{display:flex; flex-wrap:wrap; gap:2px 12px; align-items:baseline; background:#faf9ff; border-radius:12px; padding:8px 12px; border-left:5px solid #c9bdf5; animation:pop .35s ease}
+  .ln .m{font-weight:800; font-size:19px; overflow-wrap:anywhere}
+  .ln .r{font-size:14.5px; color:#6a64a6; line-height:1.5}
+  .ln.bad{background:#fff0f0; border-left-color:#ff5f5f} .ln.ok{background:#eafff0; border-left-color:#39c14a}
+  .eqmap{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:8px; text-align:center}
+  .eqmap div{background:#fff; border-radius:14px; padding:8px; box-shadow:var(--shadow-sm)}
+  .eqmap .w{display:block; font-size:13.5px; color:#6a64a6} .eqmap b{font-size:21px}
+  .bigeq{text-align:center; font-size:clamp(26px,7vw,38px); font-weight:800; margin:12px 0; color:var(--purple)}
+  .bsvg{display:block; width:100%; max-width:440px; margin:0 auto; height:auto}
+  .bsvg .beam,.bsvg .pan{transition:transform .55s cubic-bezier(.3,1.4,.5,1)}
+  .eqline{text-align:center; font-size:24px; font-weight:800; margin-top:6px}
+  .ops{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:8px}
+  .hist{background:#fdf6e9; border-left:6px solid #c58a2b; border-radius:14px; padding:12px 14px; margin-top:12px; font-size:15px; line-height:1.65}
+  .flash{animation:flash 1.8s ease}
+  @keyframes flash{0%,60%{background:#fff3b0; box-shadow:0 0 0 6px #fff3b0}100%{background:transparent; box-shadow:none}}
+  .stuck{margin-top:10px}
+  footer a{color:#7a5cff}
+  @media (max-width:600px){ .eqmap{grid-template-columns:1fr} }
+  /* ---- (EQ) บท 2 แบ่งของ: เศษส่วนซ้อน · แปลง A/B · สะพานไปแอปอื่น ---- */
+  .frc{display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; line-height:1.15; font-weight:800; margin:0 3px}
+  .frc>span:first-child{border-bottom:2px solid currentColor; padding:0 4px}
+  .frc.big{font-size:26px; color:var(--purple)}
+  .frout{text-align:center; font-size:17px; margin-top:8px; line-height:1.8}
+  .frab{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px; text-align:center}
+  .frab svg{display:block; width:100%; max-width:170px; margin:6px auto; background:#fff; border-radius:6px}
+  .frab span{font-size:15px; color:#6a64a6}
+  .yr{display:grid; grid-template-columns:repeat(5,1fr); gap:4px; padding:6px}
+  .yr i{font-style:normal; text-align:center; background:#eef0f5; border-radius:10px; padding:10px 2px; color:#8a8fa3; transition:.3s}
+  .yr i.on{background:linear-gradient(140deg,#76dd6e,#39c14a); color:#fff}
+  .yr b{display:block; font-size:17px} .yr small{font-size:12px}
+  .dc{display:grid; gap:8px; justify-items:center; margin-top:8px}
+  .dc select{font-family:inherit; font-size:16px; padding:6px 8px; border:2px solid #e6e2fb; border-radius:12px; background:#fff}
+  .bridge{display:block; margin-top:12px; background:#eef7ff; border:2px dashed #7fb6ff; border-radius:14px; padding:10px 14px; font-size:14.5px; line-height:1.55; color:#2b5fa8; text-decoration:none}
+  .bridge:hover{background:#e2f0ff}
+  .bld-a{min-height:56px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center; align-items:center; background:#fff; border:2px dashed #c9bdf5; border-radius:14px; padding:8px; margin-top:8px}
+  .bld-ph{color:#999; font-size:14.5px}
+  .tile{border:none; cursor:pointer; font-family:inherit; font-weight:800; font-size:19px; min-width:46px; padding:8px 12px; border-radius:12px; background:#efeaff; color:var(--purple)}
+  .tile.used{opacity:.3; pointer-events:none}
+  .bld-a .tile{background:linear-gradient(135deg,var(--purple),var(--blue)); color:#fff}
+  /* บท 6 · ถาดสลับได้ */
+  .trays{display:grid; grid-template-columns:repeat(5,1fr); gap:6px; padding:6px; max-width:360px; margin:0 auto}
+  .trays .tr{border:none; font-family:inherit; border-radius:12px; padding:6px 2px; font-size:24px; line-height:1.1; background:#fff1e6; transition:.2s}
+  .trays .tr.t{background:#ffe3e3}
+  .trays button.tr{cursor:pointer} .trays button.tr:active{transform:scale(.94)}
+  .trays .tr small{display:block; font-size:12px; font-weight:700; color:#8a6a3a}
+  .two{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:8px}
+  .two div{background:#fff; border:2px dashed #c9bdf5; border-radius:14px; padding:8px 14px; font-weight:700; text-align:center}
+  .two b{display:block; font-size:24px; color:var(--purple)}
+
+.chs{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.chs .tab{text-align:left;white-space:normal;line-height:1.5}
+.chs.row2{flex-direction:row;flex-wrap:wrap}
+.tab.bad{background:#ffe3e3;border-color:#f19999;color:#8a1f1f}
+.lawline{line-height:2.4;margin:10px 0}
+.lawline button{font:inherit;border:2px solid transparent;border-radius:10px;padding:2px 8px;margin:2px 0;cursor:pointer}
+.lawline .lp-who{background:#e8e8ff}.lawline .lp-act{background:#fff1c9}.lawline .lp-name{background:#dff5e1}.lawline .lp-pen{background:#ffe1ec}
+.lawline button.on{border-color:#333}
+.agepins,.ageband{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+/* ---- สารบรรณ: หนังสือตัวอย่างแตะได้ ---- */
+.letter{background:#fff;border:1px solid #e3e0ef;border-radius:8px;padding:14px 10px;font-size:14.5px;line-height:1.6;box-shadow:0 4px 14px rgba(80,60,160,.12);margin:10px 0}
+.letter .row3{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:start}
+.letter .lt{display:block;width:100%;background:none;border:2px dashed #e6e2fb;border-radius:8px;padding:3px 6px;margin:3px 0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.letter .lt:hover{border-color:#c9bdf5}.letter .lt.on{border-color:var(--purple);border-style:solid;background:#f3efff}
+.letter .lt.r{text-align:right}.letter .lt.c{text-align:center}.letter .lt.g{font-size:30px;line-height:1;text-align:center;width:auto}
+.letter .lt.d{text-align:center}.letter .lt.p{text-indent:2em}.letter .lt.s{font-size:13px}
+.letter small{font-size:12px;color:#6a64a6}
+.letter .lt .stamp{display:inline-block;border:1.5px solid #555;border-radius:3px;padding:2px 8px;font-size:12.5px;line-height:1.45;text-align:left}
+.letter .lt .stamp.blue{border-color:#1d4ed8;color:#1d4ed8;font-weight:700}
+.desk{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.desk .mini{display:flex;flex-direction:column;background:#fff;border:2px dashed #e6e2fb;border-radius:6px;padding:6px;font:inherit;font-size:12px;line-height:1.45;color:inherit;text-align:left;cursor:pointer;min-height:130px;box-shadow:0 3px 10px rgba(80,60,160,.10)}
+.desk .mini:hover{border-color:#c9bdf5}.desk .mini.on{border-color:var(--purple);border-style:solid;background:#f3efff}
+.desk .mini.env{grid-column:1/-1;min-height:96px}
+.desk .g3{display:block;text-align:center;font-size:28px;line-height:1.1}.desk .g15{font-size:15px;line-height:1}
+.desk .hd{display:flex;align-items:center;gap:6px;font-size:12.5px}
+.desk .ln-s{display:block;border-bottom:1px dotted #bbb;height:9px;margin:2px 0}
+.desk .cap{margin-top:auto;padding-top:4px;text-align:center;color:#6a64a6;font-size:12px}
+.desk .envtop{display:flex;gap:6px;align-items:flex-start}.desk .envtop small{font-size:11px}
+.desk .envto{display:block;text-align:center;margin:6px 0 2px}
+.info .stamp{display:inline-block;border:1.5px solid #555;border-radius:3px;padding:2px 8px;margin:4px 0 8px;font-size:12.5px;line-height:1.45;text-align:left}
+.info .stamp.blue{border-color:#1d4ed8;color:#1d4ed8;font-weight:700;font-size:18px}
+.seal{position:relative;display:inline-flex;align-items:center;justify-content:center;width:108px;height:108px;margin:4px 0 8px;border-radius:50%;border:2px solid #444;box-shadow:inset 0 0 0 15px #fff,inset 0 0 0 16.5px #444}
+.seal .g3{font-size:30px;line-height:1}
+.seal small{position:absolute;bottom:1px;left:0;right:0;text-align:center;font-size:9px;line-height:1.3;color:#444}
+.c9{background:linear-gradient(140deg,#b18cff,#6f6bff)}
+.letter .lt.red{color:#d81f1f;font-weight:800;font-size:24px;line-height:1.2;width:auto}
+/* ---- ตรรกะ: กล่องตัวเลข บันได จุด แถบตัวอักษร ---- */
+.card.soon{opacity:.5;filter:grayscale(.5);cursor:default;background:linear-gradient(140deg,#c9c4e6,#a9a3cf)}
+.seq{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:10px 0}
+.seq .b,.sg .b{display:inline-block;min-width:38px;padding:6px 6px;border-radius:10px;background:#fff;border:2px solid #d9d2fb;font-weight:800;font-size:18px;line-height:1.2;text-align:center}
+.seq .b small{display:block;font-size:11px;font-weight:600;color:#7a72b8}
+.seq .b.q,.sg .b.q{border-style:dashed;color:#9a8fd6}
+.seq .b.new,.sg .b.new{background:#fff4c2;border-color:#f5b400}
+.seq .b.o1{background:#e9f7ff;border-color:#7cc4f0}.seq .b.o2{background:#ffeef0;border-color:#f39aa5}
+.seq .arr{font-size:20px;color:#8b5cf6}
+.stair{margin:8px 0}
+.srow{display:flex;align-items:center;gap:6px;margin:4px 0}
+.srow .lab{flex:0 0 44px;font-size:12px;color:#6a64a6;text-align:right}
+.sg{flex:1;display:grid;gap:4px 0;min-width:0}
+.sg .b{min-width:0;padding:5px 2px;font-size:16px;margin:0 2px}
+.sg .b.d{background:#f3efff;border-color:#c9bdf5;font-size:14px}
+.pots{margin:8px 0}.potrow{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:17px;line-height:1.3}
+.potrow .lab{flex:0 0 56px;font-size:12.5px;color:#6a64a6}.potrow span:nth-child(2){flex:1;overflow-wrap:anywhere}.potrow b{flex:0 0 26px;text-align:right}
+.dcell{display:inline-flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;margin:6px 10px;vertical-align:bottom}
+.dots{display:inline-grid;gap:3px}.dots i,.tri i{display:block;width:9px;height:9px;border-radius:50%;background:#8b5cf6}
+.tri{display:flex;flex-direction:column;align-items:center;gap:3px}.trow{display:flex;gap:3px}
+.abs{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:4px;margin:8px 0}
+.abs button{border:1.5px solid #e0dbf8;border-radius:8px;background:#fff;padding:3px 0;font:inherit;font-weight:800;font-size:15px;line-height:1.15;cursor:pointer;color:inherit}
+.abs button small{display:block;font-size:10.5px;font-weight:600;color:#7a72b8}
+.abs button.hi{background:#fff4c2;border-color:#f5b400}.abs button.pin{background:#e8fbe8;border-color:#44b25d}
+.mir{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:3px 2px;margin:8px 0;text-align:center;font-weight:800;font-size:14px}
+.mir span{background:#fff;border:1.5px solid #e0dbf8;border-radius:6px;padding:2px 0;line-height:1.15}
+.mir span.mb{background:#f3efff}.mir small{display:block;font-size:9.5px;font-weight:600;color:#7a72b8}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}
+</style>
+</head>
+<body>
+<div class="bubbles" id="bubbles"></div>
+<div class="wrap">
+
+  <!-- ================= HOME ================= -->
+  <header>
+    <div class="mascot" id="mascot">🧩</div>
+    <div class="title">ตรรกะง่ายนิดเดียว</div>
+    <div class="subtitle">สังเกต → ตั้งกฎ → ทดสอบกฎ · คิดเป็นระบบจากของรอบตัว 🔍</div>
+    <div class="starbar">⭐ ดาวสะสม: <b id="totalStars">0</b></div>
+  </header>
+
+  <div class="screen active" id="home">
+    <div class="menu">
+      <button class="card c1" onclick="go('gate')"><span class="ico">🚪</span>สังเกตแบบนักสืบ<small>หาสิ่งที่เกิดซ้ำ · ตั้งกฎ · ทดสอบกฎ</small></button>
+      <button class="card c2" onclick="go('num')"><span class="ico">🔢</span>อนุกรมตัวเลข<small>ผลต่าง · บันได · ลองหาร · 2 ชุดสลับ</small></button>
+      <button class="card c3" onclick="go('abc')"><span class="ico">🔤</span>อนุกรมตัวอักษร<small>แปลงเป็นเลข · วนรอบ · รหัสลับ</small></button>
+      <button class="card soon" disabled><span class="ico">🔗</span>อุปมาอุปไมย<small>พูดความสัมพันธ์เป็นประโยค · ไม่เข้าพวก · เร็ว ๆ นี้</small></button>
+      <button class="card soon" disabled><span class="ico">🧊</span>มิติสัมพันธ์<small>คลี่กล่อง · ลูกเต๋า · มองจากด้าน · เร็ว ๆ นี้</small></button>
+      <button class="card soon" disabled><span class="ico">➡️</span>เงื่อนไขภาษา<small>ถ้า…แล้ว… · ทุก บาง ไม่มี · เร็ว ๆ นี้</small></button>
+      <button class="card soon" disabled><span class="ico">🔣</span>เงื่อนไขสัญลักษณ์<small>มากกว่า น้อยกว่า · สรุปได้แน่ไหม · เร็ว ๆ นี้</small></button>
+      <button class="card soon" disabled><span class="ico">🏆</span>เกมรวม<small>ข้อจากทุกบท · เร็ว ๆ นี้</small></button>
+      <button class="card c8" onclick="openGame()"><span class="ico">🎮</span>เกมพิชิตด่าน<small>ตอบถูก ปลดล็อกด่าน!</small></button>
+    </div>
+    <p class="hint" style="margin-top:16px">💡 ทุกบทมี 3 ชั้น: 🌱 อ่านแค่ชั้นแรกก็เข้าใจ · อยากรู้มากขึ้นค่อยกดต่อ 🌿 🌳<br>เรียนตามลำดับ บนลงล่าง · ตอบผิดได้ ไม่เป็นไร เกมจะบอกว่าติดตรงไหน แล้วพากลับไปดู 🙂</p>
+    <p class="hint" style="margin-top:20px">📚 แอปพี่น้อง · เตรียมสอบชุดเดียวกัน</p>
+    <div class="menu">
+      <a style="text-decoration:none" class="card c5" href="https://suchart-onlaiad-mac.github.io/equation/" target="_blank" rel="noopener"><span class="ico">⚖️</span>สมการง่ายนิดเดียว<small>ตาชั่ง · กล่องปิด · ดอกเบี้ย ↗</small></a>
+      <a style="text-decoration:none" class="card c2" href="https://suchart-onlaiad-mac.github.io/mock/" target="_blank" rel="noopener"><span class="ico">📝</span>สนามสอบจำลอง<small>ซ้อมสอบ · ข้อผิดพากลับบทเรียน ↗</small></a>
+    </div>
+  </div>
+
+  <!-- ================= CH 0 · สังเกตแบบนักสืบ ================= -->
+  <div class="screen" id="gate">
+    <button class="backbtn" onclick="home()">⬅️ กลับหน้าหลัก</button>
+    <div class="panel">
+      <h2>🚪 สังเกตแบบนักสืบ</h2>
+
+      <div class="layer L1">
+        <h3>🌱 ชั้นเมล็ด · รู้แค่นี้ก็เข้าใจ</h3>
+        <p>ยังไม่ต้องมีสูตร · เริ่มจากของที่เห็นในแปลงผักกับบนท้องฟ้า แล้วลองเดาดูก่อน ผิดได้ ไม่เป็นไร 🙂</p>
+
+        <div class="step-h" id="gate-s1"><span class="sn">1</span> 👀 ช่อง ❓ ควรเป็นอะไร</div>
+        <p class="tip">ดูของที่เรียงกันอยู่ แล้วเลือกสิ่งที่ควรอยู่ในช่อง ❓</p>
+        <div id="gq1"></div>
+        <div class="memo">💡 ทุกเรื่องที่ตอบได้ เราทำเหมือนกันโดยไม่รู้ตัว คือ <b>มองหาสิ่งที่เกิดซ้ำ</b> แล้วใช้สิ่งนั้นบอกช่องที่หายไป · สิ่งที่เกิดซ้ำได้กับ<b>ทุกตัว</b>เรียกว่า <b>กฎ</b> หรือ <b>แบบแผน</b></div>
+
+        <div class="step-h" id="gate-s2"><span class="sn">2</span> 🔍 ตั้งกฎ แล้วทดสอบกับทุกตัว</div>
+        <p class="tip">ตัวเลข <b>2, 4, 6, 8</b> · ลองแตะกฎทีละข้อ ดูว่ากฎไหนใช้ได้กับ<b>ทุกคู่</b> 👇</p>
+        <div id="gtBox"></div>
+        <div class="memo">🔑 นักสืบทำ 3 อย่างเรียงกัน: <b>สังเกต → ตั้งกฎ → ทดสอบกฎกับทุกตัว</b> · กฎที่ผ่านแค่คู่แรกยังใช้ไม่ได้</div>
+
+        <div class="step-h" id="gate-s3"><span class="sn">3</span> 🎯 กฎที่ดี ต้องบอกตัวถัดไปได้</div>
+        <p>กฎ "เป็นเลขคู่ทุกตัว" <b>จริงทุกตัว</b> แต่ตัวถัดไปเป็น 10, 12 หรือ 100 ก็ได้ทั้งนั้น · ส่วนกฎ "บวกทีละ 2" บอกได้ชัดว่า <b>10</b></p>
+        <div class="memo">🧭 จึงต้องการกฎที่ <b>① ตรงกับทุกตัว</b> และ <b>② บอกตัวถัดไปได้ตัวเดียว</b></div>
+
+        <div class="step-h"><span class="sn">4</span> 🗺️ เส้นทางของเรา</div>
+        <div class="path">
+          <span>🚪 สังเกตแบบนักสืบ</span><span>➜</span><span>🔢 อนุกรมตัวเลข</span><span>➜</span><span>🔤 อนุกรมตัวอักษร</span>
+        </div>
+        <button class="more" onclick="openLayer('gateL2',this)">🌿 อยากรู้อีกนิด · ฝึกเลือกกฎที่ใช้ได้ทุกตัว ⬇️</button>
+      </div>
+
+      <div class="layer L2 hide" id="gateL2">
+        <h3>🌿 ชั้นต้นกล้า · ฝึกเลือกกฎที่ใช้ได้ทุกตัว</h3>
+        <p class="tip">ทุกเรื่องมีกฎหลอกที่ผ่านแค่คู่แรก · ไล่ตรวจให้ครบทุกคู่ก่อนเลือก</p>
+        <div id="gq2"></div>
+        <div class="memo">✋ ท่าที่ช่วยได้: เขียนสิ่งที่เปลี่ยนไว้ใต้ช่องว่างระหว่างแต่ละคู่ (เช่น +2 +2 +2) · ถ้าใต้ทุกช่องเหมือนกัน แปลว่าเจอกฎแล้ว</div>
+        <button class="more" onclick="openLayer('gateL3',this)">🌳 เจาะลึก · เมื่อกฎใช้ได้มากกว่าหนึ่งแบบ ⬇️</button>
+      </div>
+
+      <div class="layer L3 hide" id="gateL3">
+        <h3>🌳 ชั้นต้นไม้ใหญ่ · เมื่อกฎใช้ได้มากกว่าหนึ่งแบบ</h3>
+        <p>ตัวเลข <b>1, 2, 4, ?</b> มีกฎที่ตรงทุกตัวได้ <b>2 แบบ</b> 👇</p>
+        <div class="tw"><table class="t">
+          <tr><th>กฎ</th><th>ตรวจกับตัวที่มี</th><th>ตัวถัดไป</th></tr>
+          <tr><td>คูณ 2</td><td>1×2=2 · 2×2=4 ✅</td><td><b>8</b></td></tr>
+          <tr><td>ผลต่างเพิ่มทีละ 1 (+1, +2, +3)</td><td>1+1=2 · 2+2=4 ✅</td><td><b>7</b></td></tr>
+        </table></div>
+        <p>ตัวเลขยิ่งน้อย กฎที่ใช้ได้ยิ่งมาก · ถ้าโจทย์ให้ <b>1, 2, 4, 8</b> กฎผลต่างเพิ่มจะตกไปทันที (4+3 ได้ 7 ไม่ใช่ 8) เหลือกฎคูณ 2 แบบเดียว</p>
+        <div class="memo">🔑 โจทย์ที่ดีจึงให้ตัวเลขมาหลายตัว · และในข้อสอบแบบเลือกตอบ <b>ตัวเลือกช่วยตัดสินได้</b> — ถ้ามีคำตอบของกฎเดียวอยู่ในตัวเลือก ก็ตอบตัวนั้น</div>
+        <div class="memo ex">⚠️ ในชีวิตจริงก็เหมือนกัน · ฝนตก 3 วันติดกัน ยังไม่พอจะสรุปว่าพรุ่งนี้ฝนตกแน่ · ข้อมูลน้อย = ยังมีคำอธิบายได้หลายแบบ</div>
+        <div id="gq3"></div>
+        <div class="center" style="margin-top:16px"><button class="btn go" onclick="openGame('gate')">🎮 ไปพิชิตด่านเลย!</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CH 1 · อนุกรมตัวเลข ================= -->
+  <div class="screen" id="num">
+    <button class="backbtn" onclick="home()">⬅️ กลับหน้าหลัก</button>
+    <div class="panel">
+      <h2>🔢 อนุกรมตัวเลข</h2>
+
+      <div class="layer L1">
+        <h3>🌱 ชั้นเมล็ด · รู้แค่นี้ก็เข้าใจ</h3>
+        <p><b>อนุกรม</b> คือตัวเลขที่เรียงต่อกันตามกฎ · บทนี้มีท่าหากฎแค่ 3 ท่า ลองทีละท่าตามลำดับ</p>
+
+        <div class="step-h" id="num-s1"><span class="sn">1</span> 🪴 ท่าที่ 1 · หาผลต่าง</div>
+        <p class="tip">ร้านต้นไม้วางกระถางเพิ่มขึ้นทุกวัน 👇</p>
+        <div class="pots" id="nmPots"></div>
+        <p>เขียนเป็นตัวเลขได้ 3, 6, 9, 12 · กด <b>➖ หาผลต่าง</b> = เอาตัวหลังลบตัวหน้าทีละคู่</p>
+        <div id="st1"></div>
+        <div class="memo">🔑 ผลต่าง<b>เท่ากันทุกช่อง</b> = เจอกฎแล้ว · ตัวถัดไปก็บวกผลต่างนั้นเพิ่มอีกครั้ง · ตัวเลขลดลงก็ใช้ท่านี้ได้ ผลต่างจะเป็นลบ เช่น −6</div>
+
+        <div class="step-h" id="num-s2"><span class="sn">2</span> 🪜 ท่าที่ 2 · ผลต่างไม่เท่ากัน ลงอีกชั้น</div>
+        <p class="tip">ตัวเลข 5, 6, 8, 11, 15 · ผลต่างชั้นแรกยังไม่เท่ากัน → กดหาผลต่าง<b>ของผลต่าง</b>อีกครั้ง</p>
+        <div id="st2"></div>
+        <div class="memo">🪜 เหมือนเดินลงบันได · ลงไปจนเจอชั้นที่เท่ากันทุกช่อง แล้วค่อยเติมย้อนขึ้นมาทีละชั้น</div>
+
+        <div class="step-h" id="num-s3"><span class="sn">3</span> ✖️ ท่าที่ 3 · ผลต่างโตเร็ว ลองหาร</div>
+        <p class="tip">ตัวเลข 4, 8, 16, 32 · ลองหาผลต่างก่อน แล้วสังเกตว่าผลต่างหน้าตาเหมือนอะไร</p>
+        <div id="st3"></div>
+        <div class="memo">🔑 ผลต่างได้ 4, 8, 16 = <b>หน้าตาเหมือนตัวเลขเดิม</b> และโตเป็นเท่าตัว → เป็นสัญญาณของการคูณ · กด <b>➗ ลองหาร</b> (ตัวหลัง ÷ ตัวหน้า) จะได้ 2 ทุกช่อง = คูณ 2</div>
+
+        <div class="step-h" id="num-s4"><span class="sn">4</span> 🧭 ลำดับการลอง</div>
+        <div class="path"><span>➖ ผลต่าง</span><span>➜</span><span>🪜 ผลต่างชั้นที่ 2</span><span>➜</span><span>➗ ลองหาร</span></div>
+        <p class="tip">ลองใช้ 3 ท่าเลือกคำตอบ 👇</p>
+        <div id="nq1"></div>
+        <button class="more" onclick="openLayer('numL2',this)">🌿 อยากรู้อีกนิด · บันไดลองเอง และอนุกรม 2 ชุดสลับ ⬇️</button>
+      </div>
+
+      <div class="layer L2 hide" id="numL2">
+        <h3>🌿 ชั้นต้นกล้า · ลองเอง และอนุกรม 2 ชุดสลับ</h3>
+        <div class="step-h" id="num-d"><span class="sn">✋</span> บันไดผลต่าง ลองเลือกท่าเอง</div>
+        <p class="tip">ไม่มีคำใบ้ว่าข้อไหนใช้ท่าไหน · ลองกดเอง ถ้าเลือกผิดท่า แอปจะบอกสัญญาณให้</p>
+        <div class="tabs" id="nmDrillTabs"></div>
+        <div id="st4"></div>
+
+        <div class="step-h" id="num-alt"><span class="sn">🎨</span> ตัวเลขขึ้น ๆ ลง ๆ = อาจมี 2 ชุดซ้อนกัน</div>
+        <p class="tip">ตัวเลข 1, 10, 2, 20, 3, 30 · ผลต่างกระโดดไปมา ลองแยกตามตำแหน่ง 👇</p>
+        <div id="nmAlt"></div>
+        <div class="memo">🔑 ตำแหน่งที่ 1, 3, 5 เป็นชุดหนึ่ง · ตำแหน่งที่ 2, 4, 6 เป็นอีกชุด · ตอบตัวถัดไป ต้องดูก่อนว่าเป็น<b>ตำแหน่งคี่หรือคู่</b></div>
+        <div id="nq2"></div>
+        <button class="more" onclick="openLayer('numL3',this)">🌳 เจาะลึก · อนุกรมที่มีชื่อ และตัวที่ 100 ⬇️</button>
+      </div>
+
+      <div class="layer L3 hide" id="numL3">
+        <h3>🌳 ชั้นต้นไม้ใหญ่ · อนุกรมที่มีชื่อ และตัวที่ 100</h3>
+        <div class="step-h" id="num-fib"><span class="sn">🐇</span> บวกสองตัวหน้า · อนุกรมฟีโบนัชชี</div>
+        <p class="tip">อนุกรมนี้เล่ากันมาจากโจทย์กระต่าย · กดดูทีละบรรทัด</p>
+        <div id="wkFib"></div>
+        <div id="nq3"></div>
+
+        <div class="step-h" id="num-sq"><span class="sn">🟪</span> จุดเรียงเป็นสี่เหลี่ยม · 1, 4, 9, 16</div>
+        <div class="center" id="nmSq"></div>
+        <p>จำนวนจุด = ด้าน × ด้าน (1×1, 2×2, 3×3, 4×4) เรียกว่า<b>เลขยกกำลังสอง</b> · ผลต่างเป็นเลขคี่ 3, 5, 7 · ตัวถัดไป 5×5 = <b>25</b></p>
+
+        <div class="step-h" id="num-tri"><span class="sn">🔺</span> จุดเรียงเป็นสามเหลี่ยม · 1, 3, 6, 10</div>
+        <div class="center" id="nmTri"></div>
+        <p>แถวใหม่ยาวกว่าแถวก่อน 1 จุด · ผลต่างจึงเป็น 2, 3, 4 · ตัวถัดไป 10 + 5 = <b>15</b></p>
+
+        <div class="step-h" id="num-nth"><span class="sn">🌳</span> ตัวที่ 100 ไม่ต้องไล่ทีละตัว</div>
+        <p>ปลูกต้นไม้ 5 ต้นเป็นแถว จะมีช่องว่างระหว่างต้น <b>4 ช่อง</b> (น้อยกว่าจำนวนต้น 1) 🌳_🌳_🌳_🌳_🌳</p>
+        <div id="wkNth"></div>
+        <div class="memo">🔑 ตัวที่ n = ตัวแรก + ผลต่าง × (n − 1) · คนลืม "− 1" บ่อยที่สุด เพราะนับต้นแทนนับช่อง</div>
+        <a class="bridge" href="../equation/#box" target="_blank" rel="noopener">📦 สะพานไปแอปสมการ: "ตัวที่ n" คือกล่องที่ยังไม่รู้ค่า แบบเดียวกับ x ในบทกล่องปิด ↗</a>
+        <div class="center" style="margin-top:16px"><button class="btn go" onclick="openGame('num')">🎮 ไปพิชิตด่านเลย!</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CH 2 · อนุกรมตัวอักษร ================= -->
+  <div class="screen" id="abc">
+    <button class="backbtn" onclick="home()">⬅️ กลับหน้าหลัก</button>
+    <div class="panel">
+      <h2>🔤 อนุกรมตัวอักษร</h2>
+
+      <div class="layer L1">
+        <h3>🌱 ชั้นเมล็ด · รู้แค่นี้ก็เข้าใจ</h3>
+        <p>ตัวอักษรก็มีลำดับเหมือนตัวเลข · แถวที่นั่งในโรงหนัง แถว A อยู่หน้าสุด ถัดมา B, C ไปเรื่อย ๆ 🎬</p>
+
+        <div class="step-h" id="abc-s1"><span class="sn">1</span> 🔢 ตัวอักษรทุกตัวมีเลขลำดับ</div>
+        <p class="tip">แตะตัวอักษรเพื่อดูลำดับ · ช่องสีเหลืองคือ A, C, E 👇</p>
+        <div class="abs" id="abS1"></div>
+        <div class="info" id="abS1Fb">แตะตัวอักษรด้านบน</div>
+
+        <div class="step-h" id="abc-s2"><span class="sn">2</span> 🔁 แปลง → หากฎ → แปลงกลับ</div>
+        <p class="tip">โจทย์ D, H, L, ? · กดดูทีละบรรทัด</p>
+        <div id="wkAbc"></div>
+        <div class="memo">🔑 พอแปลงเป็นตัวเลข ก็ใช้ท่าหาผลต่างจากบทอนุกรมตัวเลขได้ทั้งหมด · ตัวอักษรเป็นแค่<b>ชุดเลขที่ใส่ชุดใหม่</b></div>
+
+        <div class="step-h" id="abc-s3"><span class="sn">3</span> 📍 หมุดช่วยนับ E J O T Y</div>
+        <p>ไม่ต้องจำทั้ง 26 ตัว · จำหมุด 5 ตัว ทุก ๆ 5 ลำดับ แล้วนับต่อจากหมุดที่ใกล้ที่สุด</p>
+        <div class="abs" id="abPin"></div>
+        <div class="memo">📍 <b>E = 5 · J = 10 · O = 15 · T = 20 · Y = 25</b> · เช่น R อยู่ก่อน T สองตัว = 20 − 2 = 18</div>
+        <div id="aq1"></div>
+        <button class="more" onclick="openLayer('abcL2',this)">🌿 อยากรู้อีกนิด · ถอยหลัง วนรอบ และตัวอักษรคู่ตัวเลข ⬇️</button>
+      </div>
+
+      <div class="layer L2 hide" id="abcL2">
+        <h3>🌿 ชั้นต้นกล้า · กฎที่ซับซ้อนขึ้นอีกนิด</h3>
+        <div class="step-h" id="abc-gap"><span class="sn">↗️</span> ระยะห่างเพิ่มขึ้น</div>
+        <p>A, B, D, G → 1, 2, 4, 7 · ผลต่าง 1, 2, 3 → ช่องถัดไป +4 = 11 = <b>K</b> · ท่าเดียวกับบันไดผลต่าง</p>
+        <div class="step-h" id="abc-back"><span class="sn">↩️</span> ถอยหลัง</div>
+        <p>Z, X, V → 26, 24, 22 · ลดทีละ 2 → 20 = <b>T</b> · ผลต่างติดลบก็ใช้ท่าเดิมได้</p>
+        <div class="step-h" id="abc-wrap"><span class="sn">🔄</span> เลย Z แล้ววนกลับ A</div>
+        <p class="tip">ตัวอักษรเรียงเป็นวงได้ · หลัง Z = 26 คือ A อีกรอบ จึงนับต่อเป็น 27 ได้ 👇</p>
+        <div class="seq" id="abWrap"></div>
+        <div class="memo">🔑 เลขที่เกิน 26 ให้<b>ลบ 26</b> ก่อนแปลงกลับ · เช่น 29 − 26 = 3 = C</div>
+        <div id="aq2"></div>
+        <div class="step-h" id="abc-mix"><span class="sn">🔣</span> ตัวอักษรคู่ตัวเลข</div>
+        <p>A1, C3, E5 → ตัวอักษรกับตัวเลขเดินไปด้วยกัน (A=1 · C=3 · E=5) · ตัวถัดไปคือ <b>G7</b> · ถ้าเดินคนละกฎ ให้แยกหากฎทีละส่วน</p>
+        <button class="more" onclick="openLayer('abcL3',this)">🌳 เจาะลึก · คู่กระจก และรหัสลับ ⬇️</button>
+      </div>
+
+      <div class="layer L3 hide" id="abcL3">
+        <h3>🌳 ชั้นต้นไม้ใหญ่ · คู่กระจก และรหัสลับ</h3>
+        <div class="step-h" id="abc-mir"><span class="sn">🪞</span> คู่กระจก A–Z · B–Y · C–X</div>
+        <p class="tip">พับแถวตัวอักษรครึ่งหนึ่ง ตัวที่ซ้อนกันคือคู่กระจก 👇</p>
+        <div class="mir" id="abMir"></div>
+        <div class="memo">🔑 คู่กระจกมีลำดับรวมกันได้ <b>27</b> เสมอ (A 1 + Z 26) · หาคู่ของตัวไหนก็เอา 27 ลบ เช่น D = 4 → 27 − 4 = 23 = W</div>
+        <div class="step-h" id="abc-code"><span class="sn">🔐</span> รหัสเลื่อนตัวอักษร</div>
+        <p>มีบันทึกเล่าว่า <b>จูเลียส ซีซาร์</b> เขียนจดหมายลับโดยเลื่อนตัวอักษรไป 3 ตัว (A เป็น D) · ใครไม่รู้กฎก็อ่านไม่ออก · ลองเลื่อนเอง 👇</p>
+        <div id="cdBox"></div>
+        <div class="memo">🔑 โจทย์รหัสคือโจทย์อนุกรมแบบหนึ่ง: ดูคู่ตัวอย่าง (เช่น CAT → DBU) หาว่าเลื่อนไปกี่ตัว แล้วใช้กฎเดิมกับคำใหม่</div>
+        <div id="aq3"></div>
+        <div class="center" style="margin-top:16px"><button class="btn go" onclick="openGame('abc')">🎮 ไปพิชิตด่านเลย!</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= GAME ================= -->
+  <div class="screen" id="game">
+    <button class="backbtn" onclick="home()">⬅️ กลับหน้าหลัก</button>
+    <div class="panel" id="game-menu">
+      <h2 id="gTitle">🎮 เกมพิชิตด่าน</h2>
+      <div class="tabs" id="gTabs"></div>
+      <p class="lead">ด่านละ 5 ข้อ สุ่มใหม่ทุกครั้ง · มีหัวใจ ❤️ 3 ดวง · ตอบถูก 4 ข้อขึ้นไป = ผ่าน ปลดล็อกด่านถัดไป 🔓</p>
+      <div class="levels" id="levels"></div>
+      <p class="hint" style="margin-top:12px">ข้อที่ตอบผิด จะวนกลับมาถามอีกในรอบหน้า 🔁</p>
+    </div>
+
+    <div class="panel" id="game-play" style="display:none">
+      <div class="qhead"><span id="q-count">ข้อ 1 / 5</span><span class="hearts" id="q-hearts">❤️❤️❤️</span><span>ถูก: <span id="q-score">0</span></span></div>
+      <div class="qprog"><i id="q-prog" style="width:0%"></i></div>
+      <div class="qpic" id="q-pic"></div>
+      <div class="question" id="q-text">...</div>
+      <div class="choices txt" id="q-choices"></div>
+      <div class="feedback" id="q-fb"></div>
+      <div class="why" id="q-why"></div>
+      <div class="center"><button class="btn go nextbtn" id="q-next" onclick="nextQ()">ข้อต่อไป ➡️</button></div>
+    </div>
+
+    <div class="panel" id="game-end" style="display:none">
+      <div class="scorebig">
+        <div class="stars" id="e-stars">⭐⭐⭐</div>
+        <div class="msg" id="e-msg">เก่งมาก!</div>
+        <div class="detail" id="e-detail">ทำถูก 5 จาก 5 ข้อ</div>
+        <div class="center" id="e-btns" style="margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap"></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn fire" id="ch-retry" onclick="retryChallenge()">🔥 ท้าทายใหม่</button>
+
+  <footer>
+    🧩 สื่อการเรียนรู้ "ตรรกะง่ายนิดเดียว" · เปิดได้ทุกอุปกรณ์ · ตอบผิดได้ ไม่มีใครเห็นนอกจากคุณ<br>
+    แอปพี่น้อง: <a href="https://suchart-onlaiad-mac.github.io/equation/" target="_blank" rel="noopener">สมการง่ายนิดเดียว</a> · <a href="https://suchart-onlaiad-mac.github.io/mock/" target="_blank" rel="noopener">สนามสอบจำลอง</a>
+  </footer>
+</div>
+
+<script>
+/* ============ helpers ============ */
+const $ = id => document.getElementById(id);
+const SAVE_KEY='logic-v1';
+let save={stars:{}, wrong:[]};
+try{ const s=JSON.parse(localStorage.getItem(SAVE_KEY)); if(s&&s.stars) save=s; }catch(e){}
+function persist(){ try{ localStorage.setItem(SAVE_KEY,JSON.stringify(save)); }catch(e){} }
+function totalStars(){ return Object.values(save.stars).reduce((a,b)=>a+b,0); }
+function showStars(){ $('totalStars').textContent=totalStars(); }
+showStars();
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  const r=$('ch-retry'); if(r) r.style.display=(town&&Object.values(CHS).some(C=>C.scr===id))?'block':'none'; // หน้าบทใดก็ได้ — ข้อจากเกมรวมพากลับไปบทต้นทางของข้อ
+  if(!keepLayers) collapseLayers(id); keepLayers=false; // กลับเข้าบทเมื่อไหร่ เริ่มที่ 🌱 เสมอ
+  refreshLayerPlay(id);
+}
+function home(){ go('home'); }
+
+/* ============ ชั้น 🌿🌳: กดเปิด/ซ่อน · ลองเล่นท้ายชั้น (ด่าน 1/2/3 = ชั้น 🌱🌿🌳) ============ */
+const LNM=['ชั้นเมล็ด','ชั้นต้นกล้า','ชั้นต้นไม้ใหญ่'], LIC=['🌱','🌿','🌳'];
+let keepLayers=false;
+const moreBtn = id => document.querySelector(`.more[onclick^="openLayer('${id}'"]`);
+function markMore(id,open){
+  const b=moreBtn(id); if(!b) return;
+  if(!b.dataset.t) b.dataset.t=b.innerHTML;
+  const n=+id.slice(-1)-1;
+  b.innerHTML=open?`⬆️ ซ่อน${LNM[n]} ${LIC[n]}`:b.dataset.t;
+}
+function openLayer(id){
+  const el=$(id);
+  if(!el.classList.contains('hide')) return closeLayer(id);
+  el.classList.remove('hide'); markMore(id,true);
+  setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+function closeLayer(id){ // ซ่อน 🌿 = ซ่อน 🌳 ด้วย (ปุ่มเปิด 🌳 อยู่ใน 🌿)
+  const scr=id.slice(0,-2);
+  for(let k=+id.slice(-1);k<=3;k++){ const el=$(scr+'L'+k); if(el){ el.classList.add('hide'); markMore(scr+'L'+k,false); } }
+  const b=moreBtn(id); if(b) setTimeout(()=>b.scrollIntoView({behavior:'smooth',block:'center'}),50);
+}
+function collapseLayers(scr){
+  [2,3].forEach(k=>{ const el=$(scr+'L'+k); if(el){ el.classList.add('hide'); markMore(scr+'L'+k,false); } });
+}
+function readLayer(scr,i){ // จากหน้าผลเกม → กลับไปอ่านชั้น i (0=🌱) เปิดชั้นที่ต้องผ่านไว้ให้
+  keepLayers=true; go(scr); collapseLayers(scr);
+  for(let k=2;k<=i+1;k++){ $(scr+'L'+k).classList.remove('hide'); markMore(scr+'L'+k,true); }
+  if(i>0) setTimeout(()=>$(scr+'L'+(i+1)).scrollIntoView({behavior:'smooth',block:'start'}),400);
+}
+function layerPlay(ch,i){ openGame(ch); if(isOpen(i)) startGame(i); } // ยังล็อก → อยู่หน้าแผนที่ด่าน
+function refreshLayerPlay(scr){
+  document.querySelectorAll(`#${scr} .lp button`).forEach(b=>{
+    const i=+b.dataset.i, Ls=LEVELS.filter(L=>L.ch===b.dataset.ch), st=save.stars[Ls[i].id]||0,
+      open=i===0||(save.stars[Ls[i-1].id]||0)>0;
+    b.textContent=!open?`🔒 ${LNM[i]} ${LIC[i]} · เล่นผ่าน${LNM[i-1]}ก่อนนะ`
+      :st?`🎮 เล่นอีกรอบ · ${LNM[i]} ${LIC[i]} ${'⭐'.repeat(st)}`:`🎮 ลองเล่นดู ${LNM[i]} ${LIC[i]} เข้าใจแค่ไหน`;
+    b.style.opacity=open?'':'.6';
+  });
+}
+
+/* mascot reacts on click */
+const moods = ['🧩','🔍','🔢','🔤','🤔','💡','🎯'];
+$('mascot').onclick = ()=>{ $('mascot').textContent = moods[Math.floor(Math.random()*moods.length)]; };
+
+/* ============ background bubbles ============ */
+(function(){
+  const colors=['#ff8fd4','#9b8bff','#5fb8ff','#42e0c8','#ffc04e','#76dd6e'];
+  const box=$('bubbles');
+  for(let i=0;i<14;i++){
+    const s=document.createElement('span');
+    const size=20+Math.random()*60;
+    s.style.width=s.style.height=size+'px';
+    s.style.left=Math.random()*100+'%';
+    s.style.background=colors[i%colors.length];
+    s.style.animationDuration=(10+Math.random()*16)+'s';
+    s.style.animationDelay=(-Math.random()*16)+'s';
+    box.appendChild(s);
+  }
+})();
+
+/* ============ คลังข้อ · c[0] = คำตอบถูก · s = ขั้นในบทที่ใช้ตอบข้อนี้ (ตอบผิด → ปุ่มย้อนไปขั้นนั้น) ============ */
+// เลขในเกมต้องไม่ซ้ำตัวอย่างในบท (วัดความเข้าใจ ไม่ใช่ความจำ) · ตัวเลือกยาวพอ ๆ กัน
+const BANK = {
+  lg1:[
+    {p:'🌶️', s:'gate-s1', q:'แปลงปลูกเรียงแบบนี้ 🌶️🍅🍅🌶️🍅🍅🌶️❓ ช่อง ❓ ควรเป็นอะไร', c:['🍅','🌶️','🥬','🌽'], w:'กฎคือ พริก 1 ต้น ตามด้วยมะเขือเทศ 2 ต้น ซ้ำไปเรื่อย ๆ · หลังพริกต้นที่ 3 จึงเป็นมะเขือเทศ'},
+    {p:'🪴', s:'gate-s1', q:'กระถางวางเป็นแถว 1 ใบ, 3 ใบ, 5 ใบ, 7 ใบ · แถวถัดไปควรมีกี่ใบ', c:['9 ใบ','8 ใบ','10 ใบ','14 ใบ'], w:'เพิ่มแถวละ 2 ใบ · 7 + 2 = 9 · 14 มาจาก 7 × 2 ซึ่งไม่ตรงกับคู่ก่อนหน้า'},
+    {p:'⏰', s:'gate-s1', q:'นาฬิกาปลุกดังเวลา 6:00, 6:15, 6:30, 6:45 · ครั้งถัดไปดังกี่โมง', c:['7:00','6:60','6:50','7:15'], w:'ดังทุก 15 นาที · 6:45 + 15 นาที = 7:00 (1 ชั่วโมงมี 60 นาที จึงไม่มีเวลา 6:60)'},
+    {p:'💧', s:'gate-s1', q:'รดน้ำต้นไม้ทุก 2 วัน ต่อเนื่องไปเรื่อย ๆ · รดวันที่ 1, 3, 5 ของเดือน · ครั้งถัดไปคือวันที่', c:['7','6','8','10'], w:'ห่างกันครั้งละ 2 วัน · 5 + 2 = 7 · 10 มาจาก 5 × 2'},
+    {p:'🔍', s:'gate-s2', q:'นักสืบหากฎตามลำดับใด', c:['สังเกต → ตั้งกฎ → ทดสอบกับทุกตัว','ตั้งกฎ → ตอบเลย → ค่อยสังเกต','เดาคำตอบ → หากฎ → ทดสอบกฎ','สังเกต 2 ตัวแรก → ตอบได้เลย'], w:'ต้องสังเกตก่อน แล้วตั้งกฎ จากนั้นทดสอบกฎกับทุกตัว · ดูแค่ 2 ตัวแรกยังไม่พอ'},
+    {p:'✖️', s:'gate-s2', q:'ตัวเลข 6, 12, 18, 24 · กฎ "คูณ 2" ใช้ได้ไหม', c:['ไม่ได้ เพราะ 12 × 2 ได้ 24 ไม่ใช่ 18','ได้ เพราะ 6 × 2 ได้ 12 ตรงตัวที่ 2','ได้ เพราะทุกตัวหารด้วย 6 ลงตัว','ไม่ได้ เพราะ 24 ไม่ใช่เลขคู่'], w:'ต้องทดสอบทุกคู่ · 6 → 12 ผ่าน แต่ 12 → 18 ไม่ผ่าน · กฎที่ถูกคือบวกทีละ 6'},
+    {p:'🎯', s:'gate-s3', q:'ตัวเลข 10, 20, 30, 40 · กฎ "ลงท้ายด้วย 0" มีปัญหาอะไร', c:['จริงทุกตัว แต่บอกตัวถัดไปไม่ได้แน่ชัด','ไม่จริง เพราะ 20 ไม่ได้ลงท้ายด้วย 0','ไม่มีปัญหา บอกตัวถัดไปได้ว่าเป็น 50','ไม่จริง เพราะต้องคูณ 2 ทุกตัวเสมอ'], w:'กฎที่ดีต้องบอกตัวถัดไปได้ · ลงท้ายด้วย 0 เป็น 50, 60 หรือ 100 ก็ได้ · กฎ "บวกทีละ 10" บอกได้ว่า 50'},
+    {p:'🧩', s:'gate-s2', q:'ถ้ากฎที่ตั้งไว้ตรงกับตัวแรก ๆ แต่ไม่ตรงกับตัวท้าย ควรทำอย่างไร', c:['ทิ้งกฎนั้น แล้วตั้งกฎใหม่ให้ตรงทุกตัว','ใช้กฎนั้นต่อ เพราะตรงเกินครึ่งแล้ว','เลือกตัวเลือกที่ยาวที่สุดแทนการคิด','ตัดตัวท้ายทิ้ง ถือว่าโจทย์พิมพ์ผิด'], w:'กฎต้องตรงกับทุกตัว · ไม่ตรงแม้ตัวเดียวก็ต้องตั้งกฎใหม่'}
+  ],
+  lg2:[
+    {p:'🔢', s:'gateL2', q:'ตัวเลข 5, 10, 15, 20 · กฎใดใช้ได้กับทุกคู่', c:['บวกทีละ 5','คูณ 2','บวกทีละ 10','คูณ 3'], w:'5 + 5 = 10 · 10 + 5 = 15 · 15 + 5 = 20 · ส่วน "คูณ 2" ผ่านแค่ 5 → 10'},
+    {p:'🔢', s:'gateL2', q:'ตัวเลข 2, 6, 18, 54 · กฎใดใช้ได้กับทุกคู่', c:['คูณ 3','บวก 4','บวก 12','คูณ 2'], w:'2 × 3 = 6 · 6 × 3 = 18 · 18 × 3 = 54 · "บวก 4" ผ่านแค่ 2 → 6'},
+    {p:'🔢', s:'gateL2', q:'ตัวเลข 50, 45, 40, 35 · กฎใดใช้ได้กับทุกคู่', c:['ลบทีละ 5','หาร 2','ลบทีละ 10','บวกทีละ 5'], w:'ลดลงคู่ละ 5 ทุกคู่ · 50 ÷ 2 ได้ 25 ไม่ใช่ 45'},
+    {p:'🔢', s:'gateL2', q:'ตัวเลข 1, 4, 7, 10, 13 · ตัวถัดไปคือ', c:['16','15','17','26'], w:'บวกทีละ 3 · 13 + 3 = 16 · 26 มาจาก 13 × 2'},
+    {p:'🌱', s:'gateL2', q:'ต้นกล้าเรียง 🌱🌱🌿 🌱🌱🌿 🌱🌱 ต้นถัดไปคือ', c:['🌿','🌱','🌳','🍂'], w:'ต้นเล็ก 2 ต้นใหญ่ 1 ซ้ำเป็นชุด · หลัง 🌱🌱 จึงเป็น 🌿'},
+    {p:'🔢', s:'gateL2', q:'ตัวเลข 100, 50, 25 · กฎใดใช้ได้กับทุกคู่', c:['หารทีละ 2','ลบทีละ 50','ลบทีละ 25','หารทีละ 4'], w:'100 ÷ 2 = 50 · 50 ÷ 2 = 25 · "ลบ 50" ผ่านแค่ 100 → 50'},
+    {p:'⚖️', s:'gateL2', q:'ตัวเลข 4, 8, 12, 16 · กฎ "คูณ 2" กับ "บวก 4" ใช้ได้แบบใด', c:['บวก 4 ได้อย่างเดียว','คูณ 2 ได้อย่างเดียว','ใช้ได้ทั้งสองกฎ','ใช้ไม่ได้ทั้งสองกฎ'], w:'4 × 2 = 8 ผ่าน แต่ 8 × 2 ได้ 16 ไม่ใช่ 12 · บวก 4 ผ่านทุกคู่'},
+    {p:'📅', s:'gateL2', q:'เดือนที่มี 31 วัน วันที่ 3, 10, 17, 24 เป็นวันอังคาร · วันอังคารถัดไปในเดือนนี้คือวันที่', c:['31','30','28','25'], w:'1 สัปดาห์มี 7 วัน · 24 + 7 = 31'}
+  ],
+  lg3:[
+    {p:'🤔', s:'gateL3', q:'ตัวเลข 1, 3, 9, ? · ถ้าใช้กฎ "คูณ 3" ตัวถัดไปคือ', c:['27','15','18','12'], w:'9 × 3 = 27 · ถ้าใช้กฎผลต่างเพิ่มทีละ 4 (+2, +6, +10) จะได้ 19 ซึ่งเป็นอีกกฎที่ตรงกับ 3 ตัวแรกเหมือนกัน'},
+    {p:'🤔', s:'gateL3', q:'ตัวเลข 1, 3, 9, ? · ตัวเลือกคือ 12, 15, 19 และ 21 · ควรตอบข้อใด', c:['19','12','15','21'], w:'กฎคูณ 3 ได้ 27 แต่ไม่มีในตัวเลือก · กฎผลต่างเพิ่มทีละ 4 (+2 +6 +10) ได้ 19 ซึ่งมีในตัวเลือก'},
+    {p:'🔍', s:'gateL3', q:'ตัวเลข 1, 3, 9, 27, ? · ตัวถัดไปคือ', c:['81','45','54','37'], w:'มี 4 ตัวแล้ว กฎผลต่างเพิ่มทีละ 4 ตกไป (9 + 10 ได้ 19 ไม่ใช่ 27) · เหลือกฎคูณ 3 → 81'},
+    {p:'📚', s:'gateL3', q:'ทำไมโจทย์อนุกรมที่ดีจึงให้ตัวเลขมาหลายตัว', c:['ให้เหลือกฎที่ใช้ได้เพียงกฎเดียว','ให้ผู้สอบต้องคิดเลขนานขึ้น','เพราะตัวเลขน้อยคำนวณไม่ได้','เพื่อให้ตัวเลขใหญ่ขึ้นทุกตัว'], w:'ตัวเลขยิ่งน้อย กฎที่ใช้ได้ยิ่งมาก · ยิ่งให้หลายตัว กฎที่ผิดยิ่งตกไป'},
+    {p:'⚖️', s:'gateL3', q:'ตัวเลข 2, 4, ? เป็นได้ทั้ง 6 (บวก 2) และ 8 (คูณ 2) · ถ้าตัวเลือกมีทั้ง 6 และ 8 แปลว่าอะไร', c:['ข้อมูลยังไม่พอจะตัดสินได้แน่','ต้องตอบ 8 เสมอ เพราะคูณยากกว่า','ต้องตอบ 6 เสมอ เพราะบวกง่ายกว่า','ต้องตอบตัวเลขที่มากที่สุดเสมอ'], w:'กฎทั้งสองตรงกับ 2 ตัวที่มีเท่ากัน · ไม่มีเหตุผลให้เลือกข้างใดข้างหนึ่ง'},
+    {p:'🧮', s:'gateL3', q:'ตัวเลข 3, 5, 9, 17, ? · กฎ "คูณ 2 แล้วลบ 1" ใช้ได้ไหม', c:['ได้ ตัวถัดไปคือ 33','ได้ ตัวถัดไปคือ 34','ไม่ได้ ต้องบวก 2 ได้ 19','ไม่ได้ ต้องบวก 8 ได้ 25'], w:'3×2−1 = 5 · 5×2−1 = 9 · 9×2−1 = 17 ผ่านทุกคู่ · 17×2−1 = 33'},
+    {p:'🥚', s:'gateL3', q:'ไก่ออกไข่วันละ 1 ฟอง 3 วันติดกัน · เพื่อนสรุปว่า "ไก่ตัวนี้ออกไข่ทุกวันแน่นอน" · ข้อใดตรงกับวิธีคิดแบบนักสืบ', c:['ข้อมูล 3 วันยังน้อย ต้องดูต่ออีกหลายวัน','ถูกแน่นอน เพราะเห็นแบบแผนชัดแล้ว','ผิดแน่นอน เพราะไก่ต้องหยุดพักบ้าง','ถูก เพราะเห็นซ้ำกันมาแล้วถึง 3 วัน'], w:'ข้อมูลน้อยยังอธิบายได้หลายแบบ · สรุปแน่ไม่ได้ทั้งว่าออกทุกวันหรือไม่ออก'},
+    {p:'🎯', s:'gateL3', q:'ตัวเลข 2, 3, 5, ? · กฎ "ผลต่างเพิ่มทีละ 1" (+1, +2, +3) ได้ตัวถัดไปเท่าไร', c:['8','7','9','10'], w:'2 + 1 = 3 · 3 + 2 = 5 · 5 + 3 = 8'}
+  ],
+  nm1:[
+    {p:'➖', s:'num-s1', q:'อนุกรม 4, 9, 14, 19, ? · ตัวถัดไปคือ', c:['24','23','25','29'], w:'ผลต่าง +5 เท่ากันทุกช่อง · 19 + 5 = 24'},
+    {p:'➖', s:'num-s1', q:'อนุกรม 40, 34, 28, 22, ? · ตัวถัดไปคือ', c:['16','18','14','20'], w:'ผลต่าง −6 ทุกช่อง · 22 − 6 = 16'},
+    {p:'🪜', s:'num-s2', q:'อนุกรม 10, 11, 13, 16, 20, ? · ตัวถัดไปคือ', c:['25','24','26','40'], w:'ผลต่าง 1, 2, 3, 4 เพิ่มทีละ 1 · ช่องถัดไป +5 · 20 + 5 = 25 · 40 มาจาก 20 × 2'},
+    {p:'🪜', s:'num-s2', q:'อนุกรม 3, 5, 9, 15, 23, ? · ตัวถัดไปคือ', c:['33','31','32','46'], w:'ผลต่าง 2, 4, 6, 8 เพิ่มทีละ 2 · ช่องถัดไป +10 · 23 + 10 = 33'},
+    {p:'✖️', s:'num-s3', q:'อนุกรม 5, 10, 20, 40, ? · ตัวถัดไปคือ', c:['80','60','50','70'], w:'ผลต่าง 5, 10, 20 โตเป็นเท่าตัว = สัญญาณของการคูณ · 10 ÷ 5 = 2 · 40 × 2 = 80'},
+    {p:'✖️', s:'num-s3', q:'อนุกรม 3, 12, 48, ? · ตัวถัดไปคือ', c:['192','144','96','57'], w:'12 ÷ 3 = 4 · 48 ÷ 12 = 4 → คูณ 4 · 48 × 4 = 192'},
+    {p:'✖️', s:'num-s3', q:'อนุกรม 7, 14, 28, 56, ? · ตัวถัดไปคือ', c:['112','84','70','98'], w:'14 ÷ 7 = 2 · 28 ÷ 14 = 2 → คูณ 2 · 56 × 2 = 112 · 84 มาจากบวก 28 ซ้ำ'},
+    {p:'🧭', s:'num-s4', q:'เห็นอนุกรมใหม่ ควรลองท่าใดก่อน', c:['หาผลต่างระหว่างตัวที่ติดกัน','ลองคูณทุกตัวด้วย 2 ไปก่อน','ดูว่าแต่ละตัวเป็นเลขคู่หรือคี่','เลือกตัวเลือกที่มีค่ามากที่สุด'], w:'ลำดับการลอง: ผลต่าง → ผลต่างชั้นที่ 2 → ลองหาร'}
+  ],
+  nm2:[
+    {p:'🪜', s:'num-d', q:'อนุกรม 2, 5, 11, 20, 32, ? · ตัวถัดไปคือ', c:['47','44','45','64'], w:'ผลต่าง 3, 6, 9, 12 เพิ่มทีละ 3 · ช่องถัดไป +15 · 32 + 15 = 47'},
+    {p:'✖️', s:'num-d', q:'อนุกรม 2, 10, 50, 250, ? · ตัวถัดไปคือ', c:['1250','500','1000','450'], w:'10 ÷ 2 = 5 → คูณ 5 · 250 × 5 = 1250 · 500 มาจากคูณ 2 · 450 มาจากบวกผลต่างล่าสุด 200 ซ้ำ'},
+    {p:'🪜', s:'num-d', q:'อนุกรม 100, 99, 97, 94, 90, ? · ตัวถัดไปคือ', c:['85','86','84','80'], w:'ผลต่าง −1, −2, −3, −4 · ช่องถัดไป −5 · 90 − 5 = 85'},
+    {p:'🎨', s:'num-alt', q:'อนุกรม 2, 20, 4, 40, 6, 60, ? · ตัวถัดไปคือ', c:['8','80','61','66'], w:'แยก 2 ชุด: ตำแหน่งคี่ 2, 4, 6 · ตำแหน่งคู่ 20, 40, 60 · ตัวที่ 7 เป็นตำแหน่งคี่ → 8 · 80 คือตัวที่ 8'},
+    {p:'🎨', s:'num-alt', q:'อนุกรม 5, 8, 7, 10, 9, 12, ? · ตัวถัดไปคือ', c:['11','14','13','15'], w:'ตำแหน่งคี่ 5, 7, 9 → ตัวที่ 7 = 11 · (มองแบบ +3 −1 สลับกันก็ได้ 12 − 1 = 11 เหมือนกัน)'},
+    {p:'🎨', s:'num-alt', q:'อนุกรม 2, 50, 4, 45, 8, 40, ? · ตัวถัดไปคือ', c:['16','12','35','10'], w:'ตำแหน่งคี่ 2, 4, 8 คูณ 2 · ตำแหน่งคู่ 50, 45, 40 ลบ 5 · ตัวที่ 7 เป็นตำแหน่งคี่ → 16 · 35 คือตัวที่ 8'},
+    {p:'🪜', s:'num-d', q:'อนุกรม 2, 4, 8, 14, 22, ? · ตัวถัดไปคือ', c:['32','30','36','44'], w:'ผลต่าง 2, 4, 6, 8 เพิ่มทีละ 2 · ช่องถัดไป +10 · 22 + 10 = 32 · 44 มาจาก 22 × 2'},
+    {p:'🎨', s:'num-alt', q:'เมื่อไรควรลองแยกอนุกรมเป็น 2 ชุด', c:['เมื่อตัวเลขขึ้นลงสลับกันไปมา','เมื่อผลต่างเท่ากันทุกช่องแล้ว','เมื่อตัวเลขเพิ่มเป็นเท่าตัวทุกตัว','เมื่ออนุกรมมีตัวเลขไม่ถึง 4 ตัว'], w:'ตัวเลขขึ้น ๆ ลง ๆ = มักมี 2 ชุดซ้อนกันในตำแหน่งคี่กับคู่'}
+  ],
+  nm3:[
+    {p:'🐇', s:'num-fib', q:'อนุกรม 4, 6, 10, 16, 26, ? · ตัวถัดไปคือ', c:['42','36','52','40'], w:'ตัวใหม่ = สองตัวหน้ารวมกัน · 16 + 26 = 42 · 36 มาจากบวก 10 ซ้ำ · 52 = 26 × 2'},
+    {p:'🐇', s:'num-fib', q:'อนุกรม 1, 3, 4, 7, 11, ? · ตัวถัดไปคือ', c:['18','15','22','16'], w:'สองตัวหน้ารวมกัน · 7 + 11 = 18'},
+    {p:'🟪', s:'num-sq', q:'อนุกรม 1, 4, 9, 16, 25, … · ตัวที่ 8 คือ', c:['64','49','81','56'], w:'ตัวที่ n = n × n (จุดเรียงเป็นสี่เหลี่ยม) · ตัวที่ 8 = 8 × 8 = 64 · 49 คือตัวที่ 7 · 81 คือตัวที่ 9'},
+    {p:'🔺', s:'num-tri', q:'อนุกรม 1, 3, 6, 10, 15, … · ตัวที่ 7 คือ', c:['28','21','27','35'], w:'ผลต่าง 2, 3, 4, 5 → +6 ได้ 21 (ตัวที่ 6) → +7 ได้ 28 (ตัวที่ 7) · 21 คือตัวที่ 6'},
+    {p:'🌳', s:'num-nth', q:'อนุกรม 4, 8, 12, 16, … · ตัวที่ 20 คือ', c:['80','76','24','84'], w:'ตัวแรก + ผลต่าง × 19 ช่อง = 4 + 4 × 19 = 80 · 76 เกิดจากนับ 18 ช่อง · 84 เกิดจากนับ 20 ช่อง'},
+    {p:'🌳', s:'num-nth', q:'อนุกรม 5, 7, 9, 11, … · ตัวที่ 10 คือ', c:['23','25','21','20'], w:'ตัวที่ 10 = ตัวแรก + ผลต่าง × 9 ช่อง = 5 + 2 × 9 = 23 · 25 เกิดจากนับ 10 ช่อง (ลืมลบ 1)'},
+    {p:'📜', s:'num-fib', q:'อนุกรมฟีโบนัชชีถูกเล่าผ่านโจทย์อะไรในหนังสือ Liber Abaci', c:['การเพิ่มจำนวนของคู่กระต่าย','การนับเมล็ดในฝักถั่วเขียว','การเรียงอิฐเพื่อสร้างกำแพง','การแบ่งที่นาให้ลูกหลาน'], w:'ฟีโบนัชชีตั้งโจทย์ว่ากระต่าย 1 คู่จะเพิ่มเป็นกี่คู่ในแต่ละเดือน'},
+    {p:'🟪', s:'num-sq', q:'อนุกรม 2, 5, 10, 17, 26, ? · ตัวถัดไปคือ', c:['37','35','36','42'], w:'แต่ละตัว = เลขยกกำลังสอง + 1 (1+1, 4+1, 9+1, 16+1, 25+1) · ตัวถัดไป 36 + 1 = 37'}
+  ],
+  ab1:[
+    {p:'🔤', s:'abc-s1', q:'ตัวอักษร B, D, F, H, ? · ตัวถัดไปคือ', c:['J','I','K','L'], w:'B = 2 · D = 4 · F = 6 · H = 8 · บวกทีละ 2 → 10 = J'},
+    {p:'🔤', s:'abc-s2', q:'ตัวอักษร A, D, G, J, ? · ตัวถัดไปคือ', c:['M','L','N','K'], w:'1, 4, 7, 10 บวกทีละ 3 → 13 = M'},
+    {p:'📍', s:'abc-s3', q:'ตัวอักษร O อยู่ลำดับที่เท่าไรในภาษาอังกฤษ', c:['15','14','16','13'], w:'หมุด E J O T Y = 5 10 15 20 25 · O = 15'},
+    {p:'📍', s:'abc-s3', q:'ตัวอักษรลำดับที่ 20 คือตัวใด', c:['T','S','U','R'], w:'หมุด T = 20'},
+    {p:'🔤', s:'abc-s2', q:'ตัวอักษร C, F, I, L, ? · ตัวถัดไปคือ', c:['O','N','P','M'], w:'3, 6, 9, 12 บวกทีละ 3 → 15 = O'},
+    {p:'🔤', s:'abc-s1', q:'ตัวอักษร P, R, T, V, ? · ตัวถัดไปคือ', c:['X','W','Y','Z'], w:'16, 18, 20, 22 บวกทีละ 2 → 24 = X'},
+    {p:'🔁', s:'abc-s2', q:'ทำไมจึงควรแปลงตัวอักษรเป็นตัวเลขก่อน', c:['ใช้ท่าหาผลต่างแบบอนุกรมตัวเลขได้','เพราะตัวอักษรนับลำดับไม่ได้เลย','เพื่อให้คำตอบออกมาเป็นตัวเลข','เพราะโจทย์บังคับให้ตอบเป็นเลข'], w:'แปลงแล้วใช้ท่าหาผลต่างได้ทั้งหมด จากนั้นแปลงคำตอบกลับเป็นตัวอักษร'},
+    {p:'🎬', s:'abc-s1', q:'ที่นั่งโรงหนัง แถว E, G, I, K · แถวถัดไปตามกฎเดียวกันคือแถว', c:['M','L','N','O'], w:'5, 7, 9, 11 บวกทีละ 2 → 13 = M'}
+  ],
+  ab2:[
+    {p:'↗️', s:'abc-gap', q:'ตัวอักษร B, C, E, H, L, ? · ตัวถัดไปคือ', c:['Q','P','R','O'], w:'2, 3, 5, 8, 12 ผลต่าง 1, 2, 3, 4 → ช่องถัดไป +5 = 17 = Q'},
+    {p:'↩️', s:'abc-back', q:'ตัวอักษร Y, V, S, P, ? · ตัวถัดไปคือ', c:['M','N','L','K'], w:'25, 22, 19, 16 ลดทีละ 3 → 13 = M'},
+    {p:'🔄', s:'abc-wrap', q:'ตัวอักษร T, W, Z, ?, F (เลย Z ให้วนกลับ A) · ช่อง ? คือ', c:['C','B','D','A'], w:'บวกทีละ 3 · 26 + 3 = 29 → ลบ 26 = 3 = C · ตรวจ: C (3) + 3 = F (6) ✓'},
+    {p:'🔣', s:'abc-mix', q:'B2, D4, F6, H8, ? · ตัวถัดไปคือ', c:['J10','I9','J9','I10'], w:'ตัวอักษรกับเลขเดินคู่กัน · B=2 D=4 F=6 H=8 · ถัดไป J = 10 → J10'},
+    {p:'🔣', s:'abc-mix', q:'Z1, X3, V5, T7, ? · ตัวถัดไปคือ', c:['R9','S9','R8','Q9'], w:'ตัวอักษรถอยทีละ 2 (26, 24, 22, 20 → 18 = R) · ตัวเลขบวกทีละ 2 (→ 9) · ได้ R9'},
+    {p:'↗️', s:'abc-gap', q:'ตัวอักษร C, D, F, I, M, ? · ตัวถัดไปคือ', c:['R','Q','S','P'], w:'3, 4, 6, 9, 13 ผลต่าง 1, 2, 3, 4 → +5 = 18 = R'},
+    {p:'🔄', s:'abc-wrap', q:'ตัวอักษร W, Y, A, C, ? (เลย Z ให้วนกลับ A) · ตัวถัดไปคือ', c:['E','D','F','B'], w:'บวกทีละ 2 · W 23 → Y 25 → 27 (A) → 29 (C) → 31 − 26 = 5 = E'},
+    {p:'↩️', s:'abc-back', q:'ตัวอักษร Z, X, U, Q, ? · ตัวถัดไปคือ', c:['L','M','K','N'], w:'26, 24, 21, 17 ผลต่าง −2, −3, −4 → −5 = 12 = L'}
+  ],
+  ab3:[
+    {p:'🪞', s:'abc-mir', q:'คู่กระจก A–Z, B–Y, C–X · คู่ของ F คือ', c:['U','T','V','W'], w:'คู่กระจกรวมกันได้ 27 · F = 6 → 27 − 6 = 21 = U'},
+    {p:'🪞', s:'abc-mir', q:'คู่กระจกของ M คือ', c:['N','O','L','P'], w:'M = 13 · 27 − 13 = 14 = N · M กับ N อยู่ตรงกลางแถวพอดี'},
+    {p:'🔐', s:'abc-code', q:'ถ้า PEN เขียนเป็นรหัส QFO · แล้ว CUP เขียนเป็น', c:['DVQ','DUQ','EWR','BTO'], w:'ทุกตัวเลื่อนไป 1 ตัว (P→Q E→F N→O) · C→D U→V P→Q'},
+    {p:'🔐', s:'abc-code', q:'ถ้า BOOK เขียนเป็นรหัส CPPL · รหัส EPPS แปลกลับเป็นคำว่า', c:['DOOR','FQQT','DOAR','COOR'], w:'รหัสเลื่อนไปข้างหน้า 1 ตัว · แปลกลับต้องถอย 1 ตัว: E→D P→O P→O S→R'},
+    {p:'📜', s:'abc-code', q:'รหัสที่เลื่อนตัวอักษรไป 3 ตัว มีบันทึกเล่าว่าใครใช้ส่งจดหมายลับ', c:['จูเลียส ซีซาร์','อริสโตเติล','ฟีโบนัชชี','อัล-ควาริซมี'], w:'บันทึกโบราณเล่าว่าจูเลียส ซีซาร์เลื่อนตัวอักษรไป 3 ตัว (A เป็น D)'},
+    {p:'🔐', s:'abc-code', q:'เลื่อนไป 3 ตัว (A→D) · คำว่า BED จะเป็น', c:['EHG','CFE','EHF','DGF'], w:'B 2 + 3 = 5 E · E 5 + 3 = 8 H · D 4 + 3 = 7 G'},
+    {p:'🪞', s:'abc-mir', q:'ใช้คู่กระจก (A↔Z) เป็นรหัส · LOW แปลกลับเป็นคำว่าอะไร', c:['OLD','MPX','KNV','OLW'], w:'L (12) ↔ O (15) · O ↔ L · W (23) ↔ D (4) · ได้ OLD'},
+    {p:'🔢', s:'abc-code', q:'ถ้า 1 = A, 2 = B, 3 = C · แล้ว 2-1-7 คือคำว่า', c:['BAG','BAH','CAG','ABG'], w:'2 = B · 1 = A · 7 = G · BAG แปลว่ากระเป๋า'}
+  ]
+};
+const LEVELS = [
+  {ch:'gate', id:'lg1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'สังเกตแบบแผน · ตั้งกฎ ทดสอบกฎ', cls:'c6'},
+  {ch:'gate', id:'lg2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'เลือกกฎที่ใช้ได้ทุกคู่', cls:'c5'},
+  {ch:'gate', id:'lg3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'กฎหลายแบบ · ข้อมูลพอไหม', cls:'c2'},
+  {ch:'num', id:'nm1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'ผลต่าง · ผลต่างชั้น 2 · ลองหาร', cls:'c6'},
+  {ch:'num', id:'nm2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'บันไดผลต่าง · 2 ชุดสลับ', cls:'c5'},
+  {ch:'num', id:'nm3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'ฟีโบนัชชี · ยกกำลังสอง · ตัวที่ n', cls:'c2'},
+  {ch:'abc', id:'ab1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'แปลงเป็นเลข · หมุด E J O T Y', cls:'c6'},
+  {ch:'abc', id:'ab2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'ถอยหลัง · วนรอบ · คู่ตัวเลข', cls:'c5'},
+  {ch:'abc', id:'ab3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'คู่กระจก · รหัสเลื่อนตัวอักษร', cls:'c2'}
+];
+const CHS = {
+  gate:{n:'สังเกตแบบนักสืบ', i:'🚪', scr:'gate'},
+  num:{n:'อนุกรมตัวเลข', i:'🔢', scr:'num'},
+  abc:{n:'อนุกรมตัวอักษร', i:'🔤', scr:'abc'}
+};
+
+
+/* ============ ตัวช่วยกลาง ============ */
+const ln = (m,r,cls='') => `<div class="ln ${cls}"><span class="m">${m}</span>${r?`<span class="r">${r}</span>`:''}</div>`;
+const tabOn = btn => { if(!btn) return; btn.parentNode.querySelectorAll('.tab').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); };
+
+// การ์ดเรื่อง → เลือกคำตอบ → เหตุผล · set = [{p, q, c:[[ข้อความ, ถูก?, เหตุผล], …]}]
+const QS={};
+function qsMount(id,set){ QS[id]={set,i:0}; qsShow(id); }
+function qsShow(id){
+  const S=QS[id], P=S.set[S.i], ord=shuffle(P.c.map((_,j)=>j));
+  // ชุดเดียว = เรื่องเล่าอยู่ในกล่องด้านบนแล้ว แสดงแค่คำถาม (ไม่ซ้ำภาพ)
+  $(id).innerHTML=(S.set.length>1?`<div class="story"><div class="pic">${P.p}</div><p>${P.q}</p><p class="hint">เรื่องที่ ${S.i+1} / ${S.set.length}</p></div>`:`<p class="ask">${P.q}</p>`)+`
+    <div class="chs">${ord.map(j=>`<button class="tab" onclick="qsPick('${id}',${j},this)">${P.c[j][0]}</button>`).join('')}</div>
+    <div class="info" id="${id}-fb">เลือกคำตอบที่คิดว่าถูก</div>`;
+}
+function qsPick(id,j,btn){
+  const S=QS[id], P=S.set[S.i], [,ok,why]=P.c[j], last=S.i===S.set.length-1;
+  btn.classList.add(ok?'on':'bad');
+  if(ok) btn.parentNode.querySelectorAll('button').forEach(b=>b.disabled=true);
+  $(id+'-fb').innerHTML=(ok?'✅ ถูกต้อง · ':'❌ ยังไม่ใช่ · ')+why
+    +(ok?(last?(S.set.length>1?'<br>🎉 ครบทุกเรื่องแล้ว':''):`<br><button class="btn alt" onclick="qsNext('${id}')">👉 เรื่องต่อไป</button>`):'<br>ลองเลือกใหม่อีกครั้ง');
+  if(ok&&last) miniConfetti();
+}
+function qsNext(id){ QS[id].i++; qsShow(id); }
+
+/* ============ แถบแตะกลาง (ใช้ร่วมทุกบท) · GU[id] = [[ป้าย, คำอธิบาย], …] ============ */
+const GU={};
+function guTabs(id){ $(id).innerHTML=GU[id].map((b,i)=>`<button class="tab" onclick="guTap('${id}',${i},this)">${b[0]}</button>`).join(''); }
+function guTap(id,i,btn){ tabOn(btn); $(id+'Fb').innerHTML=GU[id][i][1]; }
+
+/* ============ ตัวช่วยของแอปตรรกะ ============ */
+const box = (v, cls='') => `<span class="b ${cls}">${v}</span>`;
+// เดินทีละบรรทัด · L = [[บรรทัดหลัก, เหตุผล], …]
+const WK={};
+function wkMount(id,L){ WK[id]={L,i:1}; wkShow(id); }
+function wkShow(id){
+  const W=WK[id], end=W.i>=W.L.length;
+  $(id).innerHTML=W.L.slice(0,W.i).map(x=>ln(x[0],x[1])).join('')
+    +`<div class="center" style="margin-top:8px"><button class="btn alt" onclick="wkNext('${id}')">${end?'↺ ดูใหม่ตั้งแต่ต้น':'👉 บรรทัดต่อไป'}</button></div>`;
+}
+function wkNext(id){ const W=WK[id]; W.i=W.i>=W.L.length?1:W.i+1; wkShow(id); if(W.i===W.L.length) miniConfetti(); }
+
+/* ============ บท 0 · สังเกตแบบนักสืบ ============ */
+const GQ1=[
+  {p:'🌶️', q:'แปลงผักปลูกเรียงแบบนี้ 🌶️🍅🌶️🍅🌶️❓', c:[
+    ['🍅',1,'ปลูกสลับกันทีละต้น พริก–มะเขือเทศ · หลังพริกจึงเป็นมะเขือเทศ'],
+    ['🌶️',0,'ลองชี้ทีละต้น: พริก มะเขือเทศ พริก มะเขือเทศ พริก … ต้นต่อไปคืออะไร'],
+    ['🥬',0,'ผักกาดไม่เคยอยู่ในแปลงนี้เลย · คำตอบควรมาจากสิ่งที่เห็นเกิดซ้ำ']]},
+  {p:'🪴', q:'ชั้นวางกระถาง ชั้นล่างสุด 1 ใบ ชั้นถัดขึ้นไป 2 ใบ แล้ว 3 ใบ · ชั้นที่ 4 ควรมีกี่ใบ', c:[
+    ['4 ใบ',1,'เพิ่มชั้นละ 1 ใบ · 3 + 1 = 4'],
+    ['6 ใบ',0,'6 คือ 1 + 2 + 3 = จำนวนรวมของ 3 ชั้นแรก ไม่ใช่จำนวนในชั้นที่ 4'],
+    ['3 ใบ',0,'3 ใบคือชั้นที่ 3 · ชั้นที่ 4 ต้องเพิ่มขึ้นอีก']]},
+  {p:'🌙', q:'ดวงจันทร์คืนต่อ ๆ กัน 🌑🌒🌓🌔❓', c:[
+    ['🌕',1,'ส่วนที่สว่างโตขึ้นทีละนิดทุกคืน จนเต็มดวง'],
+    ['🌑',0,'กลับไปมืดทันทีจะข้ามหลายขั้น · ตอนนี้ส่วนสว่างกำลังเพิ่มขึ้น'],
+    ['🌓',0,'🌓 มีแล้วในคืนที่ 3 · ลำดับต้องเดินต่อไปข้างหน้า']]}
+];
+const GQ2=[
+  {p:'🔢', q:'ตัวเลข 3, 6, 12, 24 · กฎใดใช้ได้กับทุกคู่', c:[
+    ['คูณ 2',1,'3 → 6 → 12 → 24 คูณ 2 ผ่านทุกคู่'],
+    ['บวก 3',0,'ผ่านแค่ 3 → 6 · แต่ 6 + 3 ได้ 9 ไม่ใช่ 12'],
+    ['เป็นเลขคู่ทุกตัว',0,'3 เป็นเลขคี่ · และกฎนี้บอกตัวถัดไปไม่ได้']]},
+  {p:'🔢', q:'ตัวเลข 7, 14, 21, 28 · กฎใดใช้ได้กับทุกคู่', c:[
+    ['บวก 7',1,'+7 ผ่านทุกคู่'],
+    ['คูณ 2',0,'7 × 2 = 14 ผ่าน แต่ 14 × 2 ได้ 28 ไม่ใช่ 21'],
+    ['บวก 14',0,'7 + 14 = 21 คือข้ามไป 1 ตัว · คู่ที่ติดกันห่างกันแค่ 7']]},
+  {p:'🔢', q:'ตัวเลข 80, 40, 20, 10 · กฎใดใช้ได้กับทุกคู่', c:[
+    ['หาร 2',1,'80 ÷ 2 = 40 · 40 ÷ 2 = 20 · 20 ÷ 2 = 10 ผ่านทุกคู่'],
+    ['ลบ 40',0,'ผ่านแค่ 80 → 40 · 40 − 40 ได้ 0 ไม่ใช่ 20'],
+    ['ลบ 20',0,'80 − 20 ได้ 60 ไม่ใช่ 40 · ไม่ผ่านตั้งแต่คู่แรก']]}
+];
+const GQ3=[
+  {p:'🤔', q:'ตัวเลข 1, 2, 4, ? · ตัวเลือกคือ 6, 7 และ 9 · ควรตอบข้อใด', c:[
+    ['7',1,'กฎผลต่างเพิ่มทีละ 1 (+1 +2 +3) ได้ 7 และมี 7 ในตัวเลือก · กฎคูณ 2 ได้ 8 แต่ไม่มีให้เลือก'],
+    ['6',0,'6 ไม่ตรงกฎใดเลย · ลองไล่ +1, +2 แล้วช่องต่อไปควรบวกเท่าไร'],
+    ['9',0,'9 ไม่ตรงทั้งกฎคูณ 2 (ได้ 8) และกฎผลต่างเพิ่มทีละ 1 (ได้ 7)']]}
+];
+// ตัวทดสอบกฎ: 2, 4, 6, 8
+const GT_SEQ=[2,4,6,8];
+const GT_R=[
+  ['บวกทีละ 2', a=>a+2],
+  ['คูณ 2', a=>a*2],
+  ['เป็นเลขคู่ทุกตัว', null]
+];
+function gtMount(){
+  $('gtBox').innerHTML=`<div class="seq">${GT_SEQ.map(v=>box(v)).join('')}${box('?','q')}</div>
+    <div class="chs" style="flex-direction:row;flex-wrap:wrap;justify-content:center">${GT_R.map((r,i)=>`<button class="tab" onclick="gtTap(${i},this)">${r[0]}</button>`).join('')}</div>
+    <div class="info" id="gtFb">แตะกฎด้านบน</div>`;
+}
+function gtTap(i,btn){
+  tabOn(btn);
+  const [name,f]=GT_R[i];
+  if(!f){
+    $('gtFb').innerHTML=GT_SEQ.map(v=>`${v} คู่ ✅`).join(' · ')
+      +'<br>✅ จริงทุกตัว · แต่ <b>ตัวถัดไปบอกไม่ได้</b> จะเป็น 10, 12 หรือ 100 ก็เป็นเลขคู่ทั้งนั้น → ดูขั้นที่ 3';
+    return;
+  }
+  let ok=true;
+  const rows=GT_SEQ.slice(1).map((v,k)=>{ const p=f(GT_SEQ[k]), good=p===v; if(!good) ok=false;
+    return `${GT_SEQ[k]} → ${p} ${good?'✅':`❌ (ตัวจริงคือ ${v})`}`; });
+  $('gtFb').innerHTML=rows.join('<br>')+(ok
+    ?`<br>🎉 กฎ "${name}" ผ่านทุกคู่ · ตัวถัดไป = ${f(8)}`
+    :`<br>กฎ "${name}" ผ่านคู่แรก แต่ไม่ผ่านคู่หลัง → <b>ใช้ไม่ได้</b>`);
+  if(ok) miniConfetti();
+}
+
+/* ============ บท 1 · อนุกรมตัวเลข ============ */
+// บันไดผลต่าง · rows[k] = {v:[…], t:'s'|'d'|'r'} · ต้องลงจนชั้นล่างเท่ากันทุกช่องจึงเติมตัวถัดไปได้
+const ST={};
+const allEq = a => a.length>=2 && a.every(x=>x===a[0]);
+function stMount(id,seq){ ST[id]={seq, rows:[{v:seq.slice(), t:'s'}], filled:false, msg:'กดปุ่มด้านล่างเพื่อเริ่ม'}; stShow(id); }
+function stShow(id){
+  const S=ST[id], L=S.rows[0].v.length+(S.filled?0:1), lab={s:'ตัวเลข', d:'ผลต่าง', r:'หาร'};
+  const rows=S.rows.map((r,k)=>`<div class="srow"><span class="lab">${lab[r.t]}</span><div class="sg" style="grid-template-columns:repeat(${2*L},minmax(0,1fr))">${
+    r.v.map((x,i)=>`<span class="b${S.filled&&i===r.v.length-1?' new':''}${r.t!=='s'?' d':''}" style="grid-column:${2*i+k+1} / span 2">${r.t==='d'&&x>0&&k>0?'+':''}${r.t==='r'?'×':''}${x}</span>`).join('')
+  }${!S.filled&&k===0?`<span class="b q" style="grid-column:${2*r.v.length+1} / span 2">?</span>`:''}</div></div>`).join('');
+  const last=S.rows[S.rows.length-1], done=S.filled, can=!done&&last.t!=='r'&&last.v.length>=3&&S.rows.length<4;
+  $(id).innerHTML=`<div class="stair">${rows}</div>
+    <div class="chs" style="flex-direction:row;flex-wrap:wrap;justify-content:center">
+      ${can?`<button class="tab" onclick="stDiff('${id}')">➖ หาผลต่าง</button><button class="tab" onclick="stRatio('${id}')">➗ ลองหาร</button>`:''}
+      ${!done&&S.rows.length>1&&allEq(last.v)?`<button class="tab on" onclick="stFill('${id}')">✨ เติมตัวถัดไป</button>`:''}
+      ${S.rows.length>1?`<button class="tab" onclick="stReset('${id}')">↺ เริ่มใหม่</button>`:''}
+    </div><div class="info">${S.msg}</div>`;
+}
+function stDiff(id){
+  const S=ST[id], a=S.rows[S.rows.length-1].v, d=a.slice(1).map((x,i)=>x-a[i]);
+  S.rows.push({v:d,t:'d'});
+  const grow=d.length>=2&&d.every((x,i)=>i===0||(Math.abs(x)>=Math.abs(d[i-1])*1.8&&Math.sign(x)===Math.sign(d[i-1])&&x!==0));
+  S.msg=allEq(d)?'✨ ชั้นนี้เท่ากันทุกช่องแล้ว · กด <b>เติมตัวถัดไป</b> ได้เลย'
+    :grow&&S.rows.length===2?'🔎 ผลต่างโตเร็วเป็นเท่าตัว หน้าตาคล้ายตัวเลขเดิม → สัญญาณของการคูณ · กด <b>เริ่มใหม่</b> แล้วลอง <b>➗ หาร</b>'
+    :S.rows.length>=4?'ลงมา 3 ชั้นแล้วยังไม่เท่ากัน → น่าจะไม่ใช่ท่าผลต่าง · กดเริ่มใหม่แล้วลองท่าอื่น'
+    :'ยังไม่เท่ากันทุกช่อง · ลองหาผลต่างของชั้นนี้อีกครั้ง';
+  stShow(id);
+}
+function stRatio(id){
+  const S=ST[id], a=S.rows[S.rows.length-1].v;
+  if(S.rows.length>1){ S.msg='ท่าหารใช้กับแถวตัวเลขบนสุด · กดเริ่มใหม่ก่อน'; return stShow(id); }
+  if(a.some((x,i)=>i>0&&(a[i-1]===0||x%a[i-1]!==0))){ S.msg='➗ หารไม่ลงตัว → ไม่ใช่การคูณด้วยจำนวนเต็ม · ลองท่าผลต่าง'; return stShow(id); }
+  const r=a.slice(1).map((x,i)=>x/a[i]);
+  S.rows.push({v:r,t:'r'});
+  S.msg=allEq(r)?`✨ หารได้ ${r[0]} ทุกช่อง = <b>คูณ ${r[0]}</b> ทุกตัว · กด <b>เติมตัวถัดไป</b>`:'ได้ไม่เท่ากันทุกช่อง → ไม่ใช่การคูณ · กดเริ่มใหม่แล้วลองท่าผลต่าง';
+  stShow(id);
+}
+function stFill(id){
+  const S=ST[id], R=S.rows;
+  R[R.length-1].v.push(R[R.length-1].v[0]);
+  for(let k=R.length-2;k>=0;k--){ const a=R[k].v, b=R[k+1]; a.push(b.t==='r'?a[a.length-1]*b.v[0]:a[a.length-1]+b.v[b.v.length-1]); }
+  S.filled=true;
+  S.msg=`🎉 ตัวถัดไปคือ <b>${R[0].v[R[0].v.length-1]}</b> · เติมจากชั้นล่างย้อนขึ้นมาทีละชั้น`;
+  stShow(id); miniConfetti();
+}
+function stReset(id){ stMount(id,ST[id].seq); }
+
+function nmPotsDraw(){
+  $('nmPots').innerHTML=[3,6,9,12].map((n,i)=>`<div class="potrow"><span class="lab">วันที่ ${i+1}</span><span>${'🪴'.repeat(n)}</span><b>${n}</b></div>`).join('');
+}
+const NQ1=[
+  {p:'🔢', q:'อนุกรม 6, 11, 16, 21, ? · ตัวถัดไปคือ', c:[
+    ['26',1,'ผลต่าง +5 เท่ากันทุกช่อง · 21 + 5 = 26'],
+    ['27',0,'ลองลบทีละคู่: 11 − 6 และ 16 − 11 ได้เท่าไร'],
+    ['42',0,'42 = 21 × 2 · แต่ผลต่างเท่ากันทุกช่อง ไม่ได้โตเป็นเท่าตัว']]},
+  {p:'🪜', q:'อนุกรม 2, 4, 7, 11, ? · ตัวถัดไปคือ', c:[
+    ['16',1,'ผลต่าง 2, 3, 4 เพิ่มทีละ 1 → ช่องถัดไป +5 · 11 + 5 = 16'],
+    ['15',0,'15 = 11 + 4 คือใช้ผลต่างเดิมซ้ำ · แต่ผลต่างเพิ่มขึ้นทีละ 1'],
+    ['22',0,'22 = 11 × 2 · ผลต่างไม่ได้โตเป็นเท่าตัว']]},
+  {p:'✖️', q:'อนุกรม 4, 12, 36, ? · ตัวถัดไปคือ', c:[
+    ['108',1,'12 ÷ 4 = 3 · 36 ÷ 12 = 3 → คูณ 3 · 36 × 3 = 108'],
+    ['60',0,'ผลต่าง 8, 24 โตเป็น 3 เท่า = สัญญาณของการคูณ · ลองหารดู'],
+    ['44',0,'44 = 36 + 8 คือใช้ผลต่างแรกซ้ำ · ผลต่างไม่เท่ากัน']]}
+];
+const NM_DRILL=[[7,10,13,16],[1,2,5,10,17],[2,8,32,128],[50,47,41,32]];
+function nmDrillTabs(){
+  $('nmDrillTabs').innerHTML=NM_DRILL.map((s,i)=>`<button class="tab${i?'':' on'}" onclick="tabOn(this);stMount('st4',NM_DRILL[${i}])">ข้อ ${i+1}</button>`).join('');
+  stMount('st4',NM_DRILL[0]);
+}
+let altOn=false;
+function nmAltDraw(){
+  const s=[1,10,2,20,3,30];
+  $('nmAlt').innerHTML=(altOn
+    ?`<div class="seq">${s.map((v,i)=>i%2===0?box(v,'o1'):'').join('')}${box('?','q')}</div><p class="hint center">ตำแหน่งคี่ 1, 2, 3 → ตัวที่ 7 คือ <b>4</b></p>
+      <div class="seq">${s.map((v,i)=>i%2?box(v,'o2'):'').join('')}</div><p class="hint center">ตำแหน่งคู่ 10, 20, 30 → ตัวที่ 8 คือ <b>40</b></p>`
+    :`<div class="seq">${s.map((v,i)=>box(v,i%2?'o2':'o1')).join('')}${box('?','q')}</div>`)
+    +`<div class="center"><button class="btn alt" onclick="altOn=!altOn;nmAltDraw()">${altOn?'↺ รวมกลับเป็นแถวเดียว':'🎨 แยกตำแหน่งคี่ · คู่'}</button></div>`;
+}
+const NQ2=[
+  {p:'🎨', q:'อนุกรม 3, 20, 6, 18, 9, 16, ? · ตัวถัดไปคือ', c:[
+    ['12',1,'ตำแหน่งคี่ 3, 6, 9 บวก 3 · ตัวที่ 7 เป็นตำแหน่งคี่ → 12'],
+    ['14',0,'14 คือตัวที่ 8 (ชุดตำแหน่งคู่ 20, 18, 16 ลดทีละ 2) · ตัวที่ 7 อยู่ชุดไหน'],
+    ['13',0,'ลองระบายสีตำแหน่งคี่กับคู่แยกกันก่อน แล้วดูแต่ละชุด']]}
+];
+const NQ3=[
+  {p:'🐇', q:'อนุกรม 1, 1, 2, 3, 5, 8, ? · ตัวถัดไปคือ', c:[
+    ['13',1,'5 + 8 = 13 · ตัวใหม่ = สองตัวหน้ารวมกัน'],
+    ['11',0,'11 = 8 + 3 คือบวกผลต่างล่าสุด (8 − 5 = 3) ซ้ำ · ลองรวมสองตัวที่อยู่หน้าช่องว่าง'],
+    ['16',0,'16 = 8 × 2 · ตัวเลขไม่ได้เพิ่มเป็นเท่าตัวพอดี (5 × 2 ไม่ใช่ 8)']]}
+];
+const dots=(n,cols)=>`<span class="dots" style="grid-template-columns:repeat(${cols},9px)">${'<i></i>'.repeat(n)}</span>`;
+function nmDotsDraw(){
+  $('nmSq').innerHTML=[1,2,3,4].map(k=>`<span class="dcell">${dots(k*k,k)}<b>${k*k}</b></span>`).join('');
+  $('nmTri').innerHTML=[1,2,3,4].map(k=>{
+    let h=''; for(let r=1;r<=k;r++) h+=`<span class="trow">${'<i></i>'.repeat(r)}</span>`;
+    return `<span class="dcell"><span class="tri">${h}</span><b>${k*(k+1)/2}</b></span>`;
+  }).join('');
+}
+
+/* ============ บท 2 · อนุกรมตัวอักษร ============ */
+const AZ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const PINS=[5,10,15,20,25];
+function abStrip(id,hi,pin){
+  $(id).innerHTML=AZ.map((L,i)=>`<button class="${hi.includes(i+1)?'hi':''}${pin&&PINS.includes(i+1)?' pin':''}" onclick="abTap('${id}',${i})">${L}<small>${i+1}</small></button>`).join('');
+}
+function abTap(id,i){ const fb=$(id+'Fb'); if(fb) fb.innerHTML=`<b>${AZ[i]}</b> อยู่ลำดับที่ <b>${i+1}</b>`+(i===6?' · A=1 C=3 E=5 ผลต่าง +2 → ตัวถัดไปลำดับ 7 = G 🎉':''); }
+function abWrapDraw(){
+  $('abWrap').innerHTML=['X','Y','Z','A','B','C'].map((L,i)=>`<span class="b${i>2?' o1':''}">${L}<small>${[24,25,26,27,28,29][i]}${i>2?` = ${i-2}`:''}</small></span>`).join('');
+}
+const AQ1=[
+  {p:'🎬', q:'แถว A อยู่หน้าสุดของโรงหนัง · แถว G เป็นแถวที่เท่าไรนับจากหน้าจอ', c:[
+    ['7',1,'จากหมุด E = 5 นับต่อ F = 6 · G = 7'],
+    ['6',0,'6 คือ F · นับต่อไปอีก 1 ตัว'],
+    ['8',0,'8 คือ H · G อยู่ก่อน H']]}
+];
+const AQ2=[
+  {p:'🔄', q:'X, A, D, ? (บวกทีละ 3 · เลย Z ให้วนกลับ A)', c:[
+    ['G',1,'D = 4 · 4 + 3 = 7 = G'],
+    ['F',0,'F = 6 คือบวก 2 · ลองนับ X → A ว่าห่างกันกี่ตัว (24 → 27)'],
+    ['H',0,'H = 8 คือบวก 4 · ผลต่างของโจทย์นี้คือ 3']]}
+];
+function abMirDraw(){
+  $('abMir').innerHTML=AZ.slice(0,13).map((L,i)=>`<span class="mt">${L}<small>${i+1}</small></span>`).join('')
+    +AZ.slice(13).reverse().map((L,i)=>`<span class="mb">${L}<small>${26-i}</small></span>`).join('');
+}
+let cdW=0, cdK=3;
+const CD_WORDS=['CAT','SUN','HEN'];
+const shiftL=(L,k)=>AZ[((AZ.indexOf(L)+k)%26+26)%26];
+function cdDraw(){
+  const w=CD_WORDS[cdW], out=w.split('').map(L=>shiftL(L,cdK)).join('');
+  $('cdBox').innerHTML=`<div class="chs" style="flex-direction:row;flex-wrap:wrap;justify-content:center">${CD_WORDS.map((x,i)=>`<button class="tab${i===cdW?' on':''}" onclick="cdW=${i};cdDraw()">${x}</button>`).join('')}</div>
+    <div class="seq">${w.split('').map(L=>box(L)).join('')}<span class="arr">➜</span>${out.split('').map(L=>box(L,'o1')).join('')}</div>
+    <div class="center"><button class="btn alt" onclick="cdK=Math.max(1,cdK-1);cdDraw()">− เลื่อนน้อยลง</button> <b>เลื่อน ${cdK} ตัว</b> <button class="btn alt" onclick="cdK=Math.min(5,cdK+1);cdDraw()">+ เลื่อนมากขึ้น</button></div>
+    <p class="hint center">${w.split('').map(L=>`${L}(${AZ.indexOf(L)+1}) + ${cdK} → ${shiftL(L,cdK)}`).join(' · ')}</p>`;
+}
+const AQ3=[
+  {p:'🔐', q:'ถ้า ARMY เลื่อนไป 1 ตัว เขียนได้ BSNZ · แล้ว NAVY จะเขียนได้ว่า', c:[
+    ['OBWZ',1,'N→O · A→B · V→W · Y→Z'],
+    ['OBWA',0,'Y เลื่อน 1 ตัวได้ Z ยังไม่เลย Z จึงยังไม่วนกลับ A'],
+    ['MZUX',0,'นี่คือการเลื่อนถอยหลัง 1 ตัว · คู่ตัวอย่าง A→B เลื่อนไปข้างหน้า']]}
+];
+
+
+/* ============ ตอบผิด → บอกว่าติดขั้นไหน + ปุ่มย้อนไปขั้นนั้น ============ */
+// [ชั้น 0/1/2, ชื่อขั้น, (ทำก่อนเลื่อน), (id ที่จะเลื่อนไป)] · คีย์ = id ของขั้นในหน้าบท
+const STEPS={
+  'gate-s1':[0,'สังเกตสิ่งที่เกิดซ้ำ'], 'gate-s2':[0,'ตั้งกฎ แล้วทดสอบกับทุกคู่'], 'gate-s3':[0,'กฎที่ดีต้องบอกตัวถัดไปได้'],
+  'gateL2':[1,'ฝึกเลือกกฎที่ใช้ได้ทุกคู่'], 'gateL3':[2,'เมื่อกฎใช้ได้มากกว่าหนึ่งแบบ'],
+  'num-s1':[0,'ท่าที่ 1 · หาผลต่าง'], 'num-s2':[0,'ท่าที่ 2 · ผลต่างชั้นที่ 2'], 'num-s3':[0,'ท่าที่ 3 · ผลต่างโตเร็ว ลองหาร'], 'num-s4':[0,'ลำดับการลอง 3 ท่า'],
+  'numL2':[1,'ลองเอง และอนุกรม 2 ชุดสลับ'], 'num-d':[1,'บันไดผลต่าง ลองเลือกท่าเอง'], 'num-alt':[1,'อนุกรม 2 ชุดสลับกัน'],
+  'numL3':[2,'อนุกรมที่มีชื่อ และตัวที่ 100'], 'num-fib':[2,'บวกสองตัวหน้า (ฟีโบนัชชี)'], 'num-sq':[2,'จุดเรียงเป็นสี่เหลี่ยม'], 'num-tri':[2,'จุดเรียงเป็นสามเหลี่ยม'], 'num-nth':[2,'ตัวที่ n ไม่ต้องไล่ทีละตัว'],
+  'abc-s1':[0,'ตัวอักษรทุกตัวมีเลขลำดับ'], 'abc-s2':[0,'แปลง → หากฎ → แปลงกลับ'], 'abc-s3':[0,'หมุดช่วยนับ E J O T Y'],
+  'abcL2':[1,'กฎที่ซับซ้อนขึ้นอีกนิด'], 'abc-gap':[1,'ระยะห่างเพิ่มขึ้น'], 'abc-back':[1,'ถอยหลัง'], 'abc-wrap':[1,'เลย Z แล้ววนกลับ A'], 'abc-mix':[1,'ตัวอักษรคู่ตัวเลข'],
+  'abcL3':[2,'คู่กระจก และรหัสลับ'], 'abc-mir':[2,'คู่กระจก รวมกันได้ 27'], 'abc-code':[2,'รหัสเลื่อนตัวอักษร']
+};
+const PC={}; // แอปนี้ไม่มีลิงก์ฝึกพื้นไป percent
+
+function goStep(s){
+  if(game.mode==='challenge'&&game.hearts<=0&&!town) town={ch:curCh, lv:game.lv}; // หัวใจหมดแล้วกดย้อนไปดูขั้น (ไม่ผ่านหน้าผล) = กลับเมือง
+  const [lay,,fn,to]=STEPS[s], sc0=($(s)||{closest:()=>null}).closest('.screen'), scr=sc0?sc0.id:CHS[curCh].scr; // ข้อจากเกมรวม → กลับไปบทต้นทางของข้อ
+  readLayer(scr,lay); if(fn) fn();
+  setTimeout(()=>{ const el=$(to||s); if(el){ el.scrollIntoView({behavior:'smooth',block:'start'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1800); } },500);
+}
+
+let curCh='gate';
+// ท้ายทุกชั้น: ปุ่มลองเล่นด่านของชั้นนั้น · ท้าย 🌿🌳: ปุ่มซ่อนชั้น · ปุ่ม 🎮 เดิมท้ายบท = แผนที่ด่านรวม
+Object.entries(CHS).forEach(([ch,C])=>{
+  const L3=$(C.scr+'L3'); if(!L3) return;
+  const play=i=>`<div class="center lp" style="margin-top:14px"><button class="btn go" data-ch="${ch}" data-i="${i}" onclick="layerPlay('${ch}',${i})"></button></div>`;
+  const hideB=k=>`<button class="more" onclick="closeLayer('${C.scr}L${k}')">⬆️ ซ่อน${LNM[k-1]} ${LIC[k-1]}</button>`;
+  moreBtn(C.scr+'L2').insertAdjacentHTML('beforebegin',play(0));
+  moreBtn(C.scr+'L3').insertAdjacentHTML('beforebegin',play(1)+hideB(2));
+  const menu=L3.querySelector('[onclick^="openGame"]');
+  menu.closest('.center').insertAdjacentHTML('beforebegin',play(2));
+  menu.className='btn alt'; menu.textContent='🗺️ ดูด่านทั้งหมดของบทนี้';
+  L3.insertAdjacentHTML('beforeend',hideB(3));
+});
+function nextCh(ch){ // บทถัดไปตามลำดับหน้าแรก (เรียนเป็นโซ่ ห้ามข้ามขั้น)
+  const K=Object.keys(CHS), i=K.indexOf(ch);
+  return K[i+1]?{scr:CHS[K[i+1]].scr, lab:'ไปบทถัดไป · '+CHS[K[i+1]].i+' '+CHS[K[i+1]].n.replace('🏆 ','')}:null;
+}
+const chLevels = () => LEVELS.filter(L=>L.ch===curCh);
+function openGame(ch){ if(ch) curCh=ch; go('game'); backToGameMenu(); }
+const PER_ROUND=5, PASS=4;
+const dedupX=a=>{ const seen=new Set(); return a.filter(q=>!q.x||(!seen.has(q.x)&&seen.add(q.x))); };
+
+/* ============ level map ============ */
+function isOpen(i){ return i===0 || (save.stars[chLevels()[i-1].id]||0)>0; }
+function renderLevels(){
+  $('gTitle').textContent='🎮 เกมพิชิตด่าน · '+CHS[curCh].n;
+  $('gTabs').innerHTML=Object.entries(CHS).map(([k,C])=>`<button class="tab${k===curCh?' on':''}" onclick="curCh='${k}';renderLevels()">${C.i} ${C.n}</button>`).join('');
+  const box=$('levels'); box.innerHTML='';
+  chLevels().forEach((L,i)=>{
+    const b=document.createElement('button');
+    const open=isOpen(i), st=save.stars[L.id]||0;
+    b.className='lv '+L.cls+(open?'':' locked');
+    b.innerHTML=`<span class="n">${open?L.icon:'🔒'}</span><span><b>${L.name}</b><small>${open?L.sub:'ผ่านด่านก่อนหน้าเพื่อปลดล็อก'}</small></span>
+      <span class="st">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}${(save.boss||{})[L.id]?'<span class="bd" title="พิชิตข้อปราบเซียนครบ">🏆</span>':''}</span>`;
+    if(open) b.onclick=()=>startGame(i);
+    box.appendChild(b);
+  });
+}
+
+/* ============ Quiz Game ============ */
+let game={qs:[],idx:0,score:0,hearts:3,lv:0,mode:'round'};
+// มติเกม 03-11: ผ่านด่าน → 🔥 ท้าทายต่อ (ข้อที่เหลือในคลัง + 👹 ข้อปราบเซียน) หัวใจ 3 ดวงใหม่ · ดาวคิดจาก 5 ข้อแรกเท่านั้น
+const BOSS={};            // ข้อปราบเซียนรายด่าน {id:[...]} — บท 0–1 ยังไม่มี
+let restOf={};            // ข้อที่ยังไม่ได้ถามในรอบล่าสุดของแต่ละด่าน
+let town=null;            // {ch, lv} หัวใจหมดแล้วกลับไปอ่านบท
+
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function qKey(lvId,q){ return lvId+'|'+q.q; }
+const prep = q => ({...q, choices:q.c?shuffle(q.c):[], ans:q.c?q.c[0]:q.k});
+const isLast = () => game.hearts<=0 || game.idx>=game.qs.length-1;
+const heartsTxt = () => '❤️'.repeat(game.hearts)+'🤍'.repeat(3-game.hearts);
+
+function startGame(lv){
+  const L=chLevels()[lv], pool=BANK[L.id];
+  // ข้อที่เคยตอบผิด ได้สิทธิ์ขึ้นก่อน แล้วเติมด้วยข้อสุ่ม
+  const wrong=shuffle(pool.filter(q=>save.wrong.includes(qKey(L.id,q))));
+  const rest=shuffle(pool.filter(q=>!wrong.includes(q)));
+  const picked=dedupX([...wrong.slice(0,2), ...rest]).slice(0,PER_ROUND);
+  restOf[L.id]=pool.filter(q=>!picked.includes(q));
+  game={lv, mode:'round', qs:shuffle(picked).map(prep), idx:0, score:0, hearts:3};
+  showPlay();
+}
+const OTHER_N=3; // ท้าทายต่อ: ดึงข้อจากชั้นอื่นของบทเดียวกัน ชั้นละไม่เกิน 3 ข้อ
+function challengePool(lv){ // ข้อที่เหลือของด่านนี้ → ข้อชั้นอื่น (layer/src บอกที่มา) → 👹 ท้ายสุด
+  const Ls=chLevels(), L=Ls[lv];
+  const rest=restOf[L.id]||BANK[L.id];   // reload แล้วไม่รู้ว่ารอบก่อนถามข้อไหน → ใช้ทั้งคลัง
+  const other=Ls.flatMap((O,i)=>i===lv?[]:shuffle(BANK[O.id]).slice(0,OTHER_N).map(q=>({...q, layer:i, src:O.id})));
+  const boss=(BOSS[L.id]||[]).map(q=>({...q, boss:true}));
+  return dedupX([...shuffle(rest), ...shuffle(other), ...shuffle(boss)]);
+}
+function startChallenge(lv){
+  game={lv, mode:'challenge', qs:challengePool(lv).map(prep), idx:0, score:0, hearts:3};
+  town=null; $('ch-retry').style.display='none';
+  showPlay();
+}
+function goTown(){ // 🏘️ กลับเมืองเตรียมเสบียง
+  town={ch:curCh, lv:game.lv};
+  go(CHS[curCh].scr);
+}
+function retryChallenge(){ // 🔥 ท้าทายใหม่ หลังอ่านบท
+  if(!town) return;
+  const t=town; curCh=t.ch; go('game'); startChallenge(t.lv);
+}
+function showPlay(){
+  $('game-menu').style.display='none';
+  $('game-end').style.display='none';
+  $('game-play').style.display='block';
+  showQ();
+}
+function showQ(){
+  const q=game.qs[game.idx], N=game.qs.length;
+  $('q-count').textContent=game.mode==='round'?`ข้อ ${game.idx+1} / ${N}`:(q.boss?'👹 ปราบเซียน':'🔥 ท้าทาย'+(q.layer!=null?` · ข้อจาก${LNM[q.layer]} ${LIC[q.layer]}`:''))+` ${game.idx+1} / ${N}`;
+  $('q-score').textContent=game.score;
+  $('q-hearts').textContent=heartsTxt();
+  $('q-prog').style.width=(game.idx/N*100)+'%';
+  $('q-pic').textContent=q.p||'';
+  $('q-text').textContent=q.q;
+  $('q-fb').textContent=''; $('q-why').style.display='none'; $('q-next').style.display='none';
+  const box=$('q-choices'); box.innerHTML='';
+  $('q-pic').onclick=null;
+  q.choices.forEach((val,i)=>{
+    const b=document.createElement('button');
+    b.className='choice'; b.textContent=['ก','ข','ค','ง'][i]+'. '+val;
+    b.onclick=()=>answer(b,val,q);
+    box.appendChild(b);
+  });
+}
+function afterAnswer(q,ok){
+  persist();
+  // ตอบผิด → บอกว่าติดขั้นไหนในบท + ปุ่มพากลับไปขั้นนั้น (กลไกสำหรับคนเรียนรู้ช้า)
+  const st=!ok&&q.s&&STEPS[q.s];
+  $('q-why').innerHTML='💡 '+q.w+(st?`<div class="stuck">📍 ข้อนี้ใช้ขั้น <b>${st[1]}</b> (${LNM[st[0]]} ${LIC[st[0]]})<br><button class="tab on" style="margin-top:6px" onclick="goStep('${q.s}')">↩️ กลับไปดูขั้นนี้</button></div>`:'')
+    +(!ok&&q.pc&&PC[q.pc]?`<a class="bridge" href="../percent/#${q.pc}" target="_blank" rel="noopener">🔗 ฝึกพื้นเพิ่ม · แอป <b>สนุกกับเปอร์เซ็นต์</b> บท "${PC[q.pc]}" ↗</a>`:'');
+  $('q-why').style.display='block';
+  $('q-next').textContent=isLast()?'ดูผล 🏁':'ข้อต่อไป ➡️';
+  $('q-next').style.display='inline-block';
+}
+function answer(btn,val,q){
+  const btns=[...document.querySelectorAll('#q-choices .choice')];
+  btns.forEach(b=>b.disabled=true);
+  const key=qKey(q.src||chLevels()[game.lv].id,q);
+  if(val===q.ans){
+    btn.classList.add('correct');
+    game.score++; $('q-score').textContent=game.score;
+    $('q-fb').textContent='✅ ถูกต้อง เก่งมาก!'; $('q-fb').style.color='#39c14a';
+    save.wrong=save.wrong.filter(k=>k!==key);
+    miniConfetti();
+  } else {
+    btn.classList.add('wrong');
+    game.hearts--; $('q-hearts').textContent=heartsTxt();
+    $('q-fb').textContent='❌ ยังไม่ถูกนะ'; $('q-fb').style.color='#ff5f5f';
+    btns[q.choices.indexOf(q.ans)].classList.add('correct');
+    if(!q.boss && !save.wrong.includes(key)) save.wrong.push(key);
+  }
+  afterAnswer(q,val===q.ans);
+}
+function nextQ(){
+  game.idx++;
+  if(game.hearts<=0 || game.idx>=game.qs.length) endGame();
+  else showQ();
+}
+function endBtns(html){
+  $('e-btns').innerHTML=html+`<button class="btn go" onclick="backToGameMenu()">🗺️ แผนที่ด่าน</button>`;
+}
+function endGame(){
+  $('game-play').style.display='none';
+  $('game-end').style.display='block';
+  if(game.mode==='challenge') return endChallenge();
+  const s=game.score, L=chLevels()[game.lv];
+  const pass = s>=PASS && game.hearts>0;
+  const starN = !pass?0 : s>=5?3 : 2;
+  $('e-stars').textContent = '⭐'.repeat(starN)+'☆'.repeat(3-starN);
+  const next=chLevels()[game.lv+1];
+  $('e-msg').textContent = !pass?'เกือบแล้ว ลองใหม่นะ 💪' : starN===3?'สุดยอด! ไม่พลาดเลย 🏆':'ผ่านด่านแล้ว! 😄';
+  const lv=game.lv, scr=CHS[curCh].scr, nx=nextCh(curCh);
+  $('e-detail').textContent = `ทำถูก ${s} จาก ${PER_ROUND} ข้อ`+(pass&&next&&!(save.stars[L.id]>0)?` · ปลดล็อก ${next.name} 🔓`:'')+(!pass?` · ต้องถูก ${PASS} ข้อขึ้นไป · ลองอ่าน${LNM[lv]}อีกรอบ แล้วกลับมาเล่นใหม่`:'');
+  if(starN>(save.stars[L.id]||0)){ save.stars[L.id]=starN; persist(); showStars(); }
+  const left=challengePool(lv).length;
+  // ผ่าน → ชวนอ่านกว้างก่อน (บทถัดไป) หรือลงลึกชั้นถัดไป · ไม่ผ่าน → พากลับไปชั้นที่เพิ่งเล่น
+  endBtns(pass
+    ? (nx?`<button class="btn go" onclick="go('${nx.scr}')">▶ ${nx.lab}</button>`:'')
+      +(lv<2?`<button class="btn alt" onclick="readLayer('${scr}',${lv+1})">${LIC[lv+1]} อ่าน${LNM[lv+1]}ต่อ</button>`
+           :`<button class="btn alt" onclick="go('${scr}')">📖 ทบทวนบทเรียน</button>`)
+      +(left?`<button class="btn fire" onclick="startChallenge(${lv})">🔥 ท้าทายต่อ (อีก ${left} ข้อ)</button>`:'')
+    : `<button class="btn alt" onclick="readLayer('${scr}',${lv})">📖 กลับไปอ่าน${LNM[lv]} ${LIC[lv]}</button>`);
+  if(pass) bigConfetti();
+}
+function endChallenge(){
+  const L=chLevels()[game.lv], N=game.qs.length, alive=game.hearts>0;
+  const hasBoss=game.qs.some(q=>q.boss);
+  if(!alive){
+    $('e-stars').textContent='💔';
+    $('e-msg').textContent='หัวใจหมดแล้ว ไปเตรียมเสบียงก่อนนะ 🎒';
+    $('e-detail').textContent=`ตอบไป ${game.idx} จาก ${N} ข้อ (ถูก ${game.score}) · กลับไปอ่านบท แล้วกด 🔥 ท้าทายใหม่ ได้หัวใจ 3 ดวงเต็ม`;
+    endBtns(`<button class="btn alt" onclick="goTown()">🏘️ กลับเมืองเตรียมเสบียง</button>`);
+    return;
+  }
+  if(hasBoss){ save.boss=save.boss||{}; save.boss[L.id]=1; persist(); }
+  $('e-stars').textContent=hasBoss?'🏆':'🔥';
+  $('e-msg').textContent=hasBoss?'พิชิตข้อปราบเซียนครบ! ได้ตรา 🏆':'ฝ่าครบทุกข้อในคลังแล้ว! 🔥';
+  $('e-detail').textContent=`ตอบถูก ${game.score} จาก ${N} ข้อ · หัวใจเหลือ ${game.hearts}`;
+  endBtns(`<button class="btn alt" onclick="go(CHS[curCh].scr)">📖 ทบทวนบทเรียน</button>`);
+  bigConfetti();
+}
+function backToGameMenu(){
+  $('game-end').style.display='none';
+  $('game-play').style.display='none';
+  $('game-menu').style.display='block';
+  town=null; $('ch-retry').style.display='none';
+  renderLevels();
+}
+
+/* ============ confetti ============ */
+function spawnConfetti(count){
+  const colors=['#ff6ec7','#a06bff','#4ea8ff','#37e0d8','#5bd75b','#ffd34e','#ff9d42'];
+  for(let i=0;i<count;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.style.animation=`fall ${1.5+Math.random()*1.5}s ease-in forwards`;
+    c.style.animationDelay=(Math.random()*0.3)+'s';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3200);
+  }
+}
+function miniConfetti(){ spawnConfetti(14); }
+function bigConfetti(){ spawnConfetti(60); }
+
+
+/* ============ เริ่มต้นตัวช่วยในบท ============ */
+qsMount('gq1',GQ1); gtMount(); qsMount('gq2',GQ2); qsMount('gq3',GQ3);
+nmPotsDraw(); stMount('st1',[3,6,9,12]); stMount('st2',[5,6,8,11,15]); stMount('st3',[4,8,16,32]); qsMount('nq1',NQ1);
+nmDrillTabs(); nmAltDraw(); qsMount('nq2',NQ2);
+wkMount('wkFib',[['เดือนที่ 1 · กระต่าย 1 คู่ (ยังเด็ก)','ดัดแปลงจากโจทย์ในหนังสือ Liber Abaci ของฟีโบนัชชี ค.ศ. 1202'],['เดือนที่ 2 · 1 คู่ (โตแล้ว)','กติกา: กระต่ายเกิดใหม่ต้องรอ 1 เดือนจึงโต'],['เดือนที่ 3 · 2 คู่','คู่ที่โตแล้วออกลูกเดือนละ 1 คู่'],['เดือนที่ 4 · 3 คู่','= 1 + 2 (สองเดือนก่อนรวมกัน)'],['เดือนที่ 5 · 5 คู่ · เดือนที่ 6 · 8 คู่','= 2 + 3 · 3 + 5 → ตัวใหม่ = สองตัวหน้ารวมกัน'],['1, 1, 2, 3, 5, 8, 13, …','นักคณิตศาสตร์อินเดียรู้จักอนุกรมนี้มาก่อนฟีโบนัชชีหลายร้อยปี']]);
+qsMount('nq3',NQ3); nmDotsDraw();
+wkMount('wkNth',[['อนุกรม 4, 7, 10, 13, … · ตัวที่ 10 คือ?','ผลต่าง +3 ทุกช่อง'],['จากตัวที่ 1 ไปตัวที่ 10 ต้องข้าม 9 ช่อง','เหมือนต้นไม้ 10 ต้น มีช่องว่าง 9 ช่อง'],['4 + 3 × 9 = 4 + 27 = 31','ตัวแรก + ผลต่าง × จำนวนช่อง'],['ตรวจ: 4, 7, 10, 13, 16, 19, 22, 25, 28, 31 ✅','นับครบ 10 ตัวพอดี']]);
+abStrip('abS1',[1,3,5]); wkMount('wkAbc',[['D, H, L, ?','โจทย์'],['4, 8, 12, ?','แปลงเป็นเลขลำดับ (D = 4 · H = 8 · L = 12)'],['ผลต่าง +4 +4 → 12 + 4 = 16','ใช้ท่าหาผลต่าง'],['16 = P','แปลงกลับ (หมุด O = 15 → ถัดไปคือ P)']]);
+abStrip('abPin',[],true); qsMount('aq1',AQ1); abWrapDraw(); qsMount('aq2',AQ2); abMirDraw(); cdDraw(); qsMount('aq3',AQ3);
+/* ลิงก์ตรงเข้าบท: index.html#bal (ใช้ลิงก์ข้ามแอป เช่นจาก percent) */
+// ลิงก์ตรง: #ชื่อบท (เช่น #fr) หรือ #ขั้นในบท จาก STEPS (เช่น #fr-p3 · #c0L3) — ใช้กับลิงก์ข้ามแอป
+{ const h=decodeURIComponent(location.hash.slice(1)), e=h&&$(h);
+  if(e&&e.classList.contains('screen')) go(h);
+  else if(STEPS[h]){ const t=$(STEPS[h][3]||h), sc=t&&t.closest('.screen'), k=sc&&Object.keys(CHS).find(k=>CHS[k].scr===sc.id); if(k){ curCh=k; goStep(h); } } }
+</script>
+</html>
