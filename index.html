@@ -531,7 +531,7 @@
       <button class="card c6" onclick="go('spa')"><span class="ico">🧊</span>มิติสัมพันธ์<small>คลี่กล่อง · ลูกเต๋า · มองจากด้าน · นับก้อน</small></button>
       <button class="card c5" onclick="go('venn')"><span class="ico">➡️</span>เงื่อนไขภาษา<small>วงกลมเวนน์ · ทุก บาง ไม่มี</small></button>
       <button class="card c7" onclick="go('sym')"><span class="ico">🔣</span>เงื่อนไขสัญลักษณ์<small>มากกว่า น้อยกว่า · สรุปได้แน่ไหม</small></button>
-      <button class="card soon" disabled><span class="ico">🏆</span>เกมรวม<small>ข้อจากทุกบท · เร็ว ๆ นี้</small></button>
+      <button class="card c1" onclick="go('mix')"><span class="ico">🏆</span>เกมรวม<small>ข้อจากทุกบท · อนุกรมสุ่ม · ทวนก่อนสอบ</small></button>
       <button class="card c8" onclick="openGame()"><span class="ico">🎮</span>เกมพิชิตด่าน<small>ตอบถูก ปลดล็อกด่าน!</small></button>
     </div>
     <p class="hint" style="margin-top:16px">💡 ทุกบทมี 3 ชั้น: 🌱 อ่านแค่ชั้นแรกก็เข้าใจ · อยากรู้มากขึ้นค่อยกดต่อ 🌿 🌳<br>เรียนตามลำดับ บนลงล่าง · ตอบผิดได้ ไม่เป็นไร เกมจะบอกว่าติดตรงไหน แล้วพากลับไปดู 🙂</p>
@@ -1002,6 +1002,64 @@
         <div class="memo">🔑 <b>แปลงรหัสกลับเป็นเครื่องหมายปกติก่อนทุกครั้ง</b> แล้วค่อยตรวจโซ่ · อย่าคิดในหัวทั้งที่ยังเป็นรหัส</div>
         <div id="sq3"></div>
         <div class="center" style="margin-top:16px"><button class="btn go" onclick="openGame('sym')">🎮 ไปพิชิตด่านเลย!</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CH 7 · เกมรวม (โครงจากบท mix ของแอปสารบรรณ) ================= -->
+  <div class="screen" id="mix">
+    <button class="backbtn" onclick="home()">⬅️ กลับหน้าหลัก</button>
+    <div class="panel">
+      <h2>🏆 เกมรวม · ทวนทุกบท</h2>
+
+      <div class="layer L1">
+        <h3>🌱 ชั้นเมล็ด · ท่าคิดหลักของทั้ง 7 บท</h3>
+        <p>บทนี้ไม่มีเรื่องใหม่ · ด่านในบทนี้<b>สุ่มข้อจากทุกบท</b> 🌱 ด่าน 1 ใช้ข้อจากด่าน 1 ของทุกบท · 🌿 ด่าน 2 ใช้ข้อจากด่าน 2 · 🌳 ด่าน 3 ใช้ข้อจากด่าน 3 · ทุกรอบมี<b>ข้ออนุกรมสุ่มตัวเลขใหม่ 1 ข้อ</b> 🎲 · ตอบผิด เกมจะพากลับไปที่บทต้นทางของข้อนั้น</p>
+        <div class="tw"><table class="t">
+          <tr><th>บท</th><th>ท่าคิดหลัก</th></tr>
+          <tr><td><a href="#gate" onclick="go('gate');return false">🚪 สังเกตแบบนักสืบ</a></td><td>สังเกต → ตั้งกฎ → <b>ทดสอบกฎกับทุกตัว</b> · กฎที่ผ่านแค่คู่แรกยังใช้ไม่ได้</td></tr>
+          <tr><td><a href="#num" onclick="go('num');return false">🔢 อนุกรมตัวเลข</a></td><td>ลอง 3 ท่าตามลำดับ: <b>หาผลต่าง → ผลต่างชั้นที่ 2 → ลองหาร</b> · ไม่เข้าทั้ง 3 ท่า ลองดูว่าเป็น 2 ชุดสลับกันไหม</td></tr>
+          <tr><td><a href="#abc" onclick="go('abc');return false">🔤 อนุกรมตัวอักษร</a></td><td><b>แปลงเป็นเลขลำดับ → หากฎ → แปลงกลับ</b> · หมุดช่วยนับ E 5 · J 10 · O 15 · T 20 · Y 25</td></tr>
+          <tr><td><a href="#ana" onclick="go('ana');return false">🔗 อุปมาอุปไมย</a></td><td><b>พูดคู่แรกเป็นประโยค</b> → เอาคำคู่ที่สองใส่ประโยคเดิม · ทิศของคู่ต้องตรงกัน</td></tr>
+          <tr><td><a href="#spa" onclick="go('spa');return false">🧊 มิติสัมพันธ์</a></td><td>กล่องมี <b>3 คู่หน้าตรงข้าม</b> · รูปคลี่ = แผ่นเดียว 6 ช่อง · นับก้อน<b>ทีละกอง</b></td></tr>
+          <tr><td><a href="#venn" onclick="go('venn');return false">➡️ เงื่อนไขภาษา</a></td><td><b>วาดวงกลมทีละข้อความ</b> · จริงทุกภาพ = แน่นอน · จริงบางภาพ ไม่จริงบางภาพ = ไม่แน่นอน</td></tr>
+          <tr><td><a href="#sym" onclick="go('sym');return false">🔣 เงื่อนไขสัญลักษณ์</a></td><td><b>ต่อเป็นโซ่</b> · โซ่ชี้ทางเดียวกันสรุปหัวกับท้ายได้ · ชี้สวนทาง = สรุปไม่ได้</td></tr>
+        </table></div>
+        <button class="more" onclick="openLayer('mixL2',this)">🌿 อยากรู้อีกนิด · เห็นโจทย์แล้วรู้ว่าบทไหน ⬇️</button>
+      </div>
+
+      <div class="layer L2 hide" id="mixL2">
+        <h3>🌿 ชั้นต้นกล้า · เห็นโจทย์แล้วรู้ว่าบทไหน</h3>
+        <p>ก่อนคิดคำตอบ ดู<b>หน้าตาของโจทย์</b>ก่อนว่าเป็นของบทไหน แล้วหยิบท่าแรกของบทนั้นมาใช้ได้ทันที ไม่ต้องเดา</p>
+        <div class="tw"><table class="t">
+          <tr><th>หน้าตาโจทย์</th><th>บท · ท่าแรก</th></tr>
+          <tr><td>ตัวเลขเรียงกัน ท้ายมี <b>?</b></td><td>🔢 เขียนผลต่างใต้ช่องว่างระหว่างแต่ละคู่</td></tr>
+          <tr><td>ตัวอักษรเรียงกัน (อาจมีเลขปน เช่น A1, C3)</td><td>🔤 แปลงตัวอักษรเป็นเลขลำดับก่อน</td></tr>
+          <tr><td>คำ 3 คำกับช่องว่าง เช่น <b>ก : ข = ค : ?</b></td><td>🔗 พูด ก กับ ข เป็นประโยค</td></tr>
+          <tr><td>ของ 4–5 อย่าง ให้หา<b>ตัวที่ไม่เข้าพวก</b></td><td>🔗 หาเกณฑ์ร่วมของตัวส่วนใหญ่ แล้วลองตัดทีละตัว</td></tr>
+          <tr><td>รูปคลี่ · ลูกเต๋า · ลูกบาศก์ · กองก้อน</td><td>🧊 หาคู่หน้าตรงข้ามก่อน · กองก้อนเขียนความสูงลงภาพด้านบน</td></tr>
+          <tr><td>มีคำว่า <b>ทุก · บาง · ไม่มี</b></td><td>➡️ วาดวงกลมทีละข้อความ</td></tr>
+          <tr><td>มี <b>&gt; &lt; ≥ =</b> หรือสัญลักษณ์แปลก ๆ แทน หรือเทียบ สูงกว่า เตี้ยกว่า</td><td>🔣 แปลงเป็นเครื่องหมายปกติ แล้วต่อเป็นโซ่</td></tr>
+          <tr><td>ไม่เข้าแบบไหนเลย</td><td>🚪 กลับไปท่านักสืบ: สังเกตสิ่งที่เกิดซ้ำ ตั้งกฎ ทดสอบกับทุกตัว</td></tr>
+        </table></div>
+        <button class="more" onclick="openLayer('mixL3',this)">🌳 เจาะลึก · คู่ที่สับสนบ่อย ⬇️</button>
+      </div>
+
+      <div class="layer L3 hide" id="mixL3">
+        <h3>🌳 ชั้นต้นไม้ใหญ่ · คู่ที่สับสนบ่อย</h3>
+        <p>หลักข้างล่างนี้อยู่ในบทต่าง ๆ แล้ว แต่<b>หน้าตาคล้ายกันจนหยิบผิดท่าได้ง่าย</b> · วางคู่กันให้เห็นว่าต่างกันตรงไหน</p>
+        <div class="tw"><table class="t">
+          <tr><th>อันนี้</th><th>กับ อันนี้</th><th>บท</th></tr>
+          <tr><td>ผลต่าง<b>เพิ่มทีละเท่ากัน</b> (+1 +2 +3 +4) → ใช้ผลต่างชั้นที่ 2 · ต่างจากผลต่างเท่ากันทุกช่อง (+2 +2) ซึ่งเจอกฎแล้วในชั้นแรก</td><td>ผลต่าง<b>โตเป็นเท่าตัว</b> (4, 8, 16) → ลองหาร</td><td>🔢</td></tr>
+          <tr><td>อนุกรม<b> 2 ชุดสลับ</b>: ตำแหน่ง 1, 3, 5 ชุดหนึ่ง · 2, 4, 6 อีกชุด · ดูก่อนว่าตัวถัดไปอยู่ตำแหน่งไหน</td><td>ตัวอักษร<b>คู่ตัวเลข</b> (A1, C3, E5): ตัวอักษรกับเลขเดินคู่กันในช่องเดียวกัน</td><td>🔢 🔤</td></tr>
+          <tr><td><b>อุปมา</b>: ทิศของคู่ต้องตรงกัน · ของเล็ก : ของใหญ่ ต้องเป็นของเล็ก : ของใหญ่ทั้งสองคู่</td><td><b>ไม่เข้าพวก</b>: ตัวที่ใช่คือตัวที่ตัดแล้ว อีก 3 ตัวมีกฎร่วมกันชัดเจน</td><td>🔗</td></tr>
+          <tr><td><b>รูปคลี่</b>: ในแถวตรง ช่องที่เว้นกัน 1 ช่อง = หน้าตรงข้าม · ช่องที่ติดกันไม่มีทางตรงข้ามกัน</td><td><b>ลูกเต๋า</b>: หน้าตรงข้ามรวมกันได้ 7 · ใช้ได้เฉพาะโจทย์ที่บอกว่าเป็นลูกเต๋ามาตรฐาน</td><td>🧊</td></tr>
+          <tr><td><b>มองจากด้าน</b>: แต่ละแนวเห็นแค่กองที่สูงที่สุด</td><td><b>นับก้อน</b>: ก้อนที่ถูกบังต้องนับด้วย · ก้อนสูงต้องมีก้อนรองข้างใต้ทุกชั้น</td><td>🧊</td></tr>
+          <tr><td><b>บาง</b> = มีอย่างน้อย 1 ตัวอยู่ทั้งสองกลุ่ม · ไม่ได้บอกว่ามีตัวที่ไม่อยู่</td><td><b>≥</b> ในโซ่ สรุปได้แค่ ≥ · จะสรุปว่า &gt; หรือ = แน่นอนไม่ได้</td><td>➡️ 🔣</td></tr>
+          <tr><td>ใช้<b>แค่ข้อความในโจทย์</b> · แม้ขัดกับชีวิตจริงก็ต้องตอบตามโจทย์</td><td>ตัวอย่าง<b>น้อยไป</b>ยังสรุปเป็นกฎไม่ได้ · ฝนตก 3 วันติด ไม่ได้แปลว่าพรุ่งนี้ตกแน่</td><td>➡️ 🚪</td></tr>
+        </table></div>
+        <div class="memo">🔁 ทวนเป็นวง: ตอบผิดข้อไหน กดปุ่มย้อนในเกมเพื่อกลับไปขั้นนั้นในบทต้นทาง อ่านแล้วกลับมาท้าทายใหม่</div>
+        <div class="center" style="margin-top:16px"><button class="btn go" onclick="openGame('mix')">🎮 ไปพิชิตด่านเลย!</button></div>
       </div>
     </div>
   </div>
@@ -1554,8 +1612,14 @@ const LEVELS = [
   {ch:'venn', id:'vn3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'บาง ≠ บางไม่ · ทุกกลับหัว · ชีวิตจริงกับโจทย์', cls:'c2'},
   {ch:'sym', id:'sy1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'เรียงลำดับ · เขียนสัญลักษณ์ · > ≥ =', cls:'c6'},
   {ch:'sym', id:'sy2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'ตอบแบบข้อสอบ ข้อสรุป 1 · 2', cls:'c5'},
-  {ch:'sym', id:'sy3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'โซ่ชี้สวนทาง · รหัสสัญลักษณ์', cls:'c2'}
+  {ch:'sym', id:'sy3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'โซ่ชี้สวนทาง · รหัสสัญลักษณ์', cls:'c2'},
+  {ch:'mix', id:'mx1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'ข้อจากด่าน 1 ของทุกบท · อนุกรมสุ่ม 🎲', cls:'c6'},
+  {ch:'mix', id:'mx2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'ข้อจากด่าน 2 ของทุกบท · อนุกรมสุ่ม 🎲', cls:'c5'},
+  {ch:'mix', id:'mx3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'ข้อจากด่าน 3 ของทุกบท · อนุกรมสุ่ม 🎲', cls:'c2'}
 ];
+// บท 7 เกมรวม: ด่าน N = ข้อจากด่าน N ของทุกบท (แบบบท mix ของแอปสารบรรณ) · ข้ออนุกรมสุ่มแทรกตอนเริ่มรอบ (gen_logic.js)
+const MIX_FROM=['lg','nm','ab','an','sp','vn','sy'];
+[1,2,3].forEach(n=>{ BANK['mx'+n]=MIX_FROM.flatMap(p=>BANK[p+n]); });
 const CHS = {
   gate:{n:'สังเกตแบบนักสืบ', i:'🚪', scr:'gate'},
   num:{n:'อนุกรมตัวเลข', i:'🔢', scr:'num'},
@@ -1563,9 +1627,67 @@ const CHS = {
   ana:{n:'อุปมาอุปไมย', i:'🔗', scr:'ana'},
   spa:{n:'มิติสัมพันธ์', i:'🧊', scr:'spa'},
   venn:{n:'เงื่อนไขภาษา', i:'➡️', scr:'venn'},
-  sym:{n:'เงื่อนไขสัญลักษณ์', i:'🔣', scr:'sym'}
+  sym:{n:'เงื่อนไขสัญลักษณ์', i:'🔣', scr:'sym'},
+  mix:{n:'เกมรวม', i:'🏆', scr:'mix'}
 };
 
+/* ============ โจทย์อนุกรมสุ่ม (บท 7 เกมรวม) ============
+   ก๊อปตัวสร้างอนุกรม 5 ชนิดจาก _research/mock_build/gen.js ทั้งก้อน (ไม่แก้ต้นฉบับ) · คำตอบคำนวณด้วยโค้ด
+   ต่างจากต้นฉบับแค่ R(): คืนข้อแบบคลังแอปนี้ {p,s,q,c,w,gen} · ข้อสุ่มไม่ลงรายการข้อผิด (q.gen) */
+const LGEN = (() => {
+  const ri = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const gcd = (a, b) => b ? gcd(b, a % b) : a;
+  const fr = (n, d) => { const g = gcd(n, d); return d / g === 1 ? String(n / g) : `${n / g}/${d / g}`; };
+  const num = n => Number(n).toLocaleString('en-US');
+  // ตัวเลือก 4 ตัวไม่ซ้ำ: คำตอบ + ตัวลวงที่มาจากความผิดพลาดที่พบบ่อย · ขาดเติมด้วยค่าใกล้เคียง
+  function opts(ans, cands, fmt = num){
+    const out = [ans], seen = new Set([fmt(ans)]);
+    const push = v => { if (out.length < 4 && Number.isFinite(v) && v > 0 && !seen.has(fmt(v))){ seen.add(fmt(v)); out.push(v); } };
+    cands.forEach(push);
+    for (let k = 1; out.length < 4 && k < 50; k++){ push(ans + k); push(ans - k); }
+    return out.map(fmt);
+  }
+  let S = 'num-s1';  // ขั้นในบทอนุกรมตัวเลขที่ข้อนี้ใช้ (ตั้งก่อนเรียกตัวสร้าง)
+  const R = (q, c, w, p = '🔢') => ({p, s:S, q:q.replace(/^อนุกรม (.*), \? ตัวถัดไปคือ$/, '$1, ? · ตัวถัดไปคือ'), c, w:w + ' 🎲 ข้อนี้สุ่มตัวเลขใหม่ทุกครั้ง', gen:true});
+  const T = [
+    function seriesArith(){
+      const a = ri(1, 30), d = ri(2, 12) * pick([1, 1, -1]), s = [0,1,2,3,4].map(i => a + 20*Math.abs(d)*(d<0) + i*d);
+      const ans = s[4] + d;
+      return R(`อนุกรม ${s.join(', ')}, ? ตัวถัดไปคือ`, opts(ans, [s[4] + 2*d, s[4] - d, ans + 1, s[4] + d + (d>0?2:-2)]),
+        `${d > 0 ? 'เพิ่ม' : 'ลด'}ทีละ ${Math.abs(d)} · ${s[4]} ${d > 0 ? '+' : '−'} ${Math.abs(d)} = ${ans}`, '🔢');
+    },
+    function seriesGeo(){
+      const a = ri(1, 5), r = ri(2, 4), s = [0,1,2,3].map(i => a * r**i), ans = s[3] * r;
+      return R(`อนุกรม ${s.join(', ')}, ? ตัวถัดไปคือ`, opts(ans, [s[3] + (s[3] - s[2]), s[3] * (r + 1), ans - r, ans + r]),
+        `คูณ ${r} ทุกครั้ง · ${num(s[3])} × ${r} = ${num(ans)}`, '🔢');
+    },
+    function seriesGrowDiff(){
+      const a = ri(1, 20), d = ri(1, 6), k = ri(1, 4), s = [a];
+      for (let i = 0; i < 4; i++) s.push(s[i] + d + i*k);
+      const last = d + 3*k, ans = s[4] + last + k;
+      return R(`อนุกรม ${s.join(', ')}, ? ตัวถัดไปคือ`, opts(ans, [s[4] + last, ans + k, ans - 1, s[4] + 2*last]),
+        `ผลต่างเพิ่มทีละ ${k}: ${[0,1,2,3].map(i => d + i*k).join(', ')} → ครั้งต่อไปเพิ่ม ${last + k} · ${s[4]} + ${last + k} = ${ans}`, '🔢');
+    },
+    function seriesSquare(){
+      const st = ri(1, 7), c = pick([0, 0, 1, -1, 2]), s = [0,1,2,3].map(i => (st+i)**2 + c), n = st + 4, ans = n*n + c;
+      const rule = c === 0 ? `${st}², ${st+1}², ${st+2}², ${st+3}² → ${n}² = ${ans}` : `เลขยกกำลังสอง ${c > 0 ? 'บวก' : 'ลบ'} ${Math.abs(c)} · ${n}² ${c > 0 ? '+' : '−'} ${Math.abs(c)} = ${ans}`;
+      return R(`อนุกรม ${s.join(', ')}, ? ตัวถัดไปคือ`, opts(ans, [s[3] + (s[3]-s[2]), (n+1)**2 + c, ans + 2, n*n + c + n]), rule, '🔢');
+    },
+    function seriesInterleave(){
+      const a = ri(1, 9), d1 = ri(2, 5), b = ri(20, 40), d2 = -ri(1, 3), s = [];
+      for (let i = 0; i < 3; i++){ s.push(a + i*d1); s.push(b + i*d2); }
+      const ans = a + 3*d1;
+      return R(`อนุกรม ${s.join(', ')}, ? ตัวถัดไปคือ`, opts(ans, [b + 3*d2, ans + d1, s[5] - 1, ans - 1]),
+        `มี 2 ชุดสลับกัน: ตำแหน่งคี่ ${a}, ${a+d1}, ${a+2*d1} (เพิ่มทีละ ${d1}) · ตัวถัดไปเป็นตำแหน่งคี่ = ${ans}`, '🔢');
+    },
+  ];
+  // ชั้นของเกมรวม → [ตัวสร้าง, ขั้นในบท] · 🌱 เพิ่มคงที่/คูณ · 🌿 ผลต่างเพิ่ม/2 ชุดสลับ · 🌳 ยกกำลังสอง
+  const BY = {mx1:[[0,'num-s1'],[1,'num-s3']], mx2:[[2,'num-s2'],[4,'num-alt']], mx3:[[3,'num-sq']]};
+  function q(id){ const L = BY[id]; if(!L) return null; const [k, st] = pick(L); S = st; return T[k](); }
+  return { q, T, BY };
+})();
+if (typeof module !== 'undefined') module.exports = LGEN;
 
 /* ============ ตัวช่วยกลาง ============ */
 const ln = (m,r,cls='') => `<div class="ln ${cls}"><span class="m">${m}</span>${r?`<span class="r">${r}</span>`:''}</div>`;
@@ -2204,6 +2326,7 @@ function startGame(lv){
   const wrong=shuffle(pool.filter(q=>save.wrong.includes(qKey(L.id,q))));
   const rest=shuffle(pool.filter(q=>!wrong.includes(q)));
   const picked=dedupX([...wrong.slice(0,2), ...rest]).slice(0,PER_ROUND);
+  const gq=LGEN.q(L.id); if(gq) picked[picked.length-1]=gq;
   restOf[L.id]=pool.filter(q=>!picked.includes(q));
   game={lv, mode:'round', qs:shuffle(picked).map(prep), idx:0, score:0, hearts:3};
   showPlay();
@@ -2278,7 +2401,7 @@ function answer(btn,val,q){
     game.hearts--; $('q-hearts').textContent=heartsTxt();
     $('q-fb').textContent='❌ ยังไม่ถูกนะ'; $('q-fb').style.color='#ff5f5f';
     btns[q.choices.indexOf(q.ans)].classList.add('correct');
-    if(!q.boss && !save.wrong.includes(key)) save.wrong.push(key);
+    if(!q.boss && !q.gen && !save.wrong.includes(key)) save.wrong.push(key);
   }
   afterAnswer(q,val===q.ans);
 }
