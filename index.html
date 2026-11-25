@@ -484,6 +484,30 @@
 .mir span{background:#fff;border:1.5px solid #e0dbf8;border-radius:6px;padding:2px 0;line-height:1.15}
 .mir span.mb{background:#f3efff}.mir small{display:block;font-size:9.5px;font-weight:600;color:#7a72b8}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}
+/* ---- บท 4 มิติสัมพันธ์ ---- */
+.spsvg{display:block;margin:4px auto;height:auto}
+.spstage{perspective:800px;height:250px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.spscene{position:relative;width:0;height:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-32deg)}
+.fd{position:absolute;width:44px;height:44px;transform-style:preserve-3d;background:rgba(253,230,138,.92);outline:2px solid #7c4a03;outline-offset:-2px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#5b3c00;backface-visibility:visible}
+.fd.clash{background:rgba(248,113,113,.9)}
+.fd.fE{left:100%;top:0;transform-origin:0 50%;transform:rotateY(calc(var(--a) * -1deg))}
+.fd.fW{left:-100%;top:0;transform-origin:100% 50%;transform:rotateY(calc(var(--a) * 1deg))}
+.fd.fS{left:0;top:100%;transform-origin:50% 0;transform:rotateX(calc(var(--a) * 1deg))}
+.fd.fN{left:0;top:-100%;transform-origin:50% 100%;transform:rotateX(calc(var(--a) * -1deg))}
+.spopts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0}
+.spopts.sp3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.spopts figure{margin:0;padding:6px;border:2px solid #ece8ff;border-radius:12px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0}
+.spopts figcaption{font-size:13px;font-weight:700;color:#5b45c9;margin-top:4px;line-height:1.3}
+.sppic,.story .pic .sppic{font-size:14px;line-height:1.3;letter-spacing:normal}
+.spmain{display:flex;justify-content:center}
+.spgrid{display:flex;flex-direction:column;align-items:center;gap:4px;margin:6px 0}
+.spgrid div{display:flex;gap:4px}
+.spgrid .tab{min-width:44px}
+.spnet{display:grid;gap:3px;justify-content:center;margin:8px 0}
+.spnet .tab{width:42px;height:42px;padding:0}
+.spgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px;margin:8px 0}
+.spgal figure{margin:0;padding:4px;border:2px solid #ece8ff;border-radius:10px;background:#fff;text-align:center}
+.spgal figcaption{font-size:12px;color:#7a72b8}
 </style>
 </head>
 <body>
@@ -504,7 +528,7 @@
       <button class="card c2" onclick="go('num')"><span class="ico">🔢</span>อนุกรมตัวเลข<small>ผลต่าง · บันได · ลองหาร · 2 ชุดสลับ</small></button>
       <button class="card c3" onclick="go('abc')"><span class="ico">🔤</span>อนุกรมตัวอักษร<small>แปลงเป็นเลข · วนรอบ · รหัสลับ</small></button>
       <button class="card c4" onclick="go('ana')"><span class="ico">🔗</span>อุปมาอุปไมย<small>พูดความสัมพันธ์เป็นประโยค · ไม่เข้าพวก</small></button>
-      <button class="card soon" disabled><span class="ico">🧊</span>มิติสัมพันธ์<small>คลี่กล่อง · ลูกเต๋า · มองจากด้าน · เร็ว ๆ นี้</small></button>
+      <button class="card c6" onclick="go('spa')"><span class="ico">🧊</span>มิติสัมพันธ์<small>คลี่กล่อง · ลูกเต๋า · มองจากด้าน · นับก้อน</small></button>
       <button class="card c5" onclick="go('venn')"><span class="ico">➡️</span>เงื่อนไขภาษา<small>วงกลมเวนน์ · ทุก บาง ไม่มี</small></button>
       <button class="card c7" onclick="go('sym')"><span class="ico">🔣</span>เงื่อนไขสัญลักษณ์<small>มากกว่า น้อยกว่า · สรุปได้แน่ไหม</small></button>
       <button class="card soon" disabled><span class="ico">🏆</span>เกมรวม<small>ข้อจากทุกบท · เร็ว ๆ นี้</small></button>
@@ -774,6 +798,94 @@
     </div>
   </div>
 
+  <!-- ================= CH 4 · มิติสัมพันธ์ ================= -->
+  <div class="screen" id="spa">
+    <button class="backbtn" onclick="home()">⬅️ กลับหน้าหลัก</button>
+    <div class="panel">
+      <h2>🧊 มิติสัมพันธ์</h2>
+
+      <div class="layer L1">
+        <h3>🌱 ชั้นเมล็ด · รู้แค่นี้ก็เข้าใจ</h3>
+        <p>บทนี้คิดด้วย<b>ตา</b> · ของจริงมี 3 มิติ (กว้าง ยาว สูง) แต่ภาพบนกระดาษแบนแค่ 2 มิติ · โจทย์จึงถามว่า ถ้าพับ หมุน หรือมองจากอีกด้าน จะเห็นอะไร · หยิบกล่องกระดาษจริงมาลองคู่กันได้เลย</p>
+
+        <div class="step-h" id="spa-s1"><span class="sn">1</span> 📦 คลี่กล่อง = แผ่นเดียว 6 ช่อง</div>
+        <p class="tip">ตัดกล่องกระดาษตามรอยต่อแล้วกางออก จะได้แผ่นเดียวมี 6 ช่อง เรียกว่า<b>รูปคลี่</b> · เลื่อนแถบเพื่อพับกลับเป็นกล่อง 👇</p>
+        <div id="spFoldT"></div>
+        <div class="memo">💡 กล่องมี <b>6 หน้า</b> · จับคู่ได้ <b>3 คู่หน้าตรงข้าม</b> (บน–ล่าง · หน้า–หลัง · ซ้าย–ขวา) · หน้าตรงข้ามกัน<b>ไม่แตะกันเลย</b> และมองเห็นพร้อมกันไม่ได้</div>
+
+        <div class="step-h" id="spa-s2"><span class="sn">2</span> 👀 มองจาก 3 ด้าน</div>
+        <p class="tip">แตะช่องในตารางเพื่อเพิ่มก้อน (แตะซ้ำจนเกิน 3 ก้อน = กลับเป็นช่องว่าง) · ดูว่าภาพจากหน้า จากขวา และจากบนเปลี่ยนอย่างไร 👇</p>
+        <div id="spBlkT"></div>
+        <div class="memo">🔑 ภาพ<b>ด้านหน้า</b> = แต่ละแถวซ้ายไปขวา เห็นกองที่<b>สูงที่สุด</b>ในแนวนั้น (กองหลังที่เตี้ยกว่าถูกบัง) · ภาพ<b>ด้านบน</b> = ช่องไหนมีก้อน ไม่บอกความสูง</div>
+
+        <div class="step-h" id="spa-s3"><span class="sn">3</span> 🧱 นับก้อนทีละกอง</div>
+        <p class="tip">ทุกก้อนวางบนพื้นหรือบนก้อนอื่น · นับเป็น<b>กอง</b> (แนวตั้ง) ทีละกอง แล้วบวกกัน · กดดูทีละบรรทัด</p>
+        <div id="spLay"></div>
+        <div id="wkLay"></div>
+        <div id="spq1"></div>
+        <button class="more" onclick="openLayer('spaL2',this)">🌿 อยากรู้อีกนิด · รูปคลี่ ลูกเต๋า และก้อนที่ถูกบัง ⬇️</button>
+      </div>
+
+      <div class="layer L2 hide" id="spaL2">
+        <h3>🌿 ชั้นต้นกล้า · รูปคลี่ ลูกเต๋า และก้อนที่ถูกบัง</h3>
+        <div class="step-h" id="spa-net"><span class="sn">📐</span> รูปคลี่ที่พับเป็นกล่องได้มี 11 แบบ</div>
+        <p class="tip">ทั้ง 11 แบบนี้พับเป็นลูกบาศก์ได้ (กลับด้านหรือหมุนแล้วนับเป็นแบบเดียวกัน) · ลองเลือกแบบที่พับไม่ได้ในของเล่นข้อ 1 ด้วย</p>
+        <div id="spGal"></div>
+        <div class="memo">🔑 วิธีดูเร็วว่าพับ<b>ไม่ได้</b>: มีช่องเรียงเป็นสี่เหลี่ยม <b>2 × 2</b> · หรือมีแถวตรงยาว <b>5 ช่อง</b>ขึ้นไป · ถ้าไม่เข้า 2 ข้อนี้ ให้ลองพับในใจทีละช่อง</div>
+
+        <div class="step-h" id="spa-opp"><span class="sn">↔️</span> หาหน้าตรงข้ามในรูปคลี่</div>
+        <p class="tip">แตะช่องใดก็ได้ ช่องสีม่วงอีกช่องคือหน้าที่อยู่ตรงข้ามเมื่อพับแล้ว 👇</p>
+        <div id="spOppT"></div>
+        <div class="memo">🔑 ในแถวตรง (แนวนอนหรือแนวตั้ง) ช่องที่<b>เว้นกัน 1 ช่อง</b> = หน้าตรงข้าม · ช่องที่<b>ติดกัน</b>ไม่มีทางเป็นหน้าตรงข้าม</div>
+
+        <div class="step-h" id="spa-die"><span class="sn">🎲</span> ลูกเต๋า: หน้าตรงข้ามรวมกันได้ 7</div>
+        <p class="tip">ลูกเต๋ามาตรฐาน 1 ตรงข้าม 6 · 2 ตรงข้าม 5 · 3 ตรงข้าม 4 · กดหมุนแล้วดูหน้าที่มองไม่เห็น 👇</p>
+        <div id="spDieT"></div>
+        <div class="memo">💡 มองเห็นได้มากที่สุดทีละ 3 หน้า · อีก 3 หน้าหาได้จาก 7 ลบ · จุดทั้งลูกรวมกัน 1 + 2 + 3 + 4 + 5 + 6 = <b>21</b> · ใช้กฎรวม 7 ได้เฉพาะโจทย์ที่บอกว่าเป็นลูกเต๋ามาตรฐาน</div>
+
+        <div class="step-h" id="spa-hide"><span class="sn">🫥</span> ก้อนที่ถูกบัง</div>
+        <p class="tip">ก้อนที่อยู่สูงต้องมีก้อน<b>รองข้างใต้</b>ทุกชั้น แม้ภาพจะมองไม่เห็น · เขียนความสูงลงบนภาพด้านบน แล้วบวก · กดดูทีละบรรทัด</p>
+        <div id="spHide"></div>
+        <div id="wkHide"></div>
+        <div id="spq2"></div>
+        <button class="more" onclick="openLayer('spaL3',this)">🌳 เจาะลึก · ลูกบาศก์หลายภาพ และลูกบาศก์ทาสี ⬇️</button>
+      </div>
+
+      <div class="layer L3 hide" id="spaL3">
+        <h3>🌳 ชั้นต้นไม้ใหญ่ · ลูกบาศก์หลายภาพ และลูกบาศก์ทาสี</h3>
+        <div class="step-h" id="spa-views"><span class="sn">🔍</span> ภาพลูกบาศก์ใบเดียวกันหลายภาพ</div>
+        <p class="tip">ลูกบาศก์ใบเดียว ติดสัญลักษณ์ 6 แบบ หน้าละ 1 แบบ · ถ่ายภาพ 2 มุม · หน้าใดอยู่ตรงข้าม ● · กดดูทีละบรรทัด</p>
+        <div id="spViews"></div>
+        <div id="wkViews"></div>
+        <div class="memo">🔑 หน้าที่เคย<b>เห็นพร้อมกับ</b> ● ในภาพใดภาพหนึ่ง = อยู่ติดกับ ● · ตัดทิ้งให้หมด · เหลือหน้าเดียว = หน้าตรงข้าม · ถ้าเหลือ 2 หน้าขึ้นไป แปลว่าข้อมูลยังไม่พอ</div>
+
+        <div class="step-h" id="spa-match"><span class="sn">🧩</span> จากรูปคลี่ไปเป็นลูกบาศก์</div>
+        <p>โจทย์อีกแบบให้รูปคลี่ 1 ภาพ แล้วถามว่าลูกบาศก์ภาพใดพับได้จากรูปคลี่นี้ · ตรวจทีละภาพ 2 ชั้น</p>
+        <div class="tw"><table class="t">
+          <tr><th>ชั้นตรวจ</th><th>ถามตัวเอง</th></tr>
+          <tr><td>1 · คู่ตรงข้าม</td><td>ภาพนี้มีหน้าตรงข้ามโผล่มาพร้อมกันไหม · ถ้ามี = ตัดทิ้งทันที</td></tr>
+          <tr><td>2 · ลำดับรอบมุม</td><td>3 หน้าที่เห็นมาพบกันที่มุมเดียว · เรียงวนตามเข็มนาฬิกาเหมือนในรูปคลี่ไหม</td></tr>
+        </table></div>
+        <div id="spMatch"></div>
+        <div class="memo">💡 ชั้นที่ 1 ตรวจง่ายกว่า ทำก่อนเสมอ · ชั้นที่ 2 ใช้เมื่อเหลือ 2 ภาพที่ไม่มีคู่ตรงข้ามทั้งคู่ (ภาพหนึ่งเป็นภาพกระจกของอีกภาพ)</div>
+
+        <div class="step-h" id="spa-paint"><span class="sn">🎨</span> ลูกบาศก์ใหญ่ทาสี แล้วตัดเป็นก้อนเล็ก</div>
+        <p class="tip">ลูกบาศก์ขนาด 3 × 3 × 3 ทาสีผิวนอกทุกด้าน แล้วตัดเป็นก้อนเล็ก 27 ก้อน · ก้อนเล็กถูกทาสีกี่หน้าขึ้นกับว่าอยู่ตรงไหน 👇</p>
+        <div id="wkPaint"></div>
+        <div class="tw"><table class="t">
+          <tr><th>ตำแหน่ง</th><th>ทาสี</th><th>3 × 3 × 3</th><th>n × n × n</th></tr>
+          <tr><td>มุม</td><td>3 หน้า</td><td>8</td><td>8 เสมอ</td></tr>
+          <tr><td>ขอบ (ไม่รวมมุม)</td><td>2 หน้า</td><td>12</td><td>12 × (n − 2)</td></tr>
+          <tr><td>กลางหน้า</td><td>1 หน้า</td><td>6</td><td>6 × (n − 2) × (n − 2)</td></tr>
+          <tr><td>ข้างใน</td><td>ไม่ถูกทาสี</td><td>1</td><td>(n − 2) × (n − 2) × (n − 2)</td></tr>
+        </table></div>
+        <div class="memo">🔑 ลูกบาศก์มี <b>8 มุม · 12 ขอบ · 6 หน้า</b> · n − 2 คือจำนวนก้อนที่เหลือเมื่อตัดมุมทั้งสองปลายออก · ตรวจคำตอบ: 4 แถวรวมกันต้องได้ n × n × n</div>
+        <div id="spq3"></div>
+        <div class="center" style="margin-top:16px"><button class="btn go" onclick="openGame('spa')">🎮 ไปพิชิตด่านเลย!</button></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= CH 5 · เงื่อนไขภาษา ================= -->
   <div class="screen" id="venn">
     <button class="backbtn" onclick="home()">⬅️ กลับหน้าหลัก</button>
@@ -1014,12 +1126,232 @@ $('mascot').onclick = ()=>{ $('mascot').textContent = moods[Math.floor(Math.rand
   }
 })();
 
+/* ============ บท 4 มิติสัมพันธ์ · ตัววาดภาพ + ตัวคำนวณเฉลย (ใช้ทั้งบทเรียน คลังข้อ และสคริปต์ตรวจ) ============ */
+/* กองก้อน: H[r][c] = จำนวนก้อนในกองนั้น · r = แถวจากหลังมาหน้า · c = ซ้ายไปขวา · ทุกก้อนวางบนพื้นหรือบนก้อนอื่น */
+function spCount(H){ return H.flat().reduce((a,b)=>a+b,0); }
+function spFront(H){ return H[0].map((_,c)=>Math.max(...H.map(row=>row[c]))); }            // มองจากหน้า: ซ้าย→ขวา
+function spRight(H){ return H.map(row=>Math.max(...row)).reverse(); }                        // มองจากขวา: ซ้าย→ขวา = แถวหน้า→แถวหลัง
+function spTop(H){ return H.map(row=>row.map(h=>h>0?1:0)); }                                 // มองจากบน: แถวหลังอยู่บน
+// ภาพเอียงต้องตอบได้แน่นอน: ทุกกองที่อยู่ใกล้ตากว่า (หน้ากว่าและขวากว่า) ต้องไม่สูงกว่ากองนี้ (กองว่างนับเป็น 1)
+function spPosed(H){
+  const R=H.length, C=H[0].length;
+  for(let r=0;r<R;r++) for(let c=0;c<C;c++) for(let r2=r;r2<R;r2++) for(let c2=c;c2<C;c2++)
+    if((r2!==r||c2!==c) && H[r2][c2]>Math.max(H[r][c],1)) return false;
+  return true;
+}
+const SP_COL={t:'#fde68a',l:'#f59e0b',r:'#b45309',k:'#7c4a03'};
+function spIso(H,o={}){
+  const W=o.w||34, U=W*0.58, R=H.length, C=H[0].length, mx=Math.max(1,...H.flat());
+  const P=(r,c,z)=>[(c-r)*W/2,(c+r)*W/4-z*U];
+  const pts=[]; for(let r=0;r<=R;r++) for(let c=0;c<=C;c++){ pts.push(P(r,c,0)); pts.push(P(r,c,mx)); }
+  const pad=o.lab?26:6, x0=Math.min(...pts.map(p=>p[0]))-pad, x1=Math.max(...pts.map(p=>p[0]))+pad;
+  const y0=Math.min(...pts.map(p=>p[1]))-6, y1=Math.max(...pts.map(p=>p[1]))+(o.lab?24:6);
+  const poly=(a,f)=>`<polygon points="${a.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ')}" fill="${f}" stroke="${SP_COL.k}" stroke-width="1.2" stroke-linejoin="round"/>`;
+  let g='';
+  for(let r=0;r<R;r++) for(let c=0;c<C;c++) g+=`<polygon points="${[P(r,c,0),P(r,c+1,0),P(r+1,c+1,0),P(r+1,c,0)].map(p=>p.join(',')).join(' ')}" fill="#f4f1ff" stroke="#d9d2fb" stroke-width="1"/>`;
+  for(let r=0;r<R;r++) for(let c=0;c<C;c++) for(let z=0;z<H[r][c];z++){
+    const hi=o.hi&&o.hi(r,c,z);
+    g+=poly([P(r,c,z+1),P(r,c+1,z+1),P(r+1,c+1,z+1),P(r+1,c,z+1)],hi?'#c4b5fd':SP_COL.t)
+      +poly([P(r+1,c,z+1),P(r+1,c+1,z+1),P(r+1,c+1,z),P(r+1,c,z)],hi?'#8b5cf6':SP_COL.l)
+      +poly([P(r,c+1,z+1),P(r+1,c+1,z+1),P(r+1,c+1,z),P(r,c+1,z)],hi?'#6d28d9':SP_COL.r);
+  }
+  if(o.lab){
+    const a=P(R,0,0), b=P(R,C,0), e=P(0,C,0);
+    g+=`<text x="${(a[0]+b[0])/2-10}" y="${(a[1]+b[1])/2+20}" text-anchor="middle" font-size="12" font-weight="700" fill="#5b45c9">👁 หน้า</text>`
+      +`<text x="${(b[0]+e[0])/2+16}" y="${(b[1]+e[1])/2+18}" text-anchor="middle" font-size="12" font-weight="700" fill="#5b45c9">ขวา 👁</text>`;
+  }
+  return `<svg class="spsvg" viewBox="${x0.toFixed(0)} ${y0.toFixed(0)} ${(x1-x0).toFixed(0)} ${(y1-y0).toFixed(0)}" style="width:100%;max-width:${o.max||260}px">${g}</svg>`;
+}
+// ภาพด้าน (หน้า/ขวา): cols = ความสูงแต่ละช่อง ซ้าย→ขวา · ภาพบน: grid 0/1
+function spSide(cols,o={}){
+  const S=o.s||20, mx=Math.max(1,...cols), Wd=cols.length*S, Ht=(o.h||mx)*S;
+  let g=`<line x1="0" y1="${Ht}" x2="${Wd}" y2="${Ht}" stroke="#7a72b8" stroke-width="2"/>`;
+  cols.forEach((h,c)=>{ for(let z=0;z<h;z++) g+=`<rect x="${c*S+1}" y="${Ht-(z+1)*S+1}" width="${S-2}" height="${S-2}" rx="2" fill="${SP_COL.l}" stroke="${SP_COL.k}" stroke-width="1.2"/>`; });
+  return `<svg class="spsvg" viewBox="-4 -4 ${Wd+8} ${Ht+8}" style="width:100%;max-width:${o.max||110}px">${g}</svg>`;
+}
+function spTopSvg(G,o={}){
+  const S=o.s||20, R=G.length, C=G[0].length;
+  let g='';
+  G.forEach((row,r)=>row.forEach((v,c)=>{
+    g+=`<rect x="${c*S+1}" y="${r*S+1}" width="${S-2}" height="${S-2}" rx="2" fill="${v?SP_COL.t:'#f4f1ff'}" stroke="${v?SP_COL.k:'#d9d2fb'}" stroke-width="1.2"/>`;
+    if(o.num&&v) g+=`<text x="${c*S+S/2}" y="${r*S+S/2+5}" text-anchor="middle" font-size="${S*0.6}" font-weight="800" fill="#5b3c00">${o.num[r][c]}</text>`;
+  }));
+  return `<svg class="spsvg" viewBox="-4 -4 ${C*S+8} ${R*S+8}" style="width:100%;max-width:${o.max||110}px">${g}</svg>`;
+}
+const spEq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+// ภาพโจทย์ + ตัวเลือกเป็นรูป: opts[0] = รูปที่ถูก · pos = ตำแหน่งที่วางรูปถูก (1–4)
+function spPicks(main,opts,pos){
+  const order=opts.slice(1); order.splice(pos-1,0,opts[0]);
+  return `<div class="sppic">${main?`<div class="spmain">${main}</div>`:''}<div class="spopts">${order.map((s,i)=>`<figure>${s}<figcaption>รูปที่ ${i+1}</figcaption></figure>`).join('')}</div></div>`;
+}
+const spOptC=pos=>['รูปที่ '+pos,...[1,2,3,4].filter(i=>i!==pos).map(i=>'รูปที่ '+i)];
+
+/* ---- รูปคลี่: cells = [[r,c],…] 6 ช่อง · กลิ้งลูกบาศก์ไปตามช่อง หน้าที่แตะพื้นในแต่ละช่อง = หน้าของช่องนั้น ---- */
+const SP_ROLL={
+  E:s=>({...s,D:s.E,W:s.D,U:s.W,E:s.U}), W:s=>({...s,D:s.W,E:s.D,U:s.E,W:s.U}),
+  S:s=>({...s,D:s.S,N:s.D,U:s.N,S:s.U}), N:s=>({...s,D:s.N,S:s.D,U:s.S,N:s.U})
+};
+const SP_ID={D:'D',U:'U',N:'N',S:'S',E:'E',W:'W'};
+const SP_OPP={D:'U',U:'D',N:'S',S:'N',E:'W',W:'E'};
+const SP_DIR=[['E',0,1],['W',0,-1],['S',1,0],['N',-1,0]];
+function spFold(cells){
+  const key=(r,c)=>r+','+c, idx={}; cells.forEach(([r,c],i)=>idx[key(r,c)]=i);
+  const face=Array(cells.length).fill(null), par=Array(cells.length).fill(null); face[0]='D';
+  const st=[]; st[0]=SP_ID; const q=[0];
+  while(q.length){ const i=q.shift(), [r,c]=cells[i];
+    for(const [d,dr,dc] of SP_DIR){ const j=idx[key(r+dr,c+dc)];
+      if(j!=null&&face[j]==null){ st[j]=SP_ROLL[d](st[i]); face[j]=st[j].D; par[j]=[i,d]; q.push(j); } } }
+  const ok=face.every(f=>f)&&new Set(face).size===6;
+  return {ok,face,par};
+}
+// ช่องที่อยู่ตรงข้ามช่อง i (null = พับไม่ได้)
+function spOppCell(cells,i){ const F=spFold(cells); if(!F.ok) return null; return F.face.indexOf(SP_OPP[F.face[i]]); }
+const SP_NETS=[
+  [[0,0],[1,0],[1,1],[1,2],[1,3],[2,0]], [[0,0],[1,0],[1,1],[1,2],[1,3],[2,1]], [[0,0],[1,0],[1,1],[1,2],[1,3],[2,2]],
+  [[0,0],[1,0],[1,1],[1,2],[1,3],[2,3]], [[0,1],[1,0],[1,1],[1,2],[1,3],[2,1]], [[0,1],[1,0],[1,1],[1,2],[1,3],[2,2]],
+  [[0,0],[0,1],[1,1],[1,2],[1,3],[2,1]], [[0,0],[0,1],[1,1],[1,2],[1,3],[2,2]], [[0,0],[0,1],[1,1],[1,2],[1,3],[2,3]],
+  [[0,0],[0,1],[1,1],[1,2],[2,2],[2,3]], [[0,0],[0,1],[0,2],[1,2],[1,3],[1,4]]
+];
+function spNetSvg(cells,o={}){
+  const S=o.s||26, R=Math.max(...cells.map(x=>x[0]))+1, C=Math.max(...cells.map(x=>x[1]))+1;
+  let g='';
+  cells.forEach(([r,c],i)=>{
+    const hi=o.hi&&o.hi.includes(i);
+    g+=`<rect x="${c*S}" y="${r*S}" width="${S}" height="${S}" fill="${hi?'#c4b5fd':(o.fill?o.fill[i]:SP_COL.t)}" stroke="${SP_COL.k}" stroke-width="1.5"/>`;
+    if(o.lab) g+=`<text x="${c*S+S/2}" y="${r*S+S/2+S*0.2}" text-anchor="middle" font-size="${S*0.55}" font-weight="800" fill="${o.labc?o.labc[i]:'#5b3c00'}">${o.lab[i]}</text>`;
+  });
+  return `<svg class="spsvg" viewBox="-3 -3 ${C*S+6} ${R*S+6}" style="width:100%;max-width:${o.max||Math.min(160,C*S+6)}px">${g}</svg>`;
+}
+
+/* ---- ลูกบาศก์ 24 ท่า · ภาพ = [บน, หน้า, ขวา] = [U, S, E] ของท่านั้น ---- */
+const SP_ORI=(()=>{ const seen=new Set(), out=[], q=[SP_ID];
+  while(q.length){ const s=q.shift(), k=JSON.stringify(s); if(seen.has(k)) continue; seen.add(k); out.push(s); for(const d of 'ESWN') q.push(SP_ROLL[d](s)); }
+  return out; })();
+// lab = ป้ายของหน้าตามตัวลูกบาศก์ {D:…,U:…,…} · ภาพ [a,b,c] เกิดขึ้นได้ไหม
+function spCanView(lab,v){ return SP_ORI.some(s=>lab[s.U]===v[0]&&lab[s.S]===v[1]&&lab[s.E]===v[2]); }
+// ภาพหลายภาพของลูกบาศก์เดียว → หน้าตรงข้าม x เป็นอะไรได้บ้าง (ลองทุกแบบการติดป้าย 720 แบบ)
+function spOppFromViews(syms,views,x){
+  const res=new Set(), F=['D','U','N','S','E','W'];
+  const perm=a=>a.length<2?[a]:a.flatMap((v,i)=>perm([...a.slice(0,i),...a.slice(i+1)]).map(p=>[v,...p]));
+  for(const p of perm(syms)){ const lab={}; F.forEach((f,i)=>lab[f]=p[i]);
+    if(views.every(v=>spCanView(lab,v))){ const f=F.find(f=>lab[f]===x); res.add(lab[SP_OPP[f]]); } }
+  return [...res];
+}
+const SP_PIP={1:[[.5,.5]],2:[[.25,.25],[.75,.75]],3:[[.25,.25],[.5,.5],[.75,.75]],4:[[.25,.25],[.75,.25],[.25,.75],[.75,.75]],
+  5:[[.25,.25],[.75,.25],[.5,.5],[.25,.75],[.75,.75]],6:[[.25,.22],[.75,.22],[.25,.5],[.75,.5],[.25,.78],[.75,.78]]};
+const SP_SYM={'●':'#e11d48','■':'#2563eb','▲':'#16a34a','★':'#d97706','✚':'#7c3aed','◆':'#0891b2'};
+// ลูกบาศก์เดี่ยว: v = [บน, หน้า, ขวา] · ตัวเลข = จุดลูกเต๋า · อื่น ๆ = สัญลักษณ์
+function spCube(v,o={}){
+  const W=o.w||74, U=W*0.58, P=(r,c,z)=>[(c-r)*W/2,(c+r)*W/4-z*U];
+  const F=[[P(0,0,1),P(0,1,1),P(1,0,1)],[P(1,0,1),P(1,1,1),P(1,0,0)],[P(1,1,1),P(0,1,1),P(1,1,0)]]; // [มุมเริ่ม, ขอบ u, ขอบ v]
+  const quad=([a,b,c])=>[a,b,[b[0]+c[0]-a[0],b[1]+c[1]-a[1]],c];
+  const fill=['#fff7d6','#ffe4a8','#f6c46b'];
+  let g='';
+  F.forEach((f,i)=>{
+    g+=`<polygon points="${quad(f).map(p=>p.map(x=>x.toFixed(1)).join(',')).join(' ')}" fill="${fill[i]}" stroke="${SP_COL.k}" stroke-width="1.6" stroke-linejoin="round"/>`;
+    const at=(u,w)=>[f[0][0]+u*(f[1][0]-f[0][0])+w*(f[2][0]-f[0][0]), f[0][1]+u*(f[1][1]-f[0][1])+w*(f[2][1]-f[0][1])];
+    const x=v[i];
+    if(typeof x==='number') (SP_PIP[x]||[]).forEach(([u,w])=>{ const p=at(u,w); g+=`<ellipse cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" rx="${W*0.06}" ry="${W*0.045}" fill="${x===1?'#dc2626':'#3b2a00'}"/>`; });
+    else { const p=at(.5,.5); g+=`<text x="${p[0].toFixed(1)}" y="${(p[1]+W*0.1).toFixed(1)}" text-anchor="middle" font-size="${W*0.3}" font-weight="800" fill="${SP_SYM[x]||'#3b2a00'}">${x}</text>`; }
+  });
+  return `<svg class="spsvg" viewBox="${-W/2-3} ${-U-3} ${W+6} ${W/2+U+6}" style="width:100%;max-width:${o.max||90}px">${g}</svg>`;
+}
+const SP_DIE={U:1,D:6,S:2,N:5,E:3,W:4};   // ลูกเต๋า: หน้าตรงข้ามรวมกันได้ 7
+// ตัวช่วยร่วม (คลังข้อโหลดก่อนของเล่น จึงต้องอยู่ที่นี่)
+// รูปคลี่วาดด้านนอกกล่องหงายขึ้น · การกลิ้งลูกบาศก์บนกระดาษเห็นจากด้านใน (กลับซ้ายขวา) จึงต้องกลับรูปก่อนติดป้าย · คู่ตรงข้ามไม่เปลี่ยน
+function spNetLab(cells,syms){ const F=spFold(cells.map(([r,c])=>[r,-c])), lab={}; F.face.forEach((f,i)=>lab[f]=syms[i]); return lab; }
+const spLabV=(lab,st)=>[lab[st.U],lab[st.S],lab[st.E]];
+const spDieV=st=>[SP_DIE[st.U],SP_DIE[st.S],SP_DIE[st.E]];
+const spCorner=(set)=>SP_ORI.find(s=>[s.U,s.S,s.E].sort().join()===[...set].sort().join());
+const spTwo=(a,b,ca='ภาพที่ 1',cb='ภาพที่ 2')=>`<div class="sppic"><div class="spopts sp2"><figure>${a}<figcaption>${ca}</figcaption></figure><figure>${b}<figcaption>${cb}</figcaption></figure></div></div>`;
+const SP_TH=['ก','ข','ค','ง','จ','ฉ'];
+/* ============ บท 4 คลังข้อ · เฉลยคำนวณด้วยตัวคำนวณใน sp.js · c[0] = คำตอบถูก · t = ข้อมูลให้สคริปต์ตรวจ (เกมไม่ใช้) ============ */
+const spQ=(p,s,q,c,w,t)=>({p,s,q,c,w,t});
+const spIsoQ=H=>spIso(H,{lab:1,max:220});
+function spCntQ(H,s,q,ds,w){ const n=spCount(H); return spQ(spIsoQ(H),s,q,[n,...ds.map(d=>n+d)].map(x=>x+' ก้อน'),w(n),{kind:'count',H,ans:n}); }
+// ข้อเลือกภาพด้าน: kind = front | right | top · ds = ข้อมูลตัวลวง (รูปแบบเดียวกับคำตอบ)
+function spViewQ(H,kind,pos,q,ds,w,s='spa-s2',main){
+  const ans=kind==='front'?spFront(H):kind==='right'?spRight(H):spTop(H);
+  const all=[ans,...ds], mx=Math.max(1,...all.flat(2));
+  const svg=d=>kind==='top'?spTopSvg(d,{max:90}):spSide(d,{h:mx,max:90});
+  return spQ(spPicks(main||spIsoQ(H),all.map(svg),pos),s,q,spOptC(pos),w,{kind,H,ans,ds,pos,top:!!main});
+}
+function spNetPickQ(nets,want,pos,q,w){   // nets[0] = รูปที่ถูก · want = true หา "พับได้" / false หา "พับไม่ได้"
+  return spQ(spPicks(null,nets.map(n=>spNetSvg(n,{s:16})),pos),'spa-net',q,spOptC(pos),w,{kind:'netpick',nets,want,pos});
+}
+function spOppQ(cells,i,s,q,ws){
+  const j=spOppCell(cells,i), others=[0,1,2,3,4,5].filter(k=>k!==i&&k!==j).slice(0,3);
+  return spQ(spNetSvg(cells,{lab:SP_TH,hi:[i],s:30,max:170}),s,q,[SP_TH[j],...others.map(k=>SP_TH[k])],ws(SP_TH[i],SP_TH[j]),{kind:'opp',cells,i,ans:j});
+}
+function spViewsQ(L,corners,x,q,w){
+  const views=corners.map(c=>spLabV(L,spCorner(c))), syms=Object.values(L), opp=L[SP_OPP[Object.keys(L).find(k=>L[k]===x)]];
+  const ds=syms.filter(y=>y!==x&&y!==opp).slice(0,3);
+  return spQ(spTwo(...views.map(v=>spCube(v,{max:100}))),'spa-views',q,[opp,...ds],w,{kind:'views',L,views,x,ans:opp});
+}
+function spMatchQ(cells,syms,pos,q,w){
+  const lab=spNetLab(cells,syms), ok=spLabV(lab,SP_ORI[7]);
+  const o=lab[SP_OPP[SP_ORI[7].U]], mir=[ok[0],ok[2],ok[1]];
+  const opp1=[ok[0],lab[SP_OPP[SP_ORI[7].U]],ok[1]], opp2=[ok[1],ok[2],lab[SP_OPP[SP_ORI[7].E]]];
+  const all=[ok,opp1,mir,opp2];
+  return spQ(spPicks(spNetSvg(cells,{lab:syms,labc:syms.map(x=>SP_SYM[x]),fill:syms.map(()=>'#fff7d6'),s:28,max:160}),all.map(v=>spCube(v,{max:80})),pos),
+    'spa-match',q,spOptC(pos),w,{kind:'match',cells,syms,all,pos});
+}
+const SP_BANK={
+  sp1:[
+    spCntQ([[2,2,1]],'spa-s3','กองก้อนแถวเดียวนี้มีทั้งหมดกี่ก้อน',[-1,-2,1],n=>`นับทีละกอง: ซ้าย 2 + กลาง 2 + ขวา 1 = ${n} · ก้อนบนสุดทุกก้อนมีก้อนรองข้างใต้`),
+    spCntQ([[2,2],[2,1]],'spa-s3','กองก้อน 4 กองนี้มีทั้งหมดกี่ก้อน',[-1,-3,1],n=>`หลังซ้าย 2 + หลังขวา 2 + หน้าซ้าย 2 + หน้าขวา 1 = ${n}`),
+    spViewQ([[3,1,0],[1,1,1]],'front',2,'มองกองนี้จากด้านหน้า (👁 หน้า) จะเห็นภาพใด',[[1,1,1],[1,1,3],[3,1,0]],
+      'แต่ละแนวซ้ายไปขวา ดูกองที่สูงที่สุดในแนวนั้น: ซ้าย 3 (กองหลังโผล่พ้นกองหน้า) · กลาง 1 · ขวา 1'),
+    spViewQ([[2,0,1],[1,1,0]],'top',4,'มองกองนี้จากด้านบน (แถวบนของภาพ = แถวหลัง) จะเห็นภาพใด',[[[1,1,0],[1,0,1]],[[1,0,1],[0,1,1]],[[1,1,1],[1,1,0]]],
+      'ภาพด้านบนบอกแค่ช่องที่มีก้อน · แถวหลัง: มี ว่าง มี · แถวหน้า: มี มี ว่าง'),
+    spQ('📦','spa-s1','กล่องทรงลูกบาศก์มีหน้าตรงข้ามกันกี่คู่',['3 คู่','2 คู่','4 คู่','6 คู่'],'6 หน้า จับคู่ตรงข้ามได้ 3 คู่: บน–ล่าง · หน้า–หลัง · ซ้าย–ขวา'),
+    spOppQ(SP_NETS[2],2,'spa-s1','พับรูปคลี่นี้เป็นกล่อง · ช่องสีม่วง (ค) จะอยู่ตรงข้ามกับช่องใด',(a,b)=>`${a} กับ ${b} อยู่ในแถวตรงเดียวกันและเว้นกัน 1 ช่อง · พับแล้วอยู่คนละฝั่งของกล่อง ไม่แตะกัน`),
+    spQ('🗺️','spa-s2','ภาพด้านบนของกองก้อนบอกเราได้อย่างไร',['ช่องไหนมีก้อนตั้งอยู่','แต่ละกองสูงกี่ก้อน','มีก้อนรวมกี่ก้อน','ก้อนไหนถูกบังจากหน้า'],'มองจากบนเห็นแค่ช่องที่มีก้อน · ความสูงต้องดูจากภาพด้านหน้าหรือภาพด้านข้าง'),
+    spViewQ([[2,1],[2,1],[1,0]],'right',3,'มองกองนี้จากด้านขวา (ขวา 👁) จะเห็นภาพใด',[[2,2,1],[2,1],[1,1,1]],
+      'ยืนทางขวาแล้วมอง แถวหน้าจะอยู่ทางซ้ายของภาพ · แต่ละแถวดูกองที่สูงที่สุด: แถวหน้า 1 · แถวกลาง 2 · แถวหลัง 2')
+  ],
+  sp2:[
+    spNetPickQ([SP_NETS[8],[[0,0],[0,1],[1,0],[1,1],[2,0],[3,0]],[[0,0],[0,1],[0,2],[0,3],[0,4],[1,2]],[[0,0],[1,0],[2,0],[2,1],[2,2],[2,3]]],true,3,
+      'รูปคลี่ใดพับเป็นลูกบาศก์ได้ (ชุด ก)','รูปที่ถูกเป็น 1 ใน 11 แบบ · รูปอื่นมีช่อง 2 × 2 · แถวยาว 5 ช่อง · หรือมี 2 ช่องซ้อนกันที่ปลายแถว 4 ช่องซึ่งพับแล้วทับกัน'),
+    spNetPickQ([[[0,0],[1,0],[1,1],[1,2],[0,2],[2,1]],SP_NETS[1],SP_NETS[7],SP_NETS[9]],false,1,
+      'รูปคลี่ใดพับเป็นลูกบาศก์ไม่ได้ (ชุด ข)','รูปที่ 1 ช่องที่ยื่นขึ้นทั้งสองข้างพับไปเป็นหน้าเดียวกัน (ทับกัน) กล่องจึงขาดไป 1 หน้า · ไม่มีช่อง 2 × 2 หรือแถวยาว ต้องลองพับในใจ'),
+    spOppQ(SP_NETS[6],3,'spa-opp','พับรูปคลี่นี้เป็นกล่อง · ช่องสีม่วง (ง) จะอยู่ตรงข้ามกับช่องใด',(a,b)=>`ให้ช่องกลางของแถวยาวเป็นพื้น แล้วพับทีละช่อง · ${a} กับ ${b} ไม่มีขอบแตะกันเลย จึงเป็นหน้าตรงข้าม`),
+    spOppQ(SP_NETS[3],0,'spa-opp','พับรูปคลี่นี้เป็นกล่อง · ช่องสีม่วง (ก) จะอยู่ตรงข้ามกับช่องใด',(a,b)=>`แถว 4 ช่องพับวนเป็นผนัง 4 ด้าน · ${a} กับ ${b} อยู่คนละปลายของแถวและยื่นออกคนละฝั่ง จึงเป็นฝากับก้น`),
+    (()=>{ const st=SP_ORI.find(s=>SP_DIE[s.U]===2), v=spDieV(st), b=7-v[0];
+      return spQ(spCube(v,{max:110}),'spa-die','ลูกเต๋ามาตรฐานวางอยู่ดังภาพ หน้าที่ติดพื้นมีกี่จุด',[b+' จุด',(7-v[1])+' จุด',(7-v[2])+' จุด',v[0]+' จุด'],
+        `หน้าติดพื้นตรงข้ามกับหน้าบน · ${v[0]} + ${b} = 7`,{kind:'die',v,ans:b}); })(),
+    (()=>{ const st=SP_ORI.find(s=>SP_DIE[s.U]===6&&SP_DIE[s.S]===3), v=spDieV(st), seen=v[0]+v[1]+v[2], h=21-seen;
+      return spQ(spCube(v,{max:110}),'spa-die','ลูกเต๋ามาตรฐานในภาพ · หน้าที่มองไม่เห็นทั้ง 3 หน้ารวมกันได้กี่จุด',[h+' จุด',seen+' จุด','21 จุด',(h-1)+' จุด'],
+        `จุดทั้งลูกรวม 21 · เห็น ${v.join(' + ')} = ${seen} · ที่มองไม่เห็น 21 − ${seen} = ${h}`,{kind:'diesum',v,ans:h}); })(),
+    spCntQ([[3,2,2],[2,1,1]],'spa-hide','กองก้อนนี้มีทั้งหมดกี่ก้อน (นับก้อนที่ถูกบังด้วย)',[-3,-2,1],n=>`ความสูงแถวหลัง 3 2 2 · แถวหน้า 2 1 1 · รวม ${n} · ก้อนที่ถูกบังคือก้อนรองใต้กองสูง`),
+    spCntQ([[3,3],[3,1],[2,0]],'spa-hide','กองก้อน 3 แถวนี้มีทั้งหมดกี่ก้อน (นับก้อนที่ถูกบังด้วย)',[-3,-2,1],n=>`แถวหลัง 3 + 3 · แถวกลาง 3 + 1 · แถวหน้า 2 + 0 · รวม ${n}`)
+  ],
+  sp3:[
+    spViewsQ({U:'★',S:'◆',E:'■',N:'●',W:'▲',D:'✚'},['USE','SDW'],'◆','ลูกบาศก์ใบเดียวกัน 2 ภาพ · หน้าใดอยู่ตรงข้าม ◆',
+      '◆ อยู่ทั้ง 2 ภาพ · เห็นพร้อม ★ ■ ✚ ▲ = ติดกัน 4 หน้า · เหลือ ● หน้าเดียว'),
+    spViewsQ({U:'✚',S:'▲',E:'●',N:'◆',W:'■',D:'★'},['USE','DNE'],'●','ลูกบาศก์ใบเดียวกัน 2 ภาพ · หน้าใดอยู่ตรงข้าม ●',
+      '● อยู่ทั้ง 2 ภาพ · เห็นพร้อม ✚ ▲ ★ ◆ = ติดกัน 4 หน้า · เหลือ ■ หน้าเดียว'),
+    spMatchQ(SP_NETS[0],['●','■','▲','★','✚','◆'],2,'ลูกบาศก์ภาพใดพับได้จากรูปคลี่นี้ (ชุด ค)',
+      'ภาพลวง 2 ภาพมีหน้าตรงข้ามโผล่พร้อมกัน · อีกภาพเรียง 3 หน้ารอบมุมกลับทิศ (ภาพกระจก)'),
+    spMatchQ(SP_NETS[9],['▲','◆','●','✚','■','★'],4,'ลูกบาศก์ภาพใดพับได้จากรูปคลี่นี้ (ชุด ง)',
+      'ตรวจชั้นที่ 1 ตัดภาพที่มีหน้าตรงข้ามพร้อมกัน 2 ภาพ · ชั้นที่ 2 ตัดภาพที่เรียงรอบมุมกลับทิศ'),
+    spQ(spIso([[4,4,4,4],[4,4,4,4],[4,4,4,4],[4,4,4,4]],{max:150}),'spa-paint','ลูกบาศก์ 4 × 4 × 4 ทาสีผิวนอกทุกด้าน ตัดเป็น 64 ก้อน · มีกี่ก้อนที่ถูกทาสีหน้าเดียว',
+      ['24 ก้อน','8 ก้อน','16 ก้อน','36 ก้อน'],'ก้อนกลางหน้า: 6 หน้า × (4 − 2) × (4 − 2) = 6 × 4 = 24'),
+    spQ('🎨','spa-paint','ลูกบาศก์ 5 × 5 × 5 ทาสีผิวนอกทุกด้าน ตัดเป็น 125 ก้อน · มีกี่ก้อนที่ถูกทาสี 2 หน้า',
+      ['36 ก้อน','27 ก้อน','24 ก้อน','54 ก้อน'],'ก้อนขอบ (ไม่รวมมุม): 12 ขอบ × (5 − 2) = 36'),
+    spQ('🎨','spa-paint','ลูกบาศก์ 4 × 4 × 4 ทาสีผิวนอกทุกด้าน ตัดเป็น 64 ก้อน · มีกี่ก้อนที่ถูกทาสีอย่างน้อย 1 หน้า',
+      ['56 ก้อน','48 ก้อน','60 ก้อน','64 ก้อน'],'ก้อนข้างในไม่ถูกทาสี (4 − 2)³ = 8 · ที่เหลือถูกทาสี 64 − 8 = 56'),
+    spViewQ([[3,1,2],[1,2,1]],'front',1,'ภาพด้านบนเขียนจำนวนก้อนแต่ละกองไว้ (แถวบน = แถวหลัง) · มองจากด้านหน้าจะเห็นภาพใด',[[2,2,3],[3,1,2],[1,2,1]],
+      'แต่ละแนวซ้ายไปขวา เลือกเลขที่มากกว่าระหว่างแถวหลังกับแถวหน้า: max(3,1)=3 · max(1,2)=2 · max(2,1)=2','spa-s2',spTopSvg(spTop([[3,1,2],[1,2,1]]),{num:[[3,1,2],[1,2,1]],s:30,max:120}))
+  ]
+};
 // บทเงื่อนไขสัญลักษณ์: ตัวเลือกแบบข้อสอบ 4 แบบ · k = ดัชนีคำตอบถูก
 const SYC=['ข้อสรุป 1 ถูกเท่านั้น','ข้อสรุป 2 ถูกเท่านั้น','ถูกทั้งคู่','ไม่ถูกเลย'];
 const syq=(p,s,q,k,w)=>({p,s,q,c:[SYC[k],...SYC.filter((_,i)=>i!==k)],w,eq:1});
 /* ============ คลังข้อ · c[0] = คำตอบถูก · s = ขั้นในบทที่ใช้ตอบข้อนี้ (ตอบผิด → ปุ่มย้อนไปขั้นนั้น) ============ */
 // เลขในเกมต้องไม่ซ้ำตัวอย่างในบท (วัดความเข้าใจ ไม่ใช่ความจำ) · ตัวเลือกยาวพอ ๆ กัน
 const BANK = {
+  ...SP_BANK,
   lg1:[
     {p:'🌶️', s:'gate-s1', q:'แปลงปลูกเรียงแบบนี้ 🌶️🍅🍅🌶️🍅🍅🌶️❓ ช่อง ❓ ควรเป็นอะไร', c:['🍅','🌶️','🥬','🌽'], w:'กฎคือ พริก 1 ต้น ตามด้วยมะเขือเทศ 2 ต้น ซ้ำไปเรื่อย ๆ · หลังพริกต้นที่ 3 จึงเป็นมะเขือเทศ'},
     {p:'🪴', s:'gate-s1', q:'กระถางวางเป็นแถว 1 ใบ, 3 ใบ, 5 ใบ, 7 ใบ · แถวถัดไปควรมีกี่ใบ', c:['9 ใบ','8 ใบ','10 ใบ','14 ใบ'], w:'เพิ่มแถวละ 2 ใบ · 7 + 2 = 9 · 14 มาจาก 7 × 2 ซึ่งไม่ตรงกับคู่ก่อนหน้า'},
@@ -1214,6 +1546,9 @@ const LEVELS = [
   {ch:'ana', id:'an1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'พูดเป็นประโยค · ความสัมพันธ์ 5 ชนิด · ทิศของคู่', cls:'c6'},
   {ch:'ana', id:'an2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'อุปมาตัวเลข · ตัวอักษร · ไม่เข้าพวก', cls:'c5'},
   {ch:'ana', id:'an3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'ความสัมพันธ์ที่เจาะจงที่สุด · ลองตัดทีละตัว', cls:'c2'},
+  {ch:'spa', id:'sp1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'นับก้อน · มองจาก 3 ด้าน · หน้าตรงข้าม', cls:'c6'},
+  {ch:'spa', id:'sp2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'รูปคลี่พับได้ไหม · ลูกเต๋า · ก้อนที่ถูกบัง', cls:'c5'},
+  {ch:'spa', id:'sp3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'ลูกบาศก์หลายภาพ · รูปคลี่สัญลักษณ์ · ทาสี', cls:'c2'},
   {ch:'venn', id:'vn1', icon:'🌱', name:'ด่าน 1 · เมล็ด', sub:'วางของลงวง · ทุก บาง ไม่มี', cls:'c6'},
   {ch:'venn', id:'vn2', icon:'🌿', name:'ด่าน 2 · ต้นกล้า', sub:'ข้อความ 2 ข้อ · แน่นอนหรือไม่แน่นอน', cls:'c5'},
   {ch:'venn', id:'vn3', icon:'🌳', name:'ด่าน 3 · ต้นไม้ใหญ่', sub:'บาง ≠ บางไม่ · ทุกกลับหัว · ชีวิตจริงกับโจทย์', cls:'c2'},
@@ -1226,6 +1561,7 @@ const CHS = {
   num:{n:'อนุกรมตัวเลข', i:'🔢', scr:'num'},
   abc:{n:'อนุกรมตัวอักษร', i:'🔤', scr:'abc'},
   ana:{n:'อุปมาอุปไมย', i:'🔗', scr:'ana'},
+  spa:{n:'มิติสัมพันธ์', i:'🧊', scr:'spa'},
   venn:{n:'เงื่อนไขภาษา', i:'➡️', scr:'venn'},
   sym:{n:'เงื่อนไขสัญลักษณ์', i:'🔣', scr:'sym'}
 };
@@ -1676,6 +2012,106 @@ const SQ3=[
     ['ข้อสรุป 2 ถูกเท่านั้น',0,'ข้อสรุป 1 คือ D > F · D = E และ E > F จึงได้ D > F ด้วย'],
     ['ไม่ถูกเลย',0,'แปลงรหัสกลับก่อน: $ คือ = และ @ คือ >']]}
 ];
+/* ============ บท 4 มิติสัมพันธ์ · ของเล่น + ตัวอย่างในบท ============ */
+// 1) พับกล่อง · กางรูปคลี่แล้วเลื่อนแถบพับ (ต่อหน้ากันเป็นต้นไม้ · ช่องลูกหมุนรอบขอบที่ติดช่องแม่)
+const SPF_NETS=[
+  ['กากบาท',SP_NETS[4]],['บันได',SP_NETS[9]],['3 ต่อ 3',SP_NETS[10]],
+  ['แถว 4 กับ 2 ช่องซ้อน',[[0,0],[1,0],[2,0],[2,1],[2,2],[2,3]]],['มีช่อง 2 × 2',[[0,0],[0,1],[1,0],[1,1],[2,0],[3,0]]]
+];
+let spfI=0, spfA=0;
+function spfDraw(){
+  const [,cells]=SPF_NETS[spfI], F=spFold(cells), S=44;
+  const rs=cells.map(x=>x[0]), cs=cells.map(x=>x[1]);
+  const rm=(Math.min(...rs)+Math.max(...rs)+1)/2, cm=(Math.min(...cs)+Math.max(...cs)+1)/2;
+  const node=(i,st='')=>`<div class="fd${i?' f'+F.par[i][1]:''}" data-i="${i}"${st}>${SP_TH[i]}${F.par.map((p,j)=>p&&p[0]===i?node(j):'').join('')}</div>`;
+  const [r0,c0]=cells[0];
+  $('spFoldT').innerHTML=`<div class="tabs">${SPF_NETS.map((x,i)=>`<button class="tab${i===spfI?' on':''}" onclick="spfI=${i};spfA=0;spfDraw()">${x[0]}</button>`).join('')}</div>
+    <div class="spstage"><div class="spscene" style="--a:${spfA}">${node(0,` style="left:calc(${(c0-cm)*S}px * (1 - var(--a) / 90) - ${S/2}px * var(--a) / 90);top:calc(${(r0-rm)*S}px * (1 - var(--a) / 90) - ${S/2}px * var(--a) / 90)"`)}</div></div>
+    <div class="center"><label class="hint">กางออก <input type="range" min="0" max="90" value="${spfA}" style="width:160px;vertical-align:middle" oninput="spfSet(+this.value)"> พับสุด</label></div>
+    <div class="info" id="spfFb"></div>`;
+  spfMsg();
+}
+function spfSet(a){ spfA=a; const sc=document.querySelector('#spFoldT .spscene'); if(sc) sc.style.setProperty('--a',a); spfMsg(); }
+function spfMsg(){
+  const [,cells]=SPF_NETS[spfI], F=spFold(cells), fb=$('spfFb'); if(!fb) return;
+  const clash=F.face.map((f,i)=>F.face.filter(g=>g===f).length>1);
+  document.querySelectorAll('#spFoldT .fd').forEach(e=>e.classList.toggle('clash',spfA>=90&&clash[+e.dataset.i]));
+  if(spfA<90){ fb.innerHTML='เลื่อนแถบไปทางขวาจนสุด แล้วดูว่าได้กล่องครบไหม'; return; }
+  if(F.ok){ const seen=new Set(), pr=[];
+    F.face.forEach((f,i)=>{ if(seen.has(f)) return; const j=F.face.indexOf(SP_OPP[f]); seen.add(f); seen.add(SP_OPP[f]); pr.push(SP_TH[i]+' – '+SP_TH[j]); });
+    fb.innerHTML=`✅ พับได้ครบ 6 หน้า ไม่ทับกัน · หน้าตรงข้าม 3 คู่: <b>${pr.join(' · ')}</b>`; miniConfetti(); }
+  else { const dup=F.face.map((f,i)=>F.face.indexOf(f)!==i?i:-1).filter(i=>i>=0).map(i=>SP_TH[F.face.indexOf(F.face[i])]+' กับ '+SP_TH[i]);
+    fb.innerHTML=`❌ พับไม่ได้ · ช่อง <b>${dup.join(' · ')}</b> ไปทับที่เดียวกัน (ช่องสีแดง) กล่องจึงขาดไป 1 หน้า`; }
+}
+// 2) กองก้อน · แตะช่องเพิ่มก้อน แล้วดูภาพ 3 ด้าน
+let spbH=[[3,2,1],[2,1,0],[1,0,0]];
+function spbDraw(){
+  const H=spbH, mx=Math.max(1,...H.flat());
+  $('spBlkT').innerHTML=`<div class="spgrid"><span class="hint">หลัง</span>${H.map((row,r)=>`<div>${row.map((h,c)=>`<button class="tab${h?' on':''}" onclick="spbH[${r}][${c}]=(spbH[${r}][${c}]+1)%4;spbDraw()">${h}</button>`).join('')}</div>`).join('')}<span class="hint">หน้า</span></div>
+    ${spIso(H,{lab:1,max:240})}
+    <div class="spopts sp3"><figure>${spSide(spFront(H),{h:mx})}<figcaption>มองจากหน้า</figcaption></figure><figure>${spSide(spRight(H),{h:mx})}<figcaption>มองจากขวา</figcaption></figure><figure>${spTopSvg(spTop(H))}<figcaption>มองจากบน</figcaption></figure></div>
+    <div class="info">รวม <b>${spCount(H)}</b> ก้อน${spPosed(H)?'':' · ⚠️ มีกองถูกบัง ดูจากภาพเอียงภาพเดียวนับไม่ได้แน่นอน (ต้องมีภาพด้านบนช่วย)'}</div>`;
+}
+// 3) นับทีละกอง
+const SP_LAY=[[3,2],[1,1]];
+function spLayDraw(){ $('spLay').innerHTML=`<div class="spopts sp2"><figure>${spIso(SP_LAY,{lab:1,max:200})}<figcaption>ภาพเอียง</figcaption></figure><figure>${spTopSvg(spTop(SP_LAY),{num:SP_LAY,s:28})}<figcaption>ภาพด้านบน + จำนวนในกอง</figcaption></figure></div>`; }
+const SPQ1=[
+  {p:spIso([[2,1,1]],{lab:1,max:200}), q:'กองนี้มีกี่ก้อน (ทุกก้อนวางบนพื้นหรือบนก้อนอื่น)', c:[
+    ['4 ก้อน',1,'กองซ้าย 2 + กลาง 1 + ขวา 1 = 4'],['3 ก้อน',0,'ลืมก้อนที่รองอยู่ใต้ก้อนบนสุดของกองซ้าย · กองซ้ายสูง 2 ก้อน'],['5 ก้อน',0,'นับทีละกองอีกครั้ง: 2 + 1 + 1']]},
+  {p:spIso([[2,2],[1,0]],{lab:1,max:200}), q:'มองจากด้านหน้า (👁 หน้า) จะเห็นกี่ชั้นในแต่ละแนว', c:[
+    ['ซ้าย 2 ชั้น · ขวา 2 ชั้น',1,'แนวซ้าย: กองหลังสูง 2 บังกองหน้าที่สูง 1 · แนวขวา: กองหลังสูง 2 (ข้างหน้าว่าง)'],
+    ['ซ้าย 1 ชั้น · ขวา 0 ชั้น',0,'นี่คือแถวหน้าแถวเดียว · มองจากหน้าจะเห็นกองหลังที่สูงกว่าโผล่ขึ้นมาด้วย'],
+    ['ซ้าย 2 ชั้น · ขวา 1 ชั้น',0,'แนวขวามีกองหลังสูง 2 ก้อน ไม่มีอะไรบัง']]}
+];
+// 4) แกลเลอรีรูปคลี่ 11 แบบ
+function spGalDraw(){ $('spGal').innerHTML=`<div class="spgal">${SP_NETS.map((n,i)=>`<figure>${spNetSvg(n,{s:13,max:72})}<figcaption>${i+1}</figcaption></figure>`).join('')}</div>`; }
+// 5) แตะช่อง ดูหน้าตรงข้าม
+const SPO_NETS=[SP_NETS[7],SP_NETS[10],SP_NETS[1]];
+let spoI=0, spoSel=-1;
+function spoDraw(){
+  const cells=SPO_NETS[spoI], opp=spoSel>=0?spOppCell(cells,spoSel):-1, C=Math.max(...cells.map(x=>x[1]))+1;
+  $('spOppT').innerHTML=`<div class="tabs">${SPO_NETS.map((_,i)=>`<button class="tab${i===spoI?' on':''}" onclick="spoI=${i};spoSel=-1;spoDraw()">รูปคลี่ ${i+1}</button>`).join('')}</div>
+    <div class="spnet" style="grid-template-columns:repeat(${C},42px)">${cells.map(([r,c],i)=>`<button class="tab${i===spoSel||i===opp?' on':''}" style="grid-row:${r+1};grid-column:${c+1}" onclick="spoSel=${i};spoDraw()">${i+1}</button>`).join('')}</div>
+    <div class="info">${spoSel<0?'แตะช่องใดก็ได้':`ช่อง <b>${spoSel+1}</b> อยู่ตรงข้ามกับช่อง <b>${opp+1}</b>`}</div>`;
+}
+// 6) หมุนลูกเต๋า
+let spdS=SP_ID, spdHid=false;
+const SPD_TURN={L:s=>({...s,S:s.E,W:s.S,N:s.W,E:s.N}), R:s=>({...s,S:s.W,E:s.S,N:s.E,W:s.N}), B:SP_ROLL.N, F:SP_ROLL.S};
+function spdDraw(){
+  const s=spdS, D=SP_DIE;
+  $('spDieT').innerHTML=`${spCube([D[s.U],D[s.S],D[s.E]],{max:130})}
+    <div class="tabs"><button class="tab" onclick="spdS=SPD_TURN.L(spdS);spdDraw()">↻ หมุน</button><button class="tab" onclick="spdS=SPD_TURN.R(spdS);spdDraw()">↺ หมุน</button><button class="tab" onclick="spdS=SPD_TURN.B(spdS);spdDraw()">⤴ พลิกไปหลัง</button><button class="tab" onclick="spdS=SPD_TURN.F(spdS);spdDraw()">⤵ พลิกมาหน้า</button></div>
+    <div class="info">เห็น: บน <b>${D[s.U]}</b> · หน้า <b>${D[s.S]}</b> · ขวา <b>${D[s.E]}</b><br>${spdHid?`มองไม่เห็น: ล่าง <b>${D[s.D]}</b> (7 − ${D[s.U]}) · หลัง <b>${D[s.N]}</b> (7 − ${D[s.S]}) · ซ้าย <b>${D[s.W]}</b> (7 − ${D[s.E]})`:`<button class="tab" onclick="spdHid=true;spdDraw()">👁 เปิดดูหน้าที่มองไม่เห็น</button>`}</div>`;
+}
+// 7) ก้อนที่ถูกบัง
+const SP_HIDE=[[3,3,1],[2,1,0]];
+function spHideDraw(){ $('spHide').innerHTML=`<div class="spopts sp2"><figure>${spIso(SP_HIDE,{lab:1,max:220})}<figcaption>ภาพเอียง</figcaption></figure><figure>${spTopSvg(spTop(SP_HIDE),{num:SP_HIDE,s:28})}<figcaption>ภาพด้านบน + ความสูง</figcaption></figure></div>`; }
+const SPQ2=[
+  {p:spPicks(null,[[[0,0],[0,1],[0,2],[0,3],[0,4],[1,1]],SP_NETS[0],SP_NETS[6],SP_NETS[8]].map(n=>spNetSvg(n,{s:18})),3), q:'รูปคลี่ใดพับเป็นลูกบาศก์ไม่ได้', c:[
+    ['รูปที่ 3',1,'รูปที่ 3 มีแถวตรงยาว 5 ช่อง · พับรอบแล้วช่องที่ 5 ไปทับช่องแรก'],['รูปที่ 1',0,'รูปที่ 1 เป็น 1 ใน 11 แบบที่พับได้'],['รูปที่ 4',0,'รูปที่ 4 เป็น 1 ใน 11 แบบที่พับได้'],['รูปที่ 2',0,'รูปที่ 2 เป็น 1 ใน 11 แบบที่พับได้']]},
+  (()=>{ const st=SP_ORI.find(s=>SP_DIE[s.U]===4), v=spDieV(st), b=7-v[0];
+    return {p:spCube(v,{max:110}), q:'ลูกเต๋ามาตรฐานวางดังภาพ หน้าที่ติดพื้นมีกี่จุด', c:[[b+' จุด',1,`หน้าบน ${v[0]} จุด · ตรงข้ามรวมกันได้ 7 · 7 − ${v[0]} = ${b}`],[v[0]+' จุด',0,'หน้าที่ติดพื้นคือหน้าตรงข้ามกับหน้าบน ไม่ใช่หน้าบน'],[(7-v[1])+' จุด',0,`${7-v[1]} คือหน้าตรงข้ามกับหน้า ${v[1]} (หน้าที่หันมาทางเรา)`]]}; })()
+];
+// 8) ลูกบาศก์หลายภาพ
+const SP_LV={U:'●',S:'■',E:'▲',N:'★',W:'✚',D:'◆'};
+const SP_LV1=spLabV(SP_LV,SP_ID), SP_LV2=spLabV(SP_LV,spCorner('UNW'));
+function spViewsDraw(){ $('spViews').innerHTML=spTwo(spCube(SP_LV1),spCube(SP_LV2)); }
+// 9) รูปคลี่สัญลักษณ์ → ภาพที่เป็นไปได้ / ไม่ได้
+const SP_MN=SP_NETS[2], SP_MS=['●','■','▲','★','✚','◆'];
+function spMatchDraw(){
+  const lab=spNetLab(SP_MN,SP_MS), F=spFold(SP_MN), ok=spLabV(lab,SP_ORI[5]);
+  const a=SP_MS[0], o=lab[SP_OPP[F.face[0]]], badV=[a,o,SP_MS.find(x=>x!==a&&x!==o)];
+  $('spMatch').innerHTML=`<div class="center">${spNetSvg(SP_MN,{lab:SP_MS,labc:SP_MS.map(x=>SP_SYM[x]),fill:SP_MS.map(()=>'#fff7d6'),s:30,max:170})}</div>
+    ${spTwo(spCube(ok),spCube(badV),'ภาพ ก','ภาพ ข')}
+    <div class="info">ภาพ ข มี <b>${a}</b> กับ <b>${o}</b> อยู่พร้อมกัน · แต่ในรูปคลี่สองช่องนี้เป็นหน้าตรงข้าม → ตัดทิ้งทันที · ภาพ ก ผ่านทั้ง 2 ชั้นตรวจ</div>`;
+}
+const SPQ3=[
+  (()=>{ const L={U:'▲',S:'●',E:'◆',N:'■',W:'★',D:'✚'}, v1=spLabV(L,SP_ID), v2=spLabV(L,spCorner('UNW'));
+    return {p:spTwo(spCube(v1),spCube(v2)), q:'ลูกบาศก์ใบเดียวกัน 2 ภาพ · หน้าใดอยู่ตรงข้าม ▲', c:[
+      ['✚',1,'▲ เห็นพร้อม ● ◆ (ภาพ 1) และ ■ ★ (ภาพ 2) · ติดกับ ▲ แล้ว 4 หน้า · เหลือ ✚ หน้าเดียว'],['●',0,'● อยู่ในภาพเดียวกับ ▲ จึงติดกัน ไม่ใช่หน้าตรงข้าม'],['★',0,'★ อยู่ในภาพเดียวกับ ▲ จึงติดกัน ไม่ใช่หน้าตรงข้าม']]}; })(),
+  {p:spIso([[2,2],[2,2]],{max:130}), q:'ลูกบาศก์ 2 × 2 × 2 ทาสีผิวนอกทุกด้าน ตัดเป็น 8 ก้อน · มีกี่ก้อนที่ถูกทาสี 3 หน้า', c:[
+    ['8 ก้อน',1,'ทุกก้อนอยู่ที่มุม (ลูกบาศก์มี 8 มุม) · ใช้สูตรได้: n − 2 = 0 จึงไม่มีก้อนขอบ กลางหน้า หรือข้างใน'],['0 ก้อน',0,'ลองนึกภาพ: ก้อนเล็กแต่ละก้อนแตะผิวนอก 3 ด้าน'],['4 ก้อน',0,'ชั้นบน 4 ก้อน ชั้นล่างอีก 4 ก้อน ทุกก้อนอยู่ที่มุม']]}
+];
 
 /* ============ ตอบผิด → บอกว่าติดขั้นไหน + ปุ่มย้อนไปขั้นนั้น ============ */
 // [ชั้น 0/1/2, ชื่อขั้น, (ทำก่อนเลื่อน), (id ที่จะเลื่อนไป)] · คีย์ = id ของขั้นในหน้าบท
@@ -1691,6 +2127,9 @@ const STEPS={
   'ana-s1':[0,'พูดคู่แรกให้เป็นประโยค'], 'ana-s2':[0,'ความสัมพันธ์ 5 ชนิด'], 'ana-s3':[0,'ทิศของคู่ต้องตรงกัน'],
   'anaL2':[1,'อุปมาตัวเลข ตัวอักษร และไม่เข้าพวก'], 'ana-num':[1,'อุปมาตัวเลข · ดูตัวเลือกช่วยตัดสิน'], 'ana-abc':[1,'อุปมาตัวอักษร'], 'ana-odd':[1,'ไม่เข้าพวก · หาเกณฑ์ร่วม'],
   'anaL3':[2,'เลือกความสัมพันธ์ที่เจาะจงที่สุด'], 'ana-sp':[2,'ทำประโยคให้เจาะจงขึ้น'], 'ana-odd2':[2,'ไม่เข้าพวก · ลองตัดทีละตัว'],
+  'spa-s1':[0,'คลี่กล่อง = แผ่นเดียว 6 ช่อง'], 'spa-s2':[0,'มองจาก 3 ด้าน'], 'spa-s3':[0,'นับก้อนทีละกอง'],
+  'spaL2':[1,'รูปคลี่ ลูกเต๋า และก้อนที่ถูกบัง'], 'spa-net':[1,'รูปคลี่ที่พับได้ 11 แบบ'], 'spa-opp':[1,'หาหน้าตรงข้ามในรูปคลี่'], 'spa-die':[1,'ลูกเต๋า หน้าตรงข้ามรวม 7'], 'spa-hide':[1,'ก้อนที่ถูกบัง'],
+  'spaL3':[2,'ลูกบาศก์หลายภาพ และลูกบาศก์ทาสี'], 'spa-views':[2,'ภาพลูกบาศก์ใบเดียวกันหลายภาพ'], 'spa-match':[2,'จากรูปคลี่ไปเป็นลูกบาศก์'], 'spa-paint':[2,'ลูกบาศก์ใหญ่ทาสี'],
   'venn-s1':[0,'วางของลงวงกลม'], 'venn-s2':[0,'ทุก บาง ไม่มี = ภาพ 3 แบบ'],
   'vennL2':[1,'ข้อความ 2 ข้อ สรุปได้แน่นอนไหม'], 'venn-two':[1,'วาดทีละข้อความ'], 'venn-maybe':[1,'วาดได้หลายแบบ = ไม่แน่นอน'],
   'vennL3':[2,'กับดักที่พบบ่อย'], 'venn-some':[2,'บาง ไม่ได้แปลว่า บางตัวไม่'], 'venn-flip':[2,'ทุก กลับหัวกลับหางไม่ได้'], 'venn-real':[2,'จริงในชีวิต ≠ แน่นอนตามโจทย์'],
@@ -1802,7 +2241,7 @@ function showQ(){
   $('q-score').textContent=game.score;
   $('q-hearts').textContent=heartsTxt();
   $('q-prog').style.width=(game.idx/N*100)+'%';
-  $('q-pic').textContent=q.p||'';
+  if(String(q.p||'').charAt(0)==='<') $('q-pic').innerHTML=q.p; else $('q-pic').textContent=q.p||'';
   $('q-text').textContent=q.q;
   $('q-fb').textContent=''; $('q-why').style.display='none'; $('q-next').style.display='none';
   const box=$('q-choices'); box.innerHTML='';
@@ -1928,6 +2367,10 @@ abStrip('abS1',[1,3,5]); wkMount('wkAbc',[['D, H, L, ?','โจทย์'],['4, 
 abStrip('abPin',[],true); qsMount('aq1',AQ1); abWrapDraw(); qsMount('aq2',AQ2); abMirDraw(); cdDraw(); qsMount('aq3',AQ3);
 wkMount('wkAna',[['ปากกา : เขียน = กรรไกร : ?','โจทย์'],['ปากกา ใช้สำหรับ เขียน','พูดคู่แรกเป็นประโยค'],['กรรไกร ใช้สำหรับ ?','เอาคำแรกของคู่ที่สองใส่ประโยคเดิม'],['กรรไกร ใช้สำหรับ ตัด ✅','ประโยคยังจริง → ตอบ ตัด']]);
 anToyDraw(); qsMount('anq1',ANQ1); anNumDraw(); qsMount('anq2',ANQ2); anOddDraw(); qsMount('anq3',ANQ3);
+spfDraw(); spbDraw(); spLayDraw(); wkMount('wkLay',[['กองหลังซ้ายสูง 3 ก้อน','ด้านบนของกองนี้อยู่สูงสุดในภาพ'],['กองหลังขวาสูง 2 ก้อน','ก้อนล่างถูกบังบางส่วน แต่ต้องมีเพราะรองก้อนบนอยู่'],['กองหน้า 2 กอง สูงกองละ 1 ก้อน','เห็นครบทั้งสองกอง'],['รวม 3 + 2 + 1 + 1 = 7 ก้อน','นับเป็นกองทีละกอง ไม่ต้องไล่นับทีละหน้า']]); qsMount('spq1',SPQ1);
+spGalDraw(); spoDraw(); spdDraw(); spHideDraw(); wkMount('wkHide',[['เขียนความสูงแต่ละกองลงในภาพด้านบน','แถวหลัง 3 · 3 · 1 · แถวหน้า 2 · 1 · ว่าง'],['ก้อนที่มองไม่เห็นคือก้อนรองใต้กองสูง','กองหลังซ้ายสูง 3 เห็นแค่บางด้าน แต่ต้องมีครบ 3 ก้อน'],['รวม 3 + 3 + 1 + 2 + 1 = 10 ก้อน','ใช้ภาพด้านบนที่เขียนเลข แทนการนับจากภาพเอียง']]); qsMount('spq2',SPQ2);
+spViewsDraw(); wkMount('wkViews',[['ภาพที่ 1: ● เห็นพร้อม ■ และ ▲','■ กับ ▲ ติดกับ ●'],['ภาพที่ 2: ● เห็นพร้อม ★ และ ✚','★ กับ ✚ ติดกับ ●'],['ติดกับ ● แล้ว 4 หน้า: ■ ▲ ★ ✚','หน้าหนึ่งมีหน้าติดกันได้แค่ 4 หน้า'],['เหลือ ◆ หน้าเดียว → ◆ อยู่ตรงข้าม ●','ตอบได้แน่นอน']]); spMatchDraw();
+wkMount('wkPaint',[['มุม 8 มุม · มุมละ 1 ก้อน = 8 ก้อน','แตะผิวนอก 3 ด้าน → ทาสี 3 หน้า'],['ขอบ 12 เส้น · เส้นละ 1 ก้อน (ไม่รวมมุม) = 12 ก้อน','ทาสี 2 หน้า'],['หน้า 6 หน้า · ตรงกลางหน้าละ 1 ก้อน = 6 ก้อน','ทาสี 1 หน้า'],['ข้างใน 1 ก้อน','ไม่โดนสีเลย'],['ตรวจ: 8 + 12 + 6 + 1 = 27 ✅','ครบทุกก้อน']]); qsMount('spq3',SPQ3);
 vnToyDraw(); vnShapeDraw(); qsMount('vq1',VQ1);
 wkMount('wkVenn',[['วงไก่ อยู่ในวงสัตว์ปีกทั้งวง','ข้อความที่ 1 · "ทุก"'],['วงสัตว์ปีก อยู่ในวงสัตว์มีขนทั้งวง','ข้อความที่ 2 · "ทุก"'],['วงไก่จึงอยู่ในวงสัตว์มีขนด้วย','วงซ้อนกัน 3 ชั้น เหมือนกล่องใส่ในกล่อง'],['"ไก่ทุกตัวมีขน" → แน่นอน ✅','วาดแบบอื่นที่ตรงตามข้อความไม่ได้เลย']]);
 vnAltDraw(); qsMount('vq2',VQ2); qsMount('vq3',VQ3);
